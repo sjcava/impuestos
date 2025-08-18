@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informe Ejecutivo de Impuestos - Trinigold Farmacia</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -211,6 +210,116 @@
             margin-bottom: 1.5rem;
         }
         
+        /* Gráfico CSS para evolución */
+        .css-chart {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            background: linear-gradient(to top, rgba(65, 158, 70, 0.1) 0%, transparent 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .chart-bars {
+            display: flex;
+            align-items: end;
+            height: 250px;
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+        
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(to top, #419E46, #7CC141);
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            transition: all 0.3s ease;
+            min-height: 20px;
+        }
+        
+        .chart-bar:hover {
+            filter: brightness(1.1);
+            transform: scaleY(1.05);
+        }
+        
+        .chart-bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #718096;
+        }
+        
+        .chart-bar-value {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #419E46;
+            white-space: nowrap;
+        }
+        
+        /* Gráfico circular CSS */
+        .pie-chart {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #FED519 0deg 96deg,
+                #F79617 96deg 156deg,
+                #7CC141 156deg 175deg,
+                #419E46 175deg 183deg,
+                #0A9561 183deg 190deg,
+                #a0aec0 190deg 195deg,
+                #718096 195deg 360deg
+            );
+            position: relative;
+            margin: 0 auto;
+        }
+        
+        .pie-chart::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+        }
+        
+        .pie-legend {
+            margin-top: 1rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            background: #f8fafc;
+        }
+        
+        .legend-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
         .comparison-item {
             display: flex;
             justify-content: space-between;
@@ -228,25 +337,6 @@
             background-color: #f8fafc;
         }
         
-        .legend-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.75rem;
-        }
-        
-        .legend-label {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        
-        .legend-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-        
         .heat-map-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -257,6 +347,24 @@
             padding: 1rem;
             border-radius: 8px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .heat-map-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .heat-map-item > * {
+            position: relative;
+            z-index: 1;
         }
         
         .heat-map-item h4 {
@@ -292,6 +400,7 @@
             font-size: 0.875rem;
             font-weight: 500;
             border-radius: 1rem;
+            transition: width 0.5s ease;
         }
         
         .table {
@@ -365,6 +474,18 @@
             color: #9ca3af;
         }
         
+        /* Animaciones */
+        .animate-on-load {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-on-load.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -384,6 +505,11 @@
                 flex-direction: column;
                 align-items: start;
                 gap: 1rem;
+            }
+            
+            .pie-chart {
+                width: 250px;
+                height: 250px;
             }
         }
         
@@ -431,7 +557,7 @@
             <!-- Pestaña Resumen Ejecutivo -->
             <div id="tab-resumen" class="tab-content active">
                 <!-- KPIs principales -->
-                <div class="grid grid-3">
+                <div class="grid grid-3 animate-on-load">
                     <div class="kpi-card" style="border-left-color: #419E46;">
                         <div class="kpi-header">
                             <div class="kpi-info">
@@ -476,13 +602,32 @@
                 </div>
 
                 <!-- Gráfico de evolución -->
-                <div class="chart-container">
+                <div class="chart-container animate-on-load">
                     <div class="chart-title">Evolución de Gastos de Impuestos</div>
-                    <canvas id="evolucionChart" width="800" height="400"></canvas>
+                    <div class="css-chart">
+                        <div class="chart-bars">
+                            <div class="chart-bar" style="height: 40%;">
+                                <div class="chart-bar-label">Abril</div>
+                                <div class="chart-bar-value">1.65M</div>
+                            </div>
+                            <div class="chart-bar" style="height: 60%;">
+                                <div class="chart-bar-label">Mayo</div>
+                                <div class="chart-bar-value">2.39M</div>
+                            </div>
+                            <div class="chart-bar" style="height: 65%;">
+                                <div class="chart-bar-label">Junio</div>
+                                <div class="chart-bar-value">2.59M</div>
+                            </div>
+                            <div class="chart-bar" style="height: 75%;">
+                                <div class="chart-bar-label">Julio</div>
+                                <div class="chart-bar-value">3.02M</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Comparativo trimestral -->
-                <div class="grid grid-2">
+                <div class="grid grid-2 animate-on-load">
                     <div class="chart-container">
                         <div class="chart-title">Comparativo Trimestral</div>
                         <div class="comparison-item normal">
@@ -542,12 +687,69 @@
 
             <!-- Pestaña Evolución Temporal -->
             <div id="tab-evolucion" class="tab-content">
-                <div class="chart-container">
+                <div class="chart-container animate-on-load">
                     <div class="chart-title">Evolución Mensual de Impuestos vs Ventas</div>
-                    <canvas id="barrasChart" width="800" height="400"></canvas>
+                    <div class="css-chart">
+                        <div class="chart-bars">
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                <div style="display: flex; gap: 0.5rem; height: 250px; align-items: end;">
+                                    <div style="background: #419E46; width: 30px; height: 40%; border-radius: 4px; position: relative;">
+                                        <div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; color: #419E46; font-weight: bold;">1.65M</div>
+                                    </div>
+                                    <div style="background: #FED519; width: 30px; height: 20%; border-radius: 4px; position: relative;">
+                                        <div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; color: #FED519; font-weight: bold;">19.7M</div>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 0.5rem; font-size: 0.875rem; font-weight: 500; color: #718096;">Abril</div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                <div style="display: flex; gap: 0.5rem; height: 250px; align-items: end;">
+                                    <div style="background: #419E46; width: 30px; height: 60%; border-radius: 4px; position: relative;">
+                                        <div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; color: #419E46; font-weight: bold;">2.39M</div>
+                                    </div>
+                                    <div style="background: #FED519; width: 30px; height: 30%; border-radius: 4px; position: relative;">
+                                        <div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; color: #FED519; font-weight: bold;">28.3M</div>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 0.5rem; font-size: 0.875rem; font-weight: 500; color: #718096;">Mayo</div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                <div style="display: flex; gap: 0.5rem; height: 250px; align-items: end;">
+                                    <div style="background: #419E46; width: 30px; height: 65%; border-radius: 4px; position: relative;">
+                                        <div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; color: #419E46; font-weight: bold;">2.59M</div>
+                                    </div>
+                                    <div style="background: #FED519; width: 30px; height: 32%; border-radius: 4px; position: relative;">
+                                        <div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; color: #FED519; font-weight: bold;">30.4M</div>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 0.5rem; font-size: 0.875rem; font-weight: 500; color: #718096;">Junio</div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                <div style="display: flex; gap: 0.5rem; height: 250px; align-items: end;">
+                                    <div style="background: #419E46; width: 30px; height: 75%; border-radius: 4px; position: relative;">
+                                        <div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; color: #419E46; font-weight: bold;">3.02M</div>
+                                    </div>
+                                    <div style="background: #FED519; width: 30px; height: 38%; border-radius: 4px; position: relative;">
+                                        <div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; color: #FED519; font-weight: bold;">36.4M</div>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 0.5rem; font-size: 0.875rem; font-weight: 500; color: #718096;">Julio</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 16px; height: 16px; background: #419E46; border-radius: 4px;"></div>
+                            <span style="font-size: 0.875rem; color: #718096;">Impuestos</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 16px; height: 16px; background: #FED519; border-radius: 4px;"></div>
+                            <span style="font-size: 0.875rem; color: #718096;">Ventas</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="chart-container">
+                <div class="chart-container animate-on-load">
                     <div class="chart-title">Mapa de Calor - Crecimiento Mensual</div>
                     <div class="heat-map-grid">
                         <div class="heat-map-item" style="background-color: rgba(124, 193, 65, 0.3);">
@@ -576,17 +778,17 @@
 
             <!-- Pestaña Composición -->
             <div id="tab-composicion" class="tab-content">
-                <div class="chart-container">
+                <div class="chart-container animate-on-load">
                     <div class="chart-title">Composición de Impuestos - Julio 2025</div>
                     <div class="grid grid-2">
-                        <div>
-                            <canvas id="pieChart" width="400" height="400"></canvas>
+                        <div style="display: flex; justify-content: center; align-items: center;">
+                            <div class="pie-chart"></div>
                         </div>
                         <div>
-                            <div style="background-color: #f8fafc; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                        <div style="width: 1rem; height: 1rem; border-radius: 50%; background-color: #FED519;"></div>
+                            <div class="pie-legend">
+                                <div class="legend-item">
+                                    <div class="legend-label">
+                                        <div class="legend-dot" style="background-color: #FED519;"></div>
                                         <span style="font-weight: bold;">RETENCIÓN IVA</span>
                                     </div>
                                     <div style="text-align: right;">
@@ -594,11 +796,9 @@
                                         <p style="font-size: 0.875rem; color: #718096;">26.7%</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div style="background-color: #f8fafc; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                        <div style="width: 1rem; height: 1rem; border-radius: 50%; background-color: #F79617;"></div>
+                                <div class="legend-item">
+                                    <div class="legend-label">
+                                        <div class="legend-dot" style="background-color: #F79617;"></div>
                                         <span style="font-weight: bold;">PATENTE</span>
                                     </div>
                                     <div style="text-align: right;">
@@ -606,11 +806,9 @@
                                         <p style="font-size: 0.875rem; color: #718096;">16.7%</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div style="background-color: #f8fafc; padding: 1rem; border-radius: 8px;">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                        <div style="width: 1rem; height: 1rem; border-radius: 50%; background-color: #7CC141;"></div>
+                                <div class="legend-item">
+                                    <div class="legend-label">
+                                        <div class="legend-dot" style="background-color: #7CC141;"></div>
                                         <span style="font-weight: bold;">ANTICIPOS ISLR</span>
                                     </div>
                                     <div style="text-align: right;">
@@ -618,12 +816,32 @@
                                         <p style="font-size: 0.875rem; color: #718096;">5.4%</p>
                                     </div>
                                 </div>
+                                <div class="legend-item">
+                                    <div class="legend-label">
+                                        <div class="legend-dot" style="background-color: #419E46;"></div>
+                                        <span style="font-weight: bold;">IVA</span>
+                                    </div>
+                                    <div style="text-align: right;">
+                                        <p style="font-weight: bold;">Bs.S 64.830,86</p>
+                                        <p style="font-size: 0.875rem; color: #718096;">2.1%</p>
+                                    </div>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-label">
+                                        <div class="legend-dot" style="background-color: #0A9561;"></div>
+                                        <span style="font-weight: bold;">IGTF</span>
+                                    </div>
+                                    <div style="text-align: right;">
+                                        <p style="font-weight: bold;">Bs.S 55.606,49</p>
+                                        <p style="font-size: 0.875rem; color: #718096;">1.8%</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="chart-container">
+                <div class="chart-container animate-on-load">
                     <div class="chart-title">Embudo Fiscal - Flujo de Impuestos</div>
                     <div>
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
@@ -649,13 +867,29 @@
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 8.28%; background-color: #7CC141;">8.28%</div>
                         </div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <span style="font-weight: bold;">Retenciones</span>
+                            <span style="font-weight: bold;">Bs.S 849.395</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 5.2%; background-color: #419E46;">5.2%</div>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <span style="font-weight: bold;">Pagos Directos</span>
+                            <span style="font-weight: bold;">Bs.S 227.516</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 1.4%; background-color: #0A9561;">1.4%</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Pestaña Análisis Detallado -->
             <div id="tab-analisis" class="tab-content">
-                <div class="chart-container">
+                <div class="chart-container animate-on-load">
                     <div class="chart-title">Resumen Ejecutivo por Mes</div>
                     <table class="table">
                         <thead>
@@ -700,15 +934,71 @@
                     </table>
                 </div>
 
-                <div class="chart-container">
+                <div class="chart-container animate-on-load">
+                    <div class="chart-title">Análisis de Tendencias por Categoría</div>
+                    <div class="grid grid-2">
+                        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px;">
+                            <h4 style="color: #1a202c; font-weight: bold; margin-bottom: 1rem;">Impuestos de Mayor Impacto</h4>
+                            <div style="margin-bottom: 1rem;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span style="font-weight: 500;">Retención IVA</span>
+                                    <span style="color: #10b981; font-weight: bold;">↗ 26.7%</span>
+                                </div>
+                                <div style="width: 100%; height: 8px; background: #e5e7eb; border-radius: 4px;">
+                                    <div style="width: 87%; height: 100%; background: #FED519; border-radius: 4px;"></div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span style="font-weight: 500;">Patente</span>
+                                    <span style="color: #10b981; font-weight: bold;">↗ 16.7%</span>
+                                </div>
+                                <div style="width: 100%; height: 8px; background: #e5e7eb; border-radius: 4px;">
+                                    <div style="width: 54%; height: 100%; background: #F79617; border-radius: 4px;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span style="font-weight: 500;">Anticipos ISLR</span>
+                                    <span style="color: #10b981; font-weight: bold;">↗ 5.4%</span>
+                                </div>
+                                <div style="width: 100%; height: 8px; background: #e5e7eb; border-radius: 4px;">
+                                    <div style="width: 18%; height: 100%; background: #7CC141; border-radius: 4px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px;">
+                            <h4 style="color: #1a202c; font-weight: bold; margin-bottom: 1rem;">Indicadores Clave</h4>
+                            <div style="margin-bottom: 1rem; padding: 1rem; background: white; border-radius: 6px; border-left: 4px solid #419E46;">
+                                <div style="font-size: 0.875rem; color: #718096;">Ratio Promedio</div>
+                                <div style="font-size: 1.25rem; font-weight: bold; color: #419E46;">8.41%</div>
+                                <div style="font-size: 0.75rem; color: #a0aec0;">Impuestos/Ventas</div>
+                            </div>
+                            <div style="margin-bottom: 1rem; padding: 1rem; background: white; border-radius: 6px; border-left: 4px solid #FED519;">
+                                <div style="font-size: 0.875rem; color: #718096;">Crecimiento Promedio</div>
+                                <div style="font-size: 1.25rem; font-weight: bold; color: #FED519;">+23.2%</div>
+                                <div style="font-size: 0.75rem; color: #a0aec0;">Mensual</div>
+                            </div>
+                            <div style="padding: 1rem; background: white; border-radius: 6px; border-left: 4px solid #F79617;">
+                                <div style="font-size: 0.875rem; color: #718096;">Impacto Mayor</div>
+                                <div style="font-size: 1.25rem; font-weight: bold; color: #F79617;">Ret. IVA</div>
+                                <div style="font-size: 0.75rem; color: #a0aec0;">Principal componente</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container animate-on-load">
                     <div class="chart-title">Recomendaciones Estratégicas</div>
                     <div class="recommendations">
                         <div class="recommendation-card" style="background-color: rgba(124, 193, 65, 0.1);">
                             <h4>Optimización Fiscal</h4>
                             <ul>
                                 <li>• Revisar estructura de retenciones de IVA (mayor componente)</li>
-                                <li>• Optimizar anticipos de ISLR mediante planificación</li>
+                                <li>• Optimizar anticipos de ISLR mediante planificación fiscal</li>
                                 <li>• Evaluar estrategias de reducción de IGTF</li>
+                                <li>• Implementar control mensual de patentes comerciales</li>
                             </ul>
                         </div>
                         <div class="recommendation-card" style="background-color: rgba(247, 150, 23, 0.1);">
@@ -717,6 +1007,7 @@
                                 <li>• Monitorear ratio impuestos/ventas mensual</li>
                                 <li>• Implementar alertas automáticas por desviaciones</li>
                                 <li>• Establecer presupuesto fiscal trimestral</li>
+                                <li>• Dashboard en tiempo real para seguimiento</li>
                             </ul>
                         </div>
                     </div>
@@ -740,14 +1031,19 @@
         // Configurar fecha actual
         document.getElementById('fecha-actual').textContent = new Date().toLocaleDateString('es-VE');
 
-        // Función para cambiar pestañas
+        // Función para cambiar pestañas - SIMPLIFICADA
         function showTab(tabName) {
             // Ocultar todas las pestañas
             const tabs = document.querySelectorAll('.tab-content');
-            tabs.forEach(tab => tab.classList.remove('active'));
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
             
             // Mostrar la pestaña seleccionada
-            document.getElementById('tab-' + tabName).classList.add('active');
+            const activeTab = document.getElementById('tab-' + tabName);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
             
             // Actualizar botones
             const buttons = document.querySelectorAll('.tab-button');
@@ -756,269 +1052,63 @@
                 button.classList.add('inactive');
             });
             
-            event.target.classList.add('active');
-            event.target.classList.remove('inactive');
+            // Activar el botón clickeado
+            if (event && event.target) {
+                event.target.classList.add('active');
+                event.target.classList.remove('inactive');
+            }
         }
 
-        // Datos para gráficos
-        const datosEvolucion = [
-            { mes: 'Abril', impuestos: 1650934, ventas: 19690070 },
-            { mes: 'Mayo', impuestos: 2392809, ventas: 28335507 },
-            { mes: 'Junio', impuestos: 2591953, ventas: 30357408 },
-            { mes: 'Julio', impuestos: 3016520, ventas: 36421600 }
-        ];
-
-        const colores = ['#FED519', '#F79617', '#7CC141', '#419E46', '#0A9561'];
-
-        // Configuración común de Chart.js
-        Chart.defaults.font.family = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
-        Chart.defaults.font.size = 12;
-
-        // Gráfico de evolución (área)
-        const ctx1 = document.getElementById('evolucionChart').getContext('2d');
-        new Chart(ctx1, {
-            type: 'line',
-            data: {
-                labels: datosEvolucion.map(d => d.mes),
-                datasets: [{
-                    label: 'Impuestos (Bs.)',
-                    data: datosEvolucion.map(d => d.impuestos),
-                    borderColor: '#419E46',
-                    backgroundColor: 'rgba(65, 158, 70, 0.2)',
-                    fill: true,
-                    tension: 0.4,
-                    borderWidth: 3,
-                    pointBackgroundColor: '#419E46',
-                    pointBorderColor: '#ffffff',
-                    pointBorderWidth: 2,
-                    pointRadius: 6
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top',
-                        labels: {
-                            usePointStyle: true,
-                            padding: 20
-                        }
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                        titleColor: '#ffffff',
-                        bodyColor: '#ffffff',
-                        borderColor: '#419E46',
-                        borderWidth: 1,
-                        callbacks: {
-                            label: function(context) {
-                                return 'Impuestos: Bs.S ' + context.parsed.y.toLocaleString('es-VE');
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: 'rgba(0, 0, 0, 0.1)'
-                        },
-                        ticks: {
-                            callback: function(value) {
-                                return 'Bs.S ' + (value / 1000000).toFixed(1) + 'M';
-                            }
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    }
-                },
-                elements: {
-                    line: {
-                        tension: 0.4
-                    }
-                }
-            }
-        });
-
-        // Gráfico de barras comparativo
-        const ctx2 = document.getElementById('barrasChart').getContext('2d');
-        new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: datosEvolucion.map(d => d.mes),
-                datasets: [
-                    {
-                        label: 'Impuestos',
-                        data: datosEvolucion.map(d => d.impuestos),
-                        backgroundColor: '#419E46',
-                        borderRadius: 4,
-                        borderSkipped: false,
-                    },
-                    {
-                        label: 'Ventas',
-                        data: datosEvolucion.map(d => d.ventas),
-                        backgroundColor: '#FED519',
-                        borderRadius: 4,
-                        borderSkipped: false,
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top',
-                        labels: {
-                            usePointStyle: true,
-                            padding: 20
-                        }
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                        titleColor: '#ffffff',
-                        bodyColor: '#ffffff',
-                        callbacks: {
-                            label: function(context) {
-                                return context.dataset.label + ': Bs.S ' + context.parsed.y.toLocaleString('es-VE');
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: 'rgba(0, 0, 0, 0.1)'
-                        },
-                        ticks: {
-                            callback: function(value) {
-                                return 'Bs.S ' + (value / 1000000).toFixed(1) + 'M';
-                            }
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    }
-                }
-            }
-        });
-
-        // Gráfico circular (pie chart)
-        const ctx3 = document.getElementById('pieChart').getContext('2d');
-        new Chart(ctx3, {
-            type: 'doughnut',
-            data: {
-                labels: ['Retención IVA', 'Patente', 'Anticipos ISLR', 'IVA', 'IGTF', 'Ret. ISLR', 'Publicidad'],
-                datasets: [{
-                    data: [806951.28, 503905.24, 162684.73, 64830.86, 55606.49, 42444.18, 3838.27],
-                    backgroundColor: colores,
-                    borderWidth: 3,
-                    borderColor: '#ffffff',
-                    hoverBorderWidth: 4,
-                    hoverOffset: 10
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'bottom',
-                        labels: {
-                            usePointStyle: true,
-                            padding: 15,
-                            generateLabels: function(chart) {
-                                const data = chart.data;
-                                const total = data.datasets[0].data.reduce((a, b) => a + b, 0);
-                                return data.labels.map((label, index) => {
-                                    const value = data.datasets[0].data[index];
-                                    const percentage = ((value / total) * 100).toFixed(1);
-                                    return {
-                                        text: label + ' (' + percentage + '%)',
-                                        fillStyle: data.datasets[0].backgroundColor[index],
-                                        pointStyle: 'circle'
-                                    };
-                                });
-                            }
-                        }
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                        titleColor: '#ffffff',
-                        bodyColor: '#ffffff',
-                        callbacks: {
-                            label: function(context) {
-                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                const percentage = ((context.parsed / total) * 100).toFixed(1);
-                                return context.label + ': Bs.S ' + context.parsed.toLocaleString('es-VE') + ' (' + percentage + '%)';
-                            }
-                        }
-                    }
-                },
-                cutout: '50%'
-            }
-        });
+        // Animaciones de entrada
+        function animateElements() {
+            const elements = document.querySelectorAll('.animate-on-load');
+            elements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.classList.add('visible');
+                }, index * 150);
+            });
+        }
 
         // Efectos hover para las tarjetas KPI
-        document.querySelectorAll('.kpi-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-4px)';
-                this.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-                this.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-            });
-        });
-
-        // Animación de entrada para los elementos
-        function animateOnLoad() {
-            const elements = document.querySelectorAll('.chart-container, .kpi-card');
-            elements.forEach((element, index) => {
-                element.style.opacity = '0';
-                element.style.transform = 'translateY(30px)';
-                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        function addHoverEffects() {
+            document.querySelectorAll('.kpi-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-4px)';
+                    this.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                });
                 
-                setTimeout(() => {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }, index * 100);
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+                });
             });
         }
-
-        // Ejecutar animaciones cuando la página carga
-        window.addEventListener('load', function() {
-            animateOnLoad();
-        });
 
         // Función para imprimir el informe
         function printReport() {
-            // Mostrar todas las pestañas para impresión
-            const tabs = document.querySelectorAll('.tab-content');
-            tabs.forEach(tab => tab.classList.add('active'));
-            
-            // Imprimir
             window.print();
-            
-            // Restaurar vista original después de imprimir
-            setTimeout(() => {
-                tabs.forEach(tab => tab.classList.remove('active'));
-                document.getElementById('tab-resumen').classList.add('active');
-            }, 1000);
         }
 
-        // Agregar evento de teclado para navegación
+        // Inicialización cuando la página carga
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Informe Ejecutivo de Impuestos - Trinigold Farmacia cargado correctamente');
+            
+            // Ejecutar animaciones
+            setTimeout(() => {
+                animateElements();
+            }, 300);
+            
+            // Agregar efectos hover
+            addHoverEffects();
+            
+            // Asegurar que la primera pestaña esté activa
+            const firstTab = document.getElementById('tab-resumen');
+            if (firstTab && !firstTab.classList.contains('active')) {
+                firstTab.classList.add('active');
+            }
+        });
+
+        // Agregar evento de teclado para imprimir
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && e.key === 'p') {
                 e.preventDefault();
@@ -1026,30 +1116,23 @@
             }
         });
 
-        // Función para formatear números
-        function formatNumber(num) {
-            return new Intl.NumberFormat('es-VE').format(num);
-        }
-
-        // Actualizar tooltips con formato mejorado
-        function updateTooltips() {
-            const charts = Chart.instances;
-            Object.values(charts).forEach(chart => {
-                chart.update();
+        // Función para resetear animaciones al cambiar de pestaña
+        function resetAnimations() {
+            const elements = document.querySelectorAll('.animate-on-load');
+            elements.forEach(element => {
+                element.classList.remove('visible');
+                setTimeout(() => {
+                    element.classList.add('visible');
+                }, 100);
             });
         }
 
-        // Configurar responsive para los gráficos
-        window.addEventListener('resize', function() {
-            Object.values(Chart.instances).forEach(chart => {
-                chart.resize();
-            });
-        });
-
-        // Inicialización final
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Informe Ejecutivo de Impuestos - Trinigold Farmacia cargado correctamente');
-        });
+        // Mejorar la función showTab para incluir animaciones
+        const originalShowTab = showTab;
+        showTab = function(tabName) {
+            originalShowTab(tabName);
+            setTimeout(resetAnimations, 100);
+        };
     </script>
 </body>
 </html>
