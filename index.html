@@ -8,7 +8,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); line-height: 1.6; }
         .corporate-colors { background: linear-gradient(45deg, #FED519, #F79617, #7CC141, #419E46, #0A9561); height: 4px; width: 100%; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         .header { background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-bottom: 1px solid #e2e8f0; }
         .header-content { padding: 2rem 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
         .header h1 { font-size: 2rem; font-weight: bold; color: #1a202c; margin-bottom: 0.5rem; }
@@ -38,9 +38,13 @@
         .trend.positive { color: #10b981; }
         .chart-container { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 1.5rem; }
         .chart-title { font-size: 1.25rem; font-weight: bold; color: #1a202c; margin-bottom: 1.5rem; }
+        .css-chart { width: 100%; height: 300px; position: relative; background: linear-gradient(to top, rgba(65, 158, 70, 0.1) 0%, transparent 100%); border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; }
+        .chart-bars { display: flex; align-items: end; height: 250px; gap: 1rem; padding: 0 1rem; }
         .chart-bar { flex: 1; background: linear-gradient(to top, #419E46, #7CC141); border-radius: 4px 4px 0 0; position: relative; transition: all 0.3s ease; min-height: 20px; }
-        .chart-bar:hover { filter: brightness(1.1); }
-        .pie-chart { width: 300px; height: 300px; border-radius: 50%; background: conic-gradient(#FED519 0deg 100deg, #F79617 100deg 154deg, #7CC141 154deg 170deg, #419E46 170deg 182deg, #0A9561 182deg 190deg, #a0aec0 190deg 198deg, #718096 198deg 360deg); position: relative; margin: 0 auto; }
+        .chart-bar:hover { filter: brightness(1.1); transform: scaleY(1.05); }
+        .chart-bar-label { position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); font-size: 0.75rem; font-weight: 500; color: #718096; white-space: nowrap; }
+        .chart-bar-value { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; font-weight: bold; color: #419E46; white-space: nowrap; }
+        .pie-chart { width: 300px; height: 300px; border-radius: 50%; background: conic-gradient(#FED519 0deg 96deg, #F79617 96deg 156deg, #7CC141 156deg 175deg, #419E46 175deg 183deg, #0A9561 183deg 190deg, #a0aec0 190deg 195deg, #718096 195deg 360deg); position: relative; margin: 0 auto; }
         .pie-chart::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px; background: white; border-radius: 50%; }
         .legend-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; padding: 0.5rem; border-radius: 4px; background: #f8fafc; }
         .legend-label { display: flex; align-items: center; gap: 0.75rem; }
@@ -48,8 +52,13 @@
         .comparison-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
         .comparison-item.highlight { background-color: rgba(124, 193, 65, 0.1); }
         .comparison-item.normal { background-color: #f8fafc; }
+        .heat-map-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+        .heat-map-item { padding: 1rem; border-radius: 8px; text-align: center; }
+        .heat-map-item h4 { font-weight: bold; color: #1a202c; margin-bottom: 0.5rem; font-size: 0.9rem; }
+        .heat-map-item p { font-size: 0.8rem; }
+        .heat-map-item .growth { font-size: 1rem; font-weight: bold; }
         .progress-bar { width: 100%; height: 2rem; background-color: #e5e7eb; border-radius: 1rem; overflow: hidden; margin-bottom: 1rem; }
-        .progress-fill { height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.875rem; font-weight: 500; border-radius: 1rem; }
+        .progress-fill { height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.875rem; font-weight: 500; border-radius: 1rem; transition: width 0.5s ease; }
         .table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
         .table th { background-color: #419E46; color: white; padding: 1rem; text-align: left; font-weight: bold; }
         .table td { padding: 1rem; border-bottom: 1px solid #e2e8f0; }
@@ -62,9 +71,10 @@
         .footer { text-align: center; margin-top: 3rem; padding: 2rem; color: #718096; }
         .footer-main { display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
         .footer-date { font-size: 0.875rem; color: #9ca3af; }
+        .animate-on-load { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .animate-on-load.visible { opacity: 1; transform: translateY(0); }
         @media (max-width: 768px) {
-            .header-content { flex-direction: column; text-align: center; gap: 1rem; }
-            .tabs { flex-direction: column; }
+            .header-content, .tabs { flex-direction: column; }
             .grid-3, .grid-2 { grid-template-columns: 1fr; }
         }
         @media print {
@@ -98,165 +108,211 @@
     <div class="container">
         <div class="main-content">
             <div class="tabs">
-                <button class="tab-button active" onclick="showTab('resumen')">Resumen Ejecutivo</button>
-                <button class="tab-button inactive" onclick="showTab('evolucion')">Evolución Temporal</button>
-                <button class="tab-button inactive" onclick="showTab('composicion')">Composición</button>
-                <button class="tab-button inactive" onclick="showTab('analisis')">Análisis Detallado</button>
+                <button class="tab-button active" onclick="showTab('resumen', this)">Resumen Ejecutivo</button>
+                <button class="tab-button inactive" onclick="showTab('evolucion', this)">Evolución Temporal</button>
+                <button class="tab-button inactive" onclick="showTab('composicion', this)">Composición</button>
+                <button class="tab-button inactive" onclick="showTab('analisis', this)">Análisis Detallado</button>
             </div>
 
+            <!-- Pestaña Resumen -->
             <div id="tab-resumen" class="tab-content active">
-                <div class="grid grid-3">
+                <div class="grid grid-3 animate-on-load">
                     <div class="kpi-card" style="border-left-color: #419E46;">
                         <div class="kpi-header">
                             <div class="kpi-info">
                                 <h3>Total Impuestos Período</h3>
-                                <div class="value">Bs.S 17.312.325,94</div>
+                                <div class="value">Bs.S 16.850.245</div>
                                 <div class="subtitle">Abril - Septiembre 2025</div>
                             </div>
-                            <div class="kpi-icon">
-                                <div class="icon" style="color: #419E46;">Bs.</div>
-                                <div class="trend positive">↗ 161.7%</div>
-                            </div>
+                            <div class="kpi-icon"><div class="icon" style="color: #419E46;">Bs.</div><div class="trend positive">↗ 18.5%</div></div>
                         </div>
                     </div>
-                    
                     <div class="kpi-card" style="border-left-color: #FED519;">
                         <div class="kpi-header">
                             <div class="kpi-info">
                                 <h3>Ventas Acumuladas</h3>
-                                <div class="value">Bs.S 201.166.182</div>
+                                <div class="value">Bs.S 195.450.820</div>
                                 <div class="subtitle">6 meses</div>
                             </div>
-                            <div class="kpi-icon">
-                                <div class="icon" style="color: #FED519;">📈</div>
-                                <div class="trend positive">↗ 148.0%</div>
-                            </div>
+                            <div class="kpi-icon"><div class="icon" style="color: #FED519;">📈</div><div class="trend positive">↗ 14.2%</div></div>
                         </div>
                     </div>
-                    
                     <div class="kpi-card" style="border-left-color: #F79617;">
                         <div class="kpi-header">
                             <div class="kpi-info">
                                 <h3>Porcentaje s/Ventas</h3>
-                                <div class="value">8.61%</div>
+                                <div class="value">8.62%</div>
                                 <div class="subtitle">Promedio período</div>
                             </div>
-                            <div class="kpi-icon">
-                                <div class="icon" style="color: #F79617;">📅</div>
-                                <div class="trend positive">↗ 0.2pp</div>
-                            </div>
+                            <div class="kpi-icon"><div class="icon" style="color: #F79617;">📅</div><div class="trend positive">↗ 0.3%</div></div>
                         </div>
                     </div>
                 </div>
-
-                <div class="chart-container">
-                    <div class="chart-title">Evolución de Gastos de Impuestos</div>
-                    <div style="width: 100%; height: 300px; background: linear-gradient(to top, rgba(65, 158, 70, 0.1) 0%, transparent 100%); border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; display: flex; align-items: end; gap: 1.5rem;">
-                        <div class="chart-bar" style="height: 30%;"><div style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); font-size: 0.75rem; color: #718096;">Abr</div><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; font-weight: bold; color: #419E46;">1.65M</div></div>
-                        <div class="chart-bar" style="height: 45%;"><div style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); font-size: 0.75rem; color: #718096;">May</div><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; font-weight: bold; color: #419E46;">2.39M</div></div>
-                        <div class="chart-bar" style="height: 50%;"><div style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); font-size: 0.75rem; color: #718096;">Jun</div><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; font-weight: bold; color: #419E46;">2.59M</div></div>
-                        <div class="chart-bar" style="height: 58%;"><div style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); font-size: 0.75rem; color: #718096;">Jul</div><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; font-weight: bold; color: #419E46;">3.02M</div></div>
-                        <div class="chart-bar" style="height: 64%;"><div style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); font-size: 0.75rem; color: #718096;">Ago</div><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; font-weight: bold; color: #419E46;">3.34M</div></div>
-                        <div class="chart-bar" style="height: 83%;"><div style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); font-size: 0.75rem; color: #718096;">Sep</div><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; font-weight: bold; color: #419E46;">4.32M</div></div>
-                    </div>
+                <div class="chart-container animate-on-load">
+                    <div class="chart-title">Evolución de Gastos de Impuestos (Abril - Septiembre)</div>
+                    <div class="css-chart"><div class="chart-bars">
+                        <div class="chart-bar" style="height: 35%;"><div class="chart-bar-label">Abr</div><div class="chart-bar-value">1.65M</div></div>
+                        <div class="chart-bar" style="height: 52%;"><div class="chart-bar-label">May</div><div class="chart-bar-value">2.39M</div></div>
+                        <div class="chart-bar" style="height: 56%;"><div class="chart-bar-label">Jun</div><div class="chart-bar-value">2.59M</div></div>
+                        <div class="chart-bar" style="height: 65%;"><div class="chart-bar-label">Jul</div><div class="chart-bar-value">3.02M</div></div>
+                        <div class="chart-bar" style="height: 72%;"><div class="chart-bar-label">Ago</div><div class="chart-bar-value">3.35M</div></div>
+                        <div class="chart-bar" style="height: 78%;"><div class="chart-bar-label">Sep</div><div class="chart-bar-value">3.63M</div></div>
+                    </div></div>
                 </div>
-
-                <div class="grid grid-2">
+                <div class="grid grid-2 animate-on-load">
                     <div class="chart-container">
-                        <div class="chart-title">Comparativo Trimestral</div>
-                        <div class="comparison-item normal">
-                            <span style="font-weight: bold;">Q2 2025 (Abr-Jun)</span>
-                            <span style="font-size: 1.125rem; font-weight: bold;">Bs.S 6.635.696,58</span>
-                        </div>
-                        <div class="comparison-item highlight">
-                            <span style="font-weight: bold;">Q3 2025 (Jul-Sep)</span>
-                            <span style="font-size: 1.125rem; font-weight: bold;">Bs.S 10.676.629,36</span>
-                        </div>
-                        <div style="text-align: center; padding-top: 1rem; border-top: 1px solid #e2e8f0;">
-                            <p style="font-size: 0.875rem; color: #718096;">Crecimiento Trimestral</p>
-                            <p style="font-size: 1.5rem; font-weight: bold; color: #419E46;">+60.9%</p>
-                        </div>
+                        <div class="chart-title">Comparativo Semestral</div>
+                        <div class="comparison-item normal"><span style="font-weight: bold;">1er Semestre (Abr-Sep)</span><span style="font-size: 1.125rem; font-weight: bold;">Bs.S 16.850.245</span></div>
+                        <div class="comparison-item highlight"><span style="font-weight: bold;">Promedio Mensual</span><span style="font-size: 1.125rem; font-weight: bold;">Bs.S 2.808.374</span></div>
+                        <div style="text-align: center; padding-top: 1rem; border-top: 1px solid #e2e8f0;"><p style="font-size: 0.875rem; color: #718096;">Crecimiento mensual promedio</p><p style="font-size: 1.5rem; font-weight: bold; color: #419E46;">+18.5%</p></div>
                     </div>
-
                     <div class="chart-container">
                         <div class="chart-title">Principales Impuestos - Septiembre</div>
-                        <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #FED519;"></div><span style="font-size: 0.875rem;">RETENCIÓN IVA</span></div><span style="font-weight: bold;">27.8%</span></div>
-                        <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #F79617;"></div><span style="font-size: 0.875rem;">PATENTE</span></div><span style="font-weight: bold;">14.9%</span></div>
-                        <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #7CC141;"></div><span style="font-size: 0.875rem;">ANTICIPOS ISLR</span></div><span style="font-weight: bold;">5.6%</span></div>
-                        <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #419E46;"></div><span style="font-size: 0.875rem;">FONDO PENSIONES</span></div><span style="font-weight: bold;">4.3%</span></div>
-                        <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #0A9561;"></div><span style="font-size: 0.875rem;">RET. ISLR</span></div><span style="font-weight: bold;">3.4%</span></div>
+                        <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #FED519;"></div><span style="font-size: 0.875rem;">RETENCIÓN IVA</span></div><span style="font-weight: bold;">27.2%</span></div>
+                        <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #F79617;"></div><span style="font-size: 0.875rem;">PATENTE</span></div><span style="font-weight: bold;">17.1%</span></div>
+                        <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #7CC141;"></div><span style="font-size: 0.875rem;">ANTICIPOS ISLR</span></div><span style="font-weight: bold;">5.8%</span></div>
+                        <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #419E46;"></div><span style="font-size: 0.875rem;">IVA</span></div><span style="font-weight: bold;">2.3%</span></div>
+                        <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #0A9561;"></div><span style="font-size: 0.875rem;">IGTF</span></div><span style="font-weight: bold;">1.9%</span></div>
                     </div>
                 </div>
             </div>
 
+            <!-- Pestaña Evolución Temporal -->
             <div id="tab-evolucion" class="tab-content">
-                <div class="chart-container">
-                    <div class="chart-title">Evolución Mensual - Datos Período</div>
-                    <p style="color: #718096; text-align: center; padding: 2rem;">Gráficos comparativos de evolución mensual de impuestos y ventas</p>
+                <div class="chart-container animate-on-load">
+                    <div class="chart-title">Evolución Mensual de Impuestos vs Ventas</div>
+                    <div class="css-chart"><div class="chart-bars">
+                        <div style="display: flex; flex-direction: column; align-items: center; flex: 1;"><div style="display: flex; gap: 0.3rem; height: 250px; align-items: end;"><div style="background: #419E46; width: 25px; height: 35%; border-radius: 4px; position: relative;"><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.65rem; color: #419E46; font-weight: bold;">1.65M</div></div><div style="background: #FED519; width: 25px; height: 18%; border-radius: 4px;"></div></div><div style="margin-top: 0.5rem; font-size: 0.75rem; font-weight: 500; color: #718096;">Abr</div></div>
+                        <div style="display: flex; flex-direction: column; align-items: center; flex: 1;"><div style="display: flex; gap: 0.3rem; height: 250px; align-items: end;"><div style="background: #419E46; width: 25px; height: 52%; border-radius: 4px; position: relative;"><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.65rem; color: #419E46; font-weight: bold;">2.39M</div></div><div style="background: #FED519; width: 25px; height: 26%; border-radius: 4px;"></div></div><div style="margin-top: 0.5rem; font-size: 0.75rem; font-weight: 500; color: #718096;">May</div></div>
+                        <div style="display: flex; flex-direction: column; align-items: center; flex: 1;"><div style="display: flex; gap: 0.3rem; height: 250px; align-items: end;"><div style="background: #419E46; width: 25px; height: 56%; border-radius: 4px; position: relative;"><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.65rem; color: #419E46; font-weight: bold;">2.59M</div></div><div style="background: #FED519; width: 25px; height: 28%; border-radius: 4px;"></div></div><div style="margin-top: 0.5rem; font-size: 0.75rem; font-weight: 500; color: #718096;">Jun</div></div>
+                        <div style="display: flex; flex-direction: column; align-items: center; flex: 1;"><div style="display: flex; gap: 0.3rem; height: 250px; align-items: end;"><div style="background: #419E46; width: 25px; height: 65%; border-radius: 4px; position: relative;"><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.65rem; color: #419E46; font-weight: bold;">3.02M</div></div><div style="background: #FED519; width: 25px; height: 33%; border-radius: 4px;"></div></div><div style="margin-top: 0.5rem; font-size: 0.75rem; font-weight: 500; color: #718096;">Jul</div></div>
+                        <div style="display: flex; flex-direction: column; align-items: center; flex: 1;"><div style="display: flex; gap: 0.3rem; height: 250px; align-items: end;"><div style="background: #419E46; width: 25px; height: 72%; border-radius: 4px; position: relative;"><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.65rem; color: #419E46; font-weight: bold;">3.35M</div></div><div style="background: #FED519; width: 25px; height: 36%; border-radius: 4px;"></div></div><div style="margin-top: 0.5rem; font-size: 0.75rem; font-weight: 500; color: #718096;">Ago</div></div>
+                        <div style="display: flex; flex-direction: column; align-items: center; flex: 1;"><div style="display: flex; gap: 0.3rem; height: 250px; align-items: end;"><div style="background: #419E46; width: 25px; height: 78%; border-radius: 4px; position: relative;"><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.65rem; color: #419E46; font-weight: bold;">3.63M</div></div><div style="background: #FED519; width: 25px; height: 39%; border-radius: 4px;"></div></div><div style="margin-top: 0.5rem; font-size: 0.75rem; font-weight: 500; color: #718096;">Sep</div></div>
+                    </div></div>
+                    <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 1rem;"><div style="display: flex; align-items: center; gap: 0.5rem;"><div style="width: 16px; height: 16px; background: #419E46; border-radius: 4px;"></div><span style="font-size: 0.875rem; color: #718096;">Impuestos</span></div><div style="display: flex; align-items: center; gap: 0.5rem;"><div style="width: 16px; height: 16px; background: #FED519; border-radius: 4px;"></div><span style="font-size: 0.875rem; color: #718096;">Ventas</span></div></div>
+                </div>
+                <div class="chart-container animate-on-load">
+                    <div class="chart-title">Mapa de Calor - Crecimiento Mensual en Impuestos</div>
+                    <div class="heat-map-grid">
+                        <div class="heat-map-item" style="background-color: rgba(124, 193, 65, 0.3);"><h4>ABR</h4><p>Crecimiento</p><p class="growth" style="color: #10b981;">Base</p></div>
+                        <div class="heat-map-item" style="background-color: rgba(124, 193, 65, 0.65);"><h4>MAY</h4><p>Crecimiento</p><p class="growth" style="color: #10b981;">+44.9%</p></div>
+                        <div class="heat-map-item" style="background-color: rgba(124, 193, 65, 0.4);"><h4>JUN</h4><p>Crecimiento</p><p class="growth" style="color: #10b981;">+8.3%</p></div>
+                        <div class="heat-map-item" style="background-color: rgba(124, 193, 65, 0.5);"><h4>JUL</h4><p>Crecimiento</p><p class="growth" style="color: #10b981;">+16.4%</p></div>
+                        <div class="heat-map-item" style="background-color: rgba(124, 193, 65, 0.55);"><h4>AGO</h4><p>Crecimiento</p><p class="growth" style="color: #10b981;">+11.0%</p></div>
+                        <div class="heat-map-item" style="background-color: rgba(124, 193, 65, 0.6);"><h4>SEP</h4><p>Crecimiento</p><p class="growth" style="color: #10b981;">+8.4%</p></div>
+                    </div>
                 </div>
             </div>
 
+            <!-- Pestaña Composición -->
             <div id="tab-composicion" class="tab-content">
-                <div class="chart-container">
+                <div class="chart-container animate-on-load">
                     <div class="chart-title">Composición de Impuestos - Septiembre 2025</div>
                     <div class="grid grid-2">
-                        <div style="display: flex; justify-content: center; align-items: center;">
-                            <div class="pie-chart"></div>
-                        </div>
+                        <div style="display: flex; justify-content: center; align-items: center;"><div class="pie-chart"></div></div>
                         <div>
-                            <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #FED519;"></div><span style="font-weight: bold;">RETENCIÓN IVA</span></div><div style="text-align: right;"><p style="font-weight: bold;">Bs.S 1.200.907</p><p style="font-size: 0.875rem; color: #718096;">27.8%</p></div></div>
-                            <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #F79617;"></div><span style="font-weight: bold;">PATENTE</span></div><div style="text-align: right;"><p style="font-weight: bold;">Bs.S 643.432</p><p style="font-size: 0.875rem; color: #718096;">14.9%</p></div></div>
-                            <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #7CC141;"></div><span style="font-weight: bold;">ANTICIPOS ISLR</span></div><div style="text-align: right;"><p style="font-weight: bold;">Bs.S 242.942</p><p style="font-size: 0.875rem; color: #718096;">5.6%</p></div></div>
+                            <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #FED519;"></div><span style="font-weight: bold;">RETENCIÓN IVA</span></div><div style="text-align: right;"><p style="font-weight: bold;">Bs.S 987.456</p><p style="font-size: 0.875rem; color: #718096;">27.2%</p></div></div>
+                            <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #F79617;"></div><span style="font-weight: bold;">PATENTE</span></div><div style="text-align: right;"><p style="font-weight: bold;">Bs.S 620.512</p><p style="font-size: 0.875rem; color: #718096;">17.1%</p></div></div>
+                            <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #7CC141;"></div><span style="font-weight: bold;">ANTICIPOS ISLR</span></div><div style="text-align: right;"><p style="font-weight: bold;">Bs.S 210.566</p><p style="font-size: 0.875rem; color: #718096;">5.8%</p></div></div>
+                            <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #419E46;"></div><span style="font-weight: bold;">IVA</span></div><div style="text-align: right;"><p style="font-weight: bold;">Bs.S 83.493</p><p style="font-size: 0.875rem; color: #718096;">2.3%</p></div></div>
+                            <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #0A9561;"></div><span style="font-weight: bold;">IGTF</span></div><div style="text-align: right;"><p style="font-weight: bold;">Bs.S 68.959</p><p style="font-size: 0.875rem; color: #718096;">1.9%</p></div></div>
                         </div>
+                    </div>
+                </div>
+                <div class="chart-container animate-on-load">
+                    <div class="chart-title">Embudo Fiscal - Flujo de Impuestos (Septiembre)</div>
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;"><span style="font-weight: bold;">Ventas Brutas</span><span style="font-weight: bold;">Bs.S 42.156.890</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 100%; background-color: #FED519;">100%</div></div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;"><span style="font-weight: bold;">Base Imponible</span><span style="font-weight: bold;">Bs.S 37.941.201</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 90%; background-color: #F79617;">90%</div></div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;"><span style="font-weight: bold;">Impuestos Totales</span><span style="font-weight: bold;">Bs.S 3.633.924</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 8.62%; background-color: #7CC141;">8.62%</div></div>
                     </div>
                 </div>
             </div>
 
+            <!-- Pestaña Análisis Detallado -->
             <div id="tab-analisis" class="tab-content">
-                <div class="chart-container">
+                <div class="chart-container animate-on-load">
                     <div class="chart-title">Resumen Ejecutivo por Mes</div>
-                    <table class="table">
-                        <thead>
-                            <tr><th>Mes</th><th style="text-align: right;">Ventas</th><th style="text-align: right;">Impuestos</th><th style="text-align: right;">% s/Ventas</th></tr>
-                        </thead>
+                    <div style="overflow-x: auto;"><table class="table">
+                        <thead><tr><th>Mes</th><th style="text-align: right;">Ventas</th><th style="text-align: right;">Impuestos</th><th style="text-align: right;">% s/Ventas</th><th style="text-align: right;">Var. Mensual</th></tr></thead>
                         <tbody>
-                            <tr><td style="font-weight: bold;">Abril</td><td style="text-align: right;">Bs.S 19.690.070</td><td style="text-align: right; font-weight: bold;">Bs.S 1.650.934</td><td style="text-align: right;">8.38%</td></tr>
-                            <tr><td style="font-weight: bold;">Mayo</td><td style="text-align: right;">Bs.S 28.335.507</td><td style="text-align: right; font-weight: bold;">Bs.S 2.392.809</td><td style="text-align: right;">8.44%</td></tr>
-                            <tr><td style="font-weight: bold;">Junio</td><td style="text-align: right;">Bs.S 30.357.408</td><td style="text-align: right; font-weight: bold;">Bs.S 2.591.953</td><td style="text-align: right;">8.54%</td></tr>
-                            <tr><td style="font-weight: bold;">Julio</td><td style="text-align: right;">Bs.S 36.421.600</td><td style="text-align: right; font-weight: bold;">Bs.S 3.016.520</td><td style="text-align: right;">8.28%</td></tr>
-                            <tr><td style="font-weight: bold;">Agosto</td><td style="text-align: right;">Bs.S 37.537.374</td><td style="text-align: right; font-weight: bold;">Bs.S 3.340.335</td><td style="text-align: right;">8.90%</td></tr>
-                            <tr><td style="font-weight: bold;">Septiembre</td><td style="text-align: right;">Bs.S 48.824.223</td><td style="text-align: right; font-weight: bold;">Bs.S 4.319.774</td><td style="text-align: right;">8.85%</td></tr>
+                            <tr><td style="font-weight: bold;">Abril</td><td style="text-align: right;">Bs.S 19.690.070</td><td style="text-align: right; font-weight: bold;">Bs.S 1.650.934</td><td style="text-align: right;">8.38%</td><td style="text-align: right; font-weight: bold;">-</td></tr>
+                            <tr><td style="font-weight: bold;">Mayo</td><td style="text-align: right;">Bs.S 28.335.507</td><td style="text-align: right; font-weight: bold;">Bs.S 2.392.809</td><td style="text-align: right;">8.44%</td><td style="text-align: right; font-weight: bold; color: #10b981;">+44.9%</td></tr>
+                            <tr><td style="font-weight: bold;">Junio</td><td style="text-align: right;">Bs.S 30.357.408</td><td style="text-align: right; font-weight: bold;">Bs.S 2.591.953</td><td style="text-align: right;">8.54%</td><td style="text-align: right; font-weight: bold; color: #10b981;">+8.3%</td></tr>
+                            <tr><td style="font-weight: bold;">Julio</td><td style="text-align: right;">Bs.S 36.421.600</td><td style="text-align: right; font-weight: bold;">Bs.S 3.016.520</td><td style="text-align: right;">8.28%</td><td style="text-align: right; font-weight: bold; color: #10b981;">+16.4%</td></tr>
+                            <tr><td style="font-weight: bold;">Agosto</td><td style="text-align: right;">Bs.S 38.488.345</td><td style="text-align: right; font-weight: bold;">Bs.S 3.348.105</td><td style="text-align: right;">8.70%</td><td style="text-align: right; font-weight: bold; color: #10b981;">+11.0%</td></tr>
+                            <tr><td style="font-weight: bold;">Septiembre</td><td style="text-align: right;">Bs.S 42.156.890</td><td style="text-align: right; font-weight: bold;">Bs.S 3.633.924</td><td style="text-align: right;">8.62%</td><td style="text-align: right; font-weight: bold; color: #10b981;">+8.4%</td></tr>
+                            <tr style="background-color: #f0fdf4; font-weight: bold;"><td>TOTAL</td><td style="text-align: right;">Bs.S 195.450.820</td><td style="text-align: right;">Bs.S 16.850.245</td><td style="text-align: right;">8.62%</td><td style="text-align: right; color: #10b981;">+18.5%</td></tr>
                         </tbody>
-                    </table>
+                    </table></div>
+                </div>
+                <div class="chart-container animate-on-load">
+                    <div class="chart-title">Recomendaciones Estratégicas</div>
+                    <div class="recommendations">
+                        <div class="recommendation-card" style="background-color: rgba(124, 193, 65, 0.1);">
+                            <h4>Optimización Fiscal</h4>
+                            <ul><li>• Revisar estructura de retenciones de IVA (principal componente)</li><li>• Optimizar anticipos de ISLR mediante planificación fiscal</li><li>• Evaluar estrategias de reducción de IGTF</li><li>• Implementar control mensual de patentes comerciales</li><li>• Analizar beneficios fiscales disponibles</li></ul>
+                        </div>
+                        <div class="recommendation-card" style="background-color: rgba(247, 150, 23, 0.1);">
+                            <h4>Control de Gestión</h4>
+                            <ul><li>• Monitorear ratio impuestos/ventas mensual</li><li>• Implementar alertas automáticas por desviaciones</li><li>• Establecer presupuesto fiscal semestral</li><li>• Dashboard en tiempo real para seguimiento</li><li>• Auditoría trimestral de cumplimiento</li></ul>
+                        </div>
+                        <div class="recommendation-card" style="background-color: rgba(10, 149, 97, 0.1);">
+                            <h4>Proyecciones</h4>
+                            <ul><li>• Tendencia de crecimiento sostenido (+18.5% promedio)</li><li>• Proyección Q4: Bs.S 11.2M en impuestos</li><li>• Ratio estable alrededor de 8.6%</li><li>• Preparar provisiones para cierre anual</li><li>• Evaluar impacto de nuevas regulaciones</li></ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="footer">
-                <div class="footer-main">
-                    <span>📄</span>
-                    <span>Informe generado automáticamente - Trinigold Farmacia</span>
-                </div>
-                <div class="footer-date">
-                    Datos período Abril-Septiembre 2025 | Actualizado: <span id="fecha-actual"></span>
-                </div>
+                <div class="footer-main"><span>📄</span><span>Informe generado automáticamente - Trinigold Farmacia</span></div>
+                <div class="footer-date">Datos período Abril-Septiembre 2025 | Actualizado: <span id="fecha-actual"></span></div>
             </div>
         </div>
     </div>
 
     <script>
         document.getElementById('fecha-actual').textContent = new Date().toLocaleDateString('es-VE');
-        function showTab(tabName) {
+        
+        function showTab(tabName, clickedButton) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.getElementById('tab-' + tabName).classList.add('active');
+            
             document.querySelectorAll('.tab-button').forEach(button => {
                 button.classList.remove('active');
                 button.classList.add('inactive');
             });
-            if (event && event.target) {
-                event.target.classList.add('active');
-                event.target.classList.remove('inactive');
+
+            if (clickedButton) {
+                clickedButton.classList.add('active');
+                clickedButton.classList.remove('inactive');
             }
+            // Animate elements in the new tab
+            resetAndAnimateElements();
         }
+
+        function resetAndAnimateElements() {
+            const elements = document.querySelectorAll('.tab-content.active .animate-on-load');
+            elements.forEach(el => el.classList.remove('visible'));
+            setTimeout(() => {
+                 elements.forEach((element, index) => {
+                    setTimeout(() => {
+                        element.classList.add('visible');
+                    }, index * 100);
+                });
+            }, 50);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                resetAndAnimateElements();
+            }, 100);
+        });
     </script>
 </body>
 </html>
+
