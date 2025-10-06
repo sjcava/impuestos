@@ -6,7 +6,7 @@
     <title>Informe Ejecutivo de Impuestos - Trinigold Farmacia</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); line-height: 1.6; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); line-height: 1.6; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         .corporate-colors { background: linear-gradient(45deg, #FED519, #F79617, #7CC141, #419E46, #0A9561); height: 4px; width: 100%; }
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         .header { background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-bottom: 1px solid #e2e8f0; }
@@ -59,6 +59,7 @@
         .heat-map-item .growth { font-size: 1rem; font-weight: bold; }
         .progress-bar { width: 100%; height: 2rem; background-color: #e5e7eb; border-radius: 1rem; overflow: hidden; margin-bottom: 1rem; }
         .progress-fill { height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.875rem; font-weight: 500; border-radius: 1rem; transition: width 0.5s ease; }
+        .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
         .table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
         .table th { background-color: #419E46; color: white; padding: 1rem; text-align: left; font-weight: bold; }
         .table td { padding: 1rem; border-bottom: 1px solid #e2e8f0; }
@@ -73,10 +74,26 @@
         .footer-date { font-size: 0.875rem; color: #9ca3af; }
         .animate-on-load { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .animate-on-load.visible { opacity: 1; transform: translateY(0); }
+
         @media (max-width: 768px) {
-            .header-content, .tabs { flex-direction: column; }
+            .container { padding: 0 15px; }
+            .header-content { flex-direction: column; text-align: center; gap: 1rem; justify-content: center; }
+            .header h1 { font-size: 1.5rem; }
+            .header p { font-size: 0.9rem; }
+            .main-content { padding: 1.5rem 0; }
+            .tabs { flex-direction: column; }
+            .tab-button { width: 100%; text-align: center; }
             .grid-3, .grid-2 { grid-template-columns: 1fr; }
+            .kpi-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+            .kpi-info .value { font-size: 1.3rem; }
+            .chart-title { font-size: 1.1rem; }
+            .css-chart { height: 250px; }
+            .chart-bars { height: 200px; }
+            .pie-chart { width: 220px; height: 220px; }
+            .pie-chart::after { width: 90px; height: 90px; }
+            .comparison-item { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
+        
         @media print {
             .tabs { display: none; }
             .tab-content { display: block !important; }
@@ -236,7 +253,7 @@
             <div id="tab-analisis" class="tab-content">
                 <div class="chart-container animate-on-load">
                     <div class="chart-title">Resumen Ejecutivo por Mes</div>
-                    <div style="overflow-x: auto;"><table class="table">
+                    <div class="table-wrapper"><table class="table">
                         <thead><tr><th>Mes</th><th style="text-align: right;">Ventas</th><th style="text-align: right;">Impuestos</th><th style="text-align: right;">% s/Ventas</th><th style="text-align: right;">Var. Mensual</th></tr></thead>
                         <tbody>
                             <tr><td style="font-weight: bold;">Abril</td><td style="text-align: right;">Bs.S 19.690.070</td><td style="text-align: right; font-weight: bold;">Bs.S 1.650.934</td><td style="text-align: right;">8.38%</td><td style="text-align: right; font-weight: bold;">-</td></tr>
