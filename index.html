@@ -3,595 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Fiscal Inteligente - Trinigold Farmacia 2025-2026</title>
+    <title>Informe Ejecutivo de Impuestos - Trinigold Farmacia</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        :root {
-            --color-primary: #419E46;
-            --color-secondary: #7CC141;
-            --color-accent-1: #FED519;
-            --color-accent-2: #F79617;
-            --color-accent-3: #0A9561;
-            --color-neutral-50: #f8fafc;
-            --color-neutral-100: #f1f5f9;
-            --color-neutral-200: #e2e8f0;
-            --color-neutral-400: #94a3b8;
-            --color-neutral-500: #64748b;
-            --color-neutral-600: #475569;
-            --color-neutral-700: #334155;
-            --color-neutral-800: #1e293b;
-            --color-neutral-900: #0f172a;
-            --color-success: #10b981;
-            --color-warning: #f59e0b;
-            --color-danger: #ef4444;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --gradient-brand: linear-gradient(135deg, var(--color-accent-1) 0%, var(--color-accent-2) 25%, var(--color-secondary) 50%, var(--color-primary) 75%, var(--color-accent-3) 100%);
-        }
-
-        body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, var(--color-neutral-50) 0%, var(--color-neutral-100) 100%);
-            line-height: 1.6;
-            color: var(--color-neutral-800);
-            min-height: 100vh;
-        }
-
-        .corporate-header { 
-            background: var(--gradient-brand);
-            height: 6px; 
-            width: 100%; 
-        }
-
-        .container { 
-            max-width: 1400px; 
-            margin: 0 auto; 
-            padding: 0 20px; 
-        }
-
-        .header { 
-            background: white; 
-            box-shadow: var(--shadow-md);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--color-neutral-200);
-        }
-
-        .header-content { 
-            padding: 2rem 0; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            flex-wrap: wrap; 
-        }
-
-        .header-title {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .header h1 { 
-            font-size: 2.5rem; 
-            font-weight: 700; 
-            background: var(--gradient-brand);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.025em;
-        }
-
-        .header p { 
-            color: var(--color-neutral-600); 
-            font-size: 1.125rem;
-            font-weight: 500;
-        }
-
-        .header-metrics {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .header-metric {
-            text-align: center;
-            padding: 0.75rem;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 12px;
-            border: 1px solid var(--color-neutral-200);
-        }
-
-        .header-metric-value {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--color-primary);
-        }
-
-        .header-metric-label {
-            font-size: 0.75rem;
-            color: var(--color-neutral-500);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .main-content { 
-            padding: 2rem 0; 
-        }
-
-        .tabs { 
-            display: flex; 
-            gap: 0.5rem; 
-            margin-bottom: 2rem; 
-            flex-wrap: wrap;
-            background: white;
-            padding: 0.5rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-        }
-
-        .tab-button { 
-            padding: 0.875rem 1.5rem; 
-            border: none; 
-            border-radius: 12px; 
-            font-weight: 600; 
-            cursor: pointer; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 0.875rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tab-button.active { 
-            background: var(--gradient-brand);
-            color: white; 
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-1px);
-        }
-
-        .tab-button.inactive { 
-            background-color: transparent;
-            color: var(--color-neutral-600);
-        }
-
-        .tab-button.inactive:hover { 
-            background-color: var(--color-neutral-100);
-            color: var(--color-neutral-800);
-            transform: translateY(-1px);
-        }
-
-        .tab-content { 
-            display: none; 
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        .tab-content.active { 
-            display: block; 
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .grid { 
-            display: grid; 
-            gap: 1.5rem; 
-            margin-bottom: 2rem; 
-        }
-
-        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); line-height: 1.6; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .corporate-colors { background: linear-gradient(45deg, #FED519, #F79617, #7CC141, #419E46, #0A9561); height: 4px; width: 100%; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+        .header { background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-bottom: 1px solid #e2e8f0; }
+        .header-content { padding: 2rem 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .header h1 { font-size: 2rem; font-weight: bold; color: #1a202c; margin-bottom: 0.5rem; }
+        .header p { color: #718096; font-size: 1rem; }
+        .color-dots { display: flex; gap: 0.5rem; }
+        .color-dot { width: 16px; height: 16px; border-radius: 50%; }
+        .main-content { padding: 2rem 0; }
+        .tabs { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .tab-button { padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.2s ease; font-size: 0.95rem; }
+        .tab-button.active { background-color: #419E46; color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .tab-button.inactive { background-color: #f1f5f9; color: #64748b; }
+        .tab-button.inactive:hover { background-color: #e2e8f0; color: #1e293b; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .grid { display: grid; gap: 1.5rem; margin-bottom: 2rem; }
         .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-
-        .card { 
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem; 
-            border-radius: 16px; 
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--color-neutral-200);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card:hover { 
-            transform: translateY(-4px); 
-            box-shadow: var(--shadow-lg);
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-brand);
-        }
-
-        .kpi-card { 
-            border-left: 4px solid var(--color-primary);
-        }
-
-        .kpi-header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-start;
-            gap: 1rem;
-        }
-
-        .kpi-info h3 { 
-            color: var(--color-neutral-600); 
-            font-size: 0.875rem; 
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .kpi-info .value { 
-            font-size: 2rem; 
-            font-weight: 700; 
-            color: var(--color-neutral-900);
-            margin-bottom: 0.25rem;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .kpi-info .subtitle { 
-            color: var(--color-neutral-500); 
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
-        .kpi-icon { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: flex-end; 
-            gap: 0.5rem; 
-        }
-
-        .icon { 
-            font-size: 2rem; 
-            opacity: 0.8;
-        }
-
-        .trend { 
-            display: flex; 
-            align-items: center; 
-            gap: 0.25rem; 
-            font-size: 0.875rem; 
-            font-weight: 600;
-            padding: 0.25rem 0.5rem;
-            border-radius: 6px;
-        }
-
-        .trend.positive { 
-            color: var(--color-success);
-            background: rgb(16 185 129 / 0.1);
-        }
-
-        .trend.negative {
-            color: var(--color-danger);
-            background: rgb(239 68 68 / 0.1);
-        }
-
-        .chart-container .chart-title { 
-            font-size: 1.25rem; 
-            font-weight: 700; 
-            color: var(--color-neutral-900);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .chart-bars { 
-            display: flex; 
-            align-items: flex-end; 
-            height: 300px; 
-            gap: 0.5rem; 
-            padding: 1rem;
-            background: linear-gradient(to top, rgba(65, 158, 70, 0.05) 0%, transparent 50%);
-            border-radius: 12px;
-            border: 1px solid var(--color-neutral-200);
-        }
-
-        .chart-bar { 
-            flex: 1; 
-            background: linear-gradient(to top, var(--color-primary), var(--color-secondary));
-            border-radius: 6px 6px 0 0; 
-            position: relative; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            min-height: 20px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .chart-bar:hover { 
-            filter: brightness(1.1) saturate(1.2);
-            transform: scaleY(1.02) translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .chart-bar-label { 
-            position: absolute; 
-            bottom: -30px; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            font-size: 0.7rem; 
-            font-weight: 600;
-            color: var(--color-neutral-700);
-            white-space: nowrap; 
-        }
-
-        .chart-bar-value { 
-            position: absolute; 
-            top: -35px; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            font-size: 0.65rem; 
-            font-weight: 700;
-            color: var(--color-primary);
-            white-space: nowrap;
-            background: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .risk-indicator {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .risk-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .risk-low { background: var(--color-success); }
-        .risk-medium { background: var(--color-warning); }
-        .risk-high { background: var(--color-danger); }
-
-        .progress-bar { 
-            width: 100%; 
-            height: 1.5rem; 
-            background: var(--color-neutral-200);
-            border-radius: 12px; 
-            overflow: hidden; 
-            margin-bottom: 1rem;
-            position: relative;
-        }
-
-        .progress-fill { 
-            height: 100%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            color: white; 
-            font-size: 0.75rem; 
-            font-weight: 600;
-            border-radius: 12px; 
-            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            background: var(--gradient-brand);
-        }
-
-        .table-wrapper { 
-            overflow-x: auto;
-            border-radius: 12px;
-            border: 1px solid var(--color-neutral-200);
-        }
-
-        .table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            font-size: 0.875rem;
-            background: white;
-        }
-
-        .table th { 
-            background: var(--gradient-brand);
-            color: white; 
-            padding: 1rem; 
-            text-align: left; 
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 0.75rem;
-        }
-
-        .table td { 
-            padding: 0.875rem 1rem; 
-            border-bottom: 1px solid var(--color-neutral-200);
-            font-variant-numeric: tabular-nums;
-        }
-
-        .table tr:hover { 
-            background: var(--color-neutral-50);
-        }
-
-        .alert-card {
-            border-left: 4px solid var(--color-warning);
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
-        }
-
-        .success-card {
-            border-left: 4px solid var(--color-success);
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
-        }
-
-        .forecast-chart {
-            position: relative;
-            height: 200px;
-            background: linear-gradient(135deg, 
-                rgba(65, 158, 70, 0.1) 0%, 
-                rgba(124, 193, 65, 0.1) 50%, 
-                rgba(254, 213, 25, 0.1) 100%);
-            border-radius: 12px;
-            padding: 1rem;
-            border: 1px solid var(--color-neutral-200);
-        }
-
-        .pie-chart { 
-            width: 280px; 
-            height: 280px; 
-            border-radius: 50%; 
-            background: conic-gradient(
-                #FED519 0deg 95deg,
-                #F79617 95deg 154deg,
-                #7CC141 154deg 179deg,
-                #419E46 179deg 198deg,
-                #0A9561 198deg 255deg,
-                #94a3b8 255deg 360deg
-            );
-            position: relative; 
-            margin: 0 auto;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .pie-chart::after { 
-            content: ''; 
-            position: absolute; 
-            top: 50%; 
-            left: 50%; 
-            transform: translate(-50%, -50%); 
-            width: 120px; 
-            height: 120px; 
-            background: white; 
-            border-radius: 50%;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .pie-chart-svg {
-            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
-            margin: 0 auto;
-        }
-
-        .pie-chart-svg path {
-            transition: opacity 0.3s ease;
-        }
-
-        .pie-chart-svg path:hover {
-            opacity: 0.8;
-        }
-
-        .footer { 
-            text-align: center; 
-            margin-top: 3rem; 
-            padding: 2rem;
-            background: white;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-        }
-
-        .footer-main { 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 0.5rem; 
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--color-neutral-700);
-        }
-
-        .footer-date { 
-            font-size: 0.875rem; 
-            color: var(--color-neutral-500);
-        }
-
-        .animate-on-load { 
-            opacity: 0; 
-            transform: translateY(20px); 
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .animate-on-load.visible { 
-            opacity: 1; 
-            transform: translateY(0); 
-        }
-
-        .legend-item { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            margin-bottom: 0.75rem; 
-            padding: 0.75rem; 
-            border-radius: 8px; 
-            background: var(--color-neutral-50);
-            border: 1px solid var(--color-neutral-200);
-            transition: all 0.2s ease;
-        }
-
-        .legend-item:hover {
-            background: white;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .legend-label { 
-            display: flex; 
-            align-items: center; 
-            gap: 0.75rem;
-            font-weight: 600;
-        }
-
-        .legend-dot { 
-            width: 12px; 
-            height: 12px; 
-            border-radius: 50%;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .metric-change {
-            font-size: 0.75rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-
-        .metric-change.positive {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--color-success);
-        }
-
-        .metric-change.negative {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--color-danger);
-        }
-
-        .year-transition {
-            background: linear-gradient(135deg, 
-                rgba(65, 158, 70, 0.1) 0%, 
-                rgba(254, 213, 25, 0.1) 100%);
-            border: 2px solid var(--color-accent-1);
-            border-radius: 12px;
-            padding: 1rem;
-            margin: 1rem 0;
-            text-align: center;
-        }
-
-        .year-transition h3 {
-            color: var(--color-primary);
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-        }
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); }
+        .kpi-card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-left: 4px solid; transition: transform 0.2s ease; }
+        .kpi-card:hover { transform: translateY(-2px); }
+        .kpi-header { display: flex; justify-content: space-between; align-items: center; }
+        .kpi-info h3 { color: #718096; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem; }
+        .kpi-info .value { font-size: 1.5rem; font-weight: bold; color: #1a202c; margin-bottom: 0.25rem; }
+        .kpi-info .subtitle { color: #a0aec0; font-size: 0.875rem; }
+        .kpi-icon { display: flex; flex-direction: column; align-items: end; gap: 0.5rem; }
+        .icon { font-size: 1.5rem; font-weight: bold; }
+        .trend { display: flex; align-items: center; gap: 0.25rem; font-size: 0.875rem; font-weight: 500; }
+        .trend.positive { color: #10b981; }
+        .chart-container { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 1.5rem; }
+        .chart-title { font-size: 1.25rem; font-weight: bold; color: #1a202c; margin-bottom: 1.5rem; }
+        .css-chart { width: 100%; height: 350px; position: relative; background: linear-gradient(to top, rgba(65, 158, 70, 0.1) 0%, transparent 100%); border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; }
+        .chart-bars { display: flex; align-items: end; height: 300px; gap: 0.5rem; padding: 0 1rem; }
+        .chart-bar { flex: 1; background: linear-gradient(to top, #419E46, #7CC141); border-radius: 4px 4px 0 0; position: relative; transition: all 0.3s ease; min-height: 20px; }
+        .chart-bar:hover { filter: brightness(1.1); transform: scaleY(1.05); }
+        .chart-bar-label { position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; font-weight: 500; color: #718096; white-space: nowrap; }
+        .chart-bar-value { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); font-size: 0.65rem; font-weight: bold; color: #419E46; white-space: nowrap; }
+        .pie-chart { width: 300px; height: 300px; border-radius: 50%; background: conic-gradient(#FED519 0deg 174deg, #F79617 174deg 236deg, #419E46 236deg 250deg, #7CC141 250deg 264deg, #0A9561 264deg 274deg, #a0aec0 274deg 280deg, #718096 280deg 360deg); position: relative; margin: 0 auto; }
+        .pie-chart::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px; background: white; border-radius: 50%; }
+        .legend-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; padding: 0.5rem; border-radius: 4px; background: #f8fafc; }
+        .legend-label { display: flex; align-items: center; gap: 0.75rem; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .comparison-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
+        .comparison-item.highlight { background-color: rgba(124, 193, 65, 0.1); }
+        .comparison-item.normal { background-color: #f8fafc; }
+        .heat-map-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 1rem; }
+        .heat-map-item { padding: 1rem; border-radius: 8px; text-align: center; }
+        .heat-map-item h4 { font-weight: bold; color: #1a202c; margin-bottom: 0.5rem; font-size: 0.9rem; }
+        .heat-map-item p { font-size: 0.8rem; }
+        .heat-map-item .growth { font-size: 1rem; font-weight: bold; }
+        .progress-bar { width: 100%; height: 2rem; background-color: #e5e7eb; border-radius: 1rem; overflow: hidden; margin-bottom: 1rem; }
+        .progress-fill { height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.875rem; font-weight: 500; border-radius: 1rem; transition: width 0.5s ease; }
+        .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+        .table th { background-color: #419E46; color: white; padding: 1rem; text-align: left; font-weight: bold; }
+        .table td { padding: 1rem; border-bottom: 1px solid #e2e8f0; }
+        .table tr:hover { background-color: #f8fafc; }
+        .recommendations { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .recommendation-card { padding: 1.5rem; border-radius: 8px; }
+        .recommendation-card h4 { font-weight: bold; color: #1a202c; margin-bottom: 1rem; }
+        .recommendation-card ul { list-style: none; padding: 0; }
+        .recommendation-card li { margin-bottom: 0.5rem; color: #4a5568; font-size: 0.875rem; }
+        .footer { text-align: center; margin-top: 3rem; padding: 2rem; color: #718096; }
+        .footer-main { display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+        .footer-date { font-size: 0.875rem; color: #9ca3af; }
+        .animate-on-load { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .animate-on-load.visible { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 768px) {
             .container { padding: 0 15px; }
-            .header-content { flex-direction: column; text-align: center; gap: 1rem; }
-            .header h1 { font-size: 2rem; }
+            .header-content { flex-direction: column; text-align: center; gap: 1rem; justify-content: center; }
+            .header h1 { font-size: 1.5rem; }
+            .header p { font-size: 0.9rem; }
+            .main-content { padding: 1.5rem 0; }
             .tabs { flex-direction: column; }
             .tab-button { width: 100%; text-align: center; }
-            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-            .chart-bars { height: 250px; gap: 0.25rem; }
+            .grid-3, .grid-2 { grid-template-columns: 1fr; }
+            .kpi-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+            .kpi-info .value { font-size: 1.3rem; }
+            .chart-title { font-size: 1.1rem; }
+            .css-chart { height: 300px; }
+            .chart-bars { height: 250px; }
             .pie-chart { width: 220px; height: 220px; }
             .pie-chart::after { width: 90px; height: 90px; }
+            .comparison-item { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
-
+        
         @media print {
             .tabs { display: none; }
             .tab-content { display: block !important; }
@@ -600,32 +102,21 @@
     </style>
 </head>
 <body>
-    <div class="corporate-header"></div>
+    <div class="corporate-colors"></div>
     
     <div class="header">
         <div class="container">
             <div class="header-content">
-                <div class="header-title">
-                    <h1>Dashboard Fiscal Inteligente</h1>
+                <div>
+                    <h1>Informe Ejecutivo de Impuestos</h1>
                     <p>Período: Abril 2025 - Enero 2026 | Trinigold Farmacia</p>
-                    <div class="header-metrics">
-                        <div class="header-metric">
-                            <div class="header-metric-value">10 meses</div>
-                            <div class="header-metric-label">Período</div>
-                        </div>
-                        <div class="header-metric">
-                            <div class="header-metric-value">8.61%</div>
-                            <div class="header-metric-label">Ratio Fiscal</div>
-                        </div>
-                        <div class="header-metric">
-                            <div class="header-metric-value">102.2%</div>
-                            <div class="header-metric-label">Crecimiento</div>
-                        </div>
-                        <div class="header-metric">
-                            <div class="header-metric-value">Q1 2026</div>
-                            <div class="header-metric-label">Iniciado</div>
-                        </div>
-                    </div>
+                </div>
+                <div class="color-dots">
+                    <div class="color-dot" style="background-color: #FED519;"></div>
+                    <div class="color-dot" style="background-color: #F79617;"></div>
+                    <div class="color-dot" style="background-color: #7CC141;"></div>
+                    <div class="color-dot" style="background-color: #419E46;"></div>
+                    <div class="color-dot" style="background-color: #0A9561;"></div>
                 </div>
             </div>
         </div>
@@ -634,859 +125,198 @@
     <div class="container">
         <div class="main-content">
             <div class="tabs">
-                <button class="tab-button active" onclick="showTab('dashboard', this)">📊 Dashboard Ejecutivo</button>
-                <button class="tab-button inactive" onclick="showTab('evolucion', this)">📈 Evolución 2025-2026</button>
-                <button class="tab-button inactive" onclick="showTab('composicion', this)">🎯 Composición Fiscal</button>
-                <button class="tab-button inactive" onclick="showTab('analisis', this)">💡 Análisis Inteligente</button>
-                <button class="tab-button inactive" onclick="showTab('alertas', this)">⚠️ Alertas & Cumplimiento</button>
-                <button class="tab-button inactive" onclick="showTab('proyecciones', this)">🔮 Proyecciones 2026</button>
+                <button class="tab-button active" onclick="showTab('resumen', this)">Resumen Ejecutivo</button>
+                <button class="tab-button inactive" onclick="showTab('evolucion', this)">Evolución Temporal</button>
+                <button class="tab-button inactive" onclick="showTab('composicion', this)">Composición</button>
+                <button class="tab-button inactive" onclick="showTab('analisis', this)">Análisis Detallado</button>
             </div>
 
-            <!-- Dashboard Ejecutivo -->
-            <div id="tab-dashboard" class="tab-content active">
+            <!-- Pestaña Resumen -->
+            <div id="tab-resumen" class="tab-content active">
                 <div class="grid grid-3 animate-on-load">
-                    <div class="card kpi-card">
+                    <div class="kpi-card" style="border-left-color: #419E46;">
                         <div class="kpi-header">
                             <div class="kpi-info">
                                 <h3>Total Impuestos Período</h3>
-                                <div class="value">Bs.S 41.099.790</div>
+                                <div class="value">Bs.S 46.999.034</div>
                                 <div class="subtitle">Abril 2025 - Enero 2026</div>
                             </div>
-                            <div class="kpi-icon">
-                                <div class="icon" style="color: var(--color-primary);">💰</div>
-                                <div class="trend positive">↗ 102.2%</div>
-                            </div>
+                            <div class="kpi-icon"><div class="icon" style="color: #419E46;">Bs.</div><div class="trend positive">↗ 459.6%</div></div>
                         </div>
                     </div>
-                    
-                    <div class="card kpi-card">
+                    <div class="kpi-card" style="border-left-color: #FED519;">
                         <div class="kpi-header">
                             <div class="kpi-info">
                                 <h3>Ventas Acumuladas</h3>
-                                <div class="value">Bs.S 477.237.500</div>
+                                <div class="value">Bs.S 537.079.483</div>
                                 <div class="subtitle">10 meses</div>
                             </div>
-                            <div class="kpi-icon">
-                                <div class="icon" style="color: var(--color-accent-1);">📈</div>
-                                <div class="trend positive">↗ 142.5%</div>
-                            </div>
+                            <div class="kpi-icon"><div class="icon" style="color: #FED519;">📈</div><div class="trend positive">↗ 443.5%</div></div>
                         </div>
                     </div>
-                    
-                    <div class="card kpi-card">
+                    <div class="kpi-card" style="border-left-color: #F79617;">
                         <div class="kpi-header">
                             <div class="kpi-info">
-                                <h3>Eficiencia Fiscal</h3>
-                                <div class="value">8.61%</div>
+                                <h3>Porcentaje s/Ventas</h3>
+                                <div class="value">8.75%</div>
                                 <div class="subtitle">Promedio período</div>
                             </div>
-                            <div class="kpi-icon">
-                                <div class="icon" style="color: var(--color-secondary);">⚡</div>
-                                <div class="trend positive">↗ Estable</div>
-                            </div>
+                            <div class="kpi-icon"><div class="icon" style="color: #F79617;">📊</div><div class="trend positive">↗ 0.5%</div></div>
                         </div>
                     </div>
                 </div>
-
-                <div class="year-transition animate-on-load">
-                    <h3>🎊 Transición 2025 → 2026</h3>
-                    <p>Cierre exitoso de 2025 con <strong>Bs.S 37.761.113</strong> en impuestos (Abr-Dic) | Inicio sólido de 2026 con <strong>Bs.S 3.338.677</strong> en enero</p>
+                <div class="chart-container animate-on-load">
+                    <div class="chart-title">Evolución de Gastos de Impuestos (Abril 2025 - Enero 2026)</div>
+                    <div class="css-chart"><div class="chart-bars">
+                        <div class="chart-bar" style="height: 18%;"><div class="chart-bar-label">Abr</div><div class="chart-bar-value">1.65M</div></div>
+                        <div class="chart-bar" style="height: 26%;"><div class="chart-bar-label">May</div><div class="chart-bar-value">2.39M</div></div>
+                        <div class="chart-bar" style="height: 28%;"><div class="chart-bar-label">Jun</div><div class="chart-bar-value">2.59M</div></div>
+                        <div class="chart-bar" style="height: 33%;"><div class="chart-bar-label">Jul</div><div class="chart-bar-value">3.02M</div></div>
+                        <div class="chart-bar" style="height: 36%;"><div class="chart-bar-label">Ago</div><div class="chart-bar-value">3.34M</div></div>
+                        <div class="chart-bar" style="height: 47%;"><div class="chart-bar-label">Sep</div><div class="chart-bar-value">4.32M</div></div>
+                        <div class="chart-bar" style="height: 61%;"><div class="chart-bar-label">Oct</div><div class="chart-bar-value">5.65M</div></div>
+                        <div class="chart-bar" style="height: 75%;"><div class="chart-bar-label">Nov</div><div class="chart-bar-value">6.92M</div></div>
+                        <div class="chart-bar" style="height: 85%;"><div class="chart-bar-label">Dic</div><div class="chart-bar-value">7.89M</div></div>
+                        <div class="chart-bar" style="height: 100%;"><div class="chart-bar-label">Ene</div><div class="chart-bar-value">9.24M</div></div>
+                    </div></div>
                 </div>
-
-                <div class="card animate-on-load">
-                    <div class="chart-title">📊 Evolución Mensual de Impuestos - Período Completo</div>
-                    <div class="chart-bars">
-                        <div class="chart-bar" style="height: 21%;"><div class="chart-bar-label">Abr</div><div class="chart-bar-value">1.65M</div></div>
-                        <div class="chart-bar" style="height: 30%;"><div class="chart-bar-label">May</div><div class="chart-bar-value">2.39M</div></div>
-                        <div class="chart-bar" style="height: 33%;"><div class="chart-bar-label">Jun</div><div class="chart-bar-value">2.59M</div></div>
-                        <div class="chart-bar" style="height: 38%;"><div class="chart-bar-label">Jul</div><div class="chart-bar-value">3.02M</div></div>
-                        <div class="chart-bar" style="height: 42%;"><div class="chart-bar-label">Ago</div><div class="chart-bar-value">3.34M</div></div>
-                        <div class="chart-bar" style="height: 55%;"><div class="chart-bar-label">Sep</div><div class="chart-bar-value">4.32M</div></div>
-                        <div class="chart-bar" style="height: 72%;"><div class="chart-bar-label">Oct</div><div class="chart-bar-value">5.65M</div></div>
-                        <div class="chart-bar" style="height: 88%;"><div class="chart-bar-label">Nov</div><div class="chart-bar-value">6.92M</div></div>
-                        <div class="chart-bar" style="height: 100%;"><div class="chart-bar-label">Dic</div><div class="chart-bar-value">7.89M</div></div>
-                        <div class="chart-bar" style="height: 42%; border: 2px dashed var(--color-accent-1);"><div class="chart-bar-label">Ene26</div><div class="chart-bar-value">3.34M</div></div>
-                    </div>
-                </div>
-
                 <div class="grid grid-2 animate-on-load">
-                    <div class="card">
-                        <div class="chart-title">📈 Métricas de Rendimiento</div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <div class="legend-dot" style="background: var(--color-success);"></div>
-                                <span>Crecimiento Total Período</span>
-                            </div>
-                            <span style="font-weight: 700; color: var(--color-success);">+102.2%</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <div class="legend-dot" style="background: var(--color-primary);"></div>
-                                <span>Promedio Mensual</span>
-                            </div>
-                            <span style="font-weight: 700;">Bs.S 4.109.979</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <div class="legend-dot" style="background: var(--color-accent-2);"></div>
-                                <span>Pico Histórico (Diciembre)</span>
-                            </div>
-                            <span style="font-weight: 700; color: var(--color-accent-2);">Bs.S 7.885.882</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <div class="legend-dot" style="background: var(--color-accent-1);"></div>
-                                <span>Compliance Score</span>
-                            </div>
-                            <span style="font-weight: 700; color: var(--color-success);">99.2%</span>
-                        </div>
+                    <div class="chart-container">
+                        <div class="chart-title">Comparativo Período</div>
+                        <div class="comparison-item normal"><span style="font-weight: bold;">Total Período (Abr-Ene)</span><span style="font-size: 1.125rem; font-weight: bold;">Bs.S 46.999.034</span></div>
+                        <div class="comparison-item highlight"><span style="font-weight: bold;">Promedio Mensual</span><span style="font-size: 1.125rem; font-weight: bold;">Bs.S 4.699.903</span></div>
+                        <div style="text-align: center; padding-top: 1rem; border-top: 1px solid #e2e8f0;"><p style="font-size: 0.875rem; color: #718096;">Crecimiento total del período</p><p style="font-size: 1.5rem; font-weight: bold; color: #419E46;">+459.6%</p></div>
                     </div>
-                    
-                    <div class="card">
-                        <div class="chart-title">🎯 Análisis de Años</div>
-                        <div style="margin-bottom: 1.5rem;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                <span style="font-weight: 600;">Total 2025 (Abr-Dic)</span>
-                                <span style="font-weight: 700;">Bs.S 37.76M</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 91.9%;">91.9% del período</div>
-                            </div>
-                        </div>
-                        <div style="margin-bottom: 1.5rem;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                <span style="font-weight: 600;">Enero 2026</span>
-                                <span style="font-weight: 700;">Bs.S 3.34M</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 8.1%; background: var(--color-accent-1);">8.1% del período</div>
-                            </div>
-                        </div>
-                        <div class="risk-indicator">
-                            <div class="risk-dot risk-low"></div>
-                            <span style="font-weight: 600; color: var(--color-success);">Transición 2026: Exitosa</span>
-                        </div>
+                    <div class="chart-container">
+                        <div class="chart-title">Principales Impuestos - Enero 2026</div>
+                        <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #FED519;"></div><span style="font-size: 0.875rem;">RETENCIÓN IVA</span></div><span style="font-weight: bold;">48.3%</span></div>
+                        <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #F79617;"></div><span style="font-size: 0.875rem;">PATENTE</span></div><span style="font-weight: bold;">17.1%</span></div>
+                        <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #419E46;"></div><span style="font-size: 0.875rem;">IVA</span></div><span style="font-weight: bold;">14.6%</span></div>
+                        <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #7CC141;"></div><span style="font-size: 0.875rem;">ANTICIPOS ISLR</span></div><span style="font-weight: bold;">11.6%</span></div>
+                        <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #0A9561;"></div><span style="font-size: 0.875rem;">FONDO PENSIONES</span></div><span style="font-weight: bold;">4.1%</span></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Evolución 2025-2026 -->
+            <!-- Pestaña Evolución Temporal -->
             <div id="tab-evolucion" class="tab-content">
-                <div class="card animate-on-load">
-                    <div class="chart-title">📈 Análisis de Tendencias - 2025 vs 2026</div>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
-                        <div style="padding: 1rem; background: rgba(65, 158, 70, 0.1); border-radius: 8px; text-align: center;">
-                            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">ABR</h4>
-                            <p style="color: var(--color-neutral-600);">Base</p>
-                            <p style="font-size: 1.1rem; font-weight: 700; color: var(--color-neutral-700);">1.65M</p>
-                        </div>
-                        <div style="padding: 1rem; background: rgba(65, 158, 70, 0.2); border-radius: 8px; text-align: center;">
-                            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">MAY</h4>
-                            <p style="color: var(--color-success);">+44.9%</p>
-                            <p style="font-size: 1.1rem; font-weight: 700; color: var(--color-success);">2.39M</p>
-                        </div>
-                        <div style="padding: 1rem; background: rgba(65, 158, 70, 0.25); border-radius: 8px; text-align: center;">
-                            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">JUN</h4>
-                            <p style="color: var(--color-success);">+8.3%</p>
-                            <p style="font-size: 1.1rem; font-weight: 700; color: var(--color-success);">2.59M</p>
-                        </div>
-                        <div style="padding: 1rem; background: rgba(65, 158, 70, 0.3); border-radius: 8px; text-align: center;">
-                            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">JUL</h4>
-                            <p style="color: var(--color-success);">+16.4%</p>
-                            <p style="font-size: 1.1rem; font-weight: 700; color: var(--color-success);">3.02M</p>
-                        </div>
-                        <div style="padding: 1rem; background: rgba(65, 158, 70, 0.35); border-radius: 8px; text-align: center;">
-                            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">AGO</h4>
-                            <p style="color: var(--color-success);">+11.0%</p>
-                            <p style="font-size: 1.1rem; font-weight: 700; color: var(--color-success);">3.34M</p>
-                        </div>
-                        <div style="padding: 1rem; background: rgba(65, 158, 70, 0.4); border-radius: 8px; text-align: center;">
-                            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">SEP</h4>
-                            <p style="color: var(--color-success);">+29.3%</p>
-                            <p style="font-size: 1.1rem; font-weight: 700; color: var(--color-success);">4.32M</p>
-                        </div>
-                        <div style="padding: 1rem; background: rgba(65, 158, 70, 0.45); border-radius: 8px; text-align: center;">
-                            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">OCT</h4>
-                            <p style="color: var(--color-success);">+30.8%</p>
-                            <p style="font-size: 1.1rem; font-weight: 700; color: var(--color-success);">5.65M</p>
-                        </div>
-                        <div style="padding: 1rem; background: rgba(65, 158, 70, 0.5); border-radius: 8px; text-align: center;">
-                            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">NOV</h4>
-                            <p style="color: var(--color-success);">+22.5%</p>
-                            <p style="font-size: 1.1rem; font-weight: 700; color: var(--color-success);">6.92M</p>
-                        </div>
-                        <div style="padding: 1rem; background: rgba(65, 158, 70, 0.55); border-radius: 8px; text-align: center;">
-                            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">DIC</h4>
-                            <p style="color: var(--color-success);">+14.0%</p>
-                            <p style="font-size: 1.1rem; font-weight: 700; color: var(--color-success);">7.89M</p>
-                        </div>
-                        <div style="padding: 1rem; background: rgba(254, 213, 25, 0.3); border: 2px solid var(--color-accent-1); border-radius: 8px; text-align: center;">
-                            <h4 style="font-weight: 700; margin-bottom: 0.5rem; color: var(--color-accent-2);">ENE 26</h4>
-                            <p style="color: var(--color-warning);">-57.7%</p>
-                            <p style="font-size: 1.1rem; font-weight: 700; color: var(--color-accent-2);">3.34M</p>
-                        </div>
-                    </div>
+                <div class="chart-container animate-on-load">
+                    <div class="chart-title">Evolución Mensual de Impuestos vs Ventas</div>
+                    <div class="css-chart"><div class="chart-bars">
+                        <div style="display: flex; flex-direction: column; align-items: center; flex: 1;"><div style="display: flex; gap: 0.3rem; height: 300px; align-items: end;"><div style="background: #419E46; width: 20px; height: 18%; border-radius: 4px; position: relative;"><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; color: #419E46; font-weight: bold;">1.65M</div></div><div style="background: #FED519; width: 20px; height: 9%; border-radius: 4px;"></div></div><div style="margin-top: 0.5rem; font-size: 0.7rem; font-weight: 500; color: #718096;">Abr</div></div>
+                        <div style="display: flex; flex-direction: column; align-items: center; flex: 1;"><div style="display: flex; gap: 0.3rem; height: 300px; align-items: end;"><div style="background: #419E46; width: 20px; height: 26%; border-radius: 4px; position: relative;"><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; color: #419E46; font-weight: bold;">2.39M</div></div><div style="background: #FED519; width: 20px; height: 13%; border-radius: 4px;"></div></div><div style="margin-top: 0.5rem; font-size: 0.7rem; font-weight: 500; color: #718096;">May</div></div>
+                        <div style="display: flex; flex-direction: column; align-items: center; flex: 1;"><div style="display: flex; gap: 0.3rem; height: 300px; align-items: end;"><div style="background: #419E46; width: 20px; height: 28%; border-radius: 4px; position: relative;"><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; color: #419E46; font-weight: bold;">2.59M</div></div><div style="background: #FED519; width: 20px; height: 14%; border-radius: 4px;"></div></div><div style="margin-top: 0.5rem; font-size: 0.7rem; font-weight: 500; color: #718096;">Jun</div></div>
+                        <div style="display: flex; flex-direction: column; align-items: center; flex: 1;"><div style="display: flex; gap: 0.3rem; height: 300px; align-items: end;"><div style="background: #419E46; width: 20px; height: 33%; border-radius: 4px; position: relative;"><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; color: #419E46; font-weight: bold;">3.02M</div></div><div style="background: #FED519; width: 20px; height: 17%; border-radius: 4px;"></div></div><div style="margin-top: 0.5rem; font-size: 0.7rem; font-weight: 500; color: #718096;">Jul</div></div>
+                        <div style="display: flex; flex-direction: column; align-items: center; flex: 1;"><div style="display: flex; gap: 0.3rem; height: 300px; align-items: end;"><div style="background: #419E46; width: 20px; height: 36%; border-radius: 4px; position: relative;"><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; color: #419E46; font-weight: bold;">3.34M</div></div><div style="background: #FED519; width: 20px; height: 17%; border-radius: 4px;"></div></div><div style="margin-top: 0.5rem; font-size: 0.7rem; font-weight: 500; color: #718096;">Ago</div></div>
+                        <div style="display: flex; flex-direction: column; align-items: center; flex: 1;"><div style="display: flex; gap: 0.3rem; height: 300px; align-items: end;"><div style="background: #419E46; width: 20px; height: 47%; border-radius: 4px; position: relative;"><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; color: #419E46; font-weight: bold;">4.32M</div></div><div style="background: #FED519; width: 20px; height: 23%; border-radius: 4px;"></div></div><div style="margin-top: 0.5rem; font-size: 0.7rem; font-weight: 500; color: #718096;">Sep</div></div>
+                        <div style="display: flex; flex-direction: column; align-items: center; flex: 1;"><div style="display: flex; gap: 0.3rem; height: 300px; align-items: end;"><div style="background: #419E46; width: 20px; height: 61%; border-radius: 4px; position: relative;"><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; color: #419E46; font-weight: bold;">5.65M</div></div><div style="background: #FED519; width: 20px; height: 30%; border-radius: 4px;"></div></div><div style="margin-top: 0.5rem; font-size: 0.7rem; font-weight: 500; color: #718096;">Oct</div></div>
+                        <div style="display: flex; flex-direction: column; align-items: center; flex: 1;"><div style="display: flex; gap: 0.3rem; height: 300px; align-items: end;"><div style="background: #419E46; width: 20px; height: 75%; border-radius: 4px; position: relative;"><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; color: #419E46; font-weight: bold;">6.92M</div></div><div style="background: #FED519; width: 20px; height: 36%; border-radius: 4px;"></div></div><div style="margin-top: 0.5rem; font-size: 0.7rem; font-weight: 500; color: #718096;">Nov</div></div>
+                        <div style="display: flex; flex-direction: column; align-items: center; flex: 1;"><div style="display: flex; gap: 0.3rem; height: 300px; align-items: end;"><div style="background: #419E46; width: 20px; height: 85%; border-radius: 4px; position: relative;"><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; color: #419E46; font-weight: bold;">7.89M</div></div><div style="background: #FED519; width: 20px; height: 40%; border-radius: 4px;"></div></div><div style="margin-top: 0.5rem; font-size: 0.7rem; font-weight: 500; color: #718096;">Dic</div></div>
+                        <div style="display: flex; flex-direction: column; align-items: center; flex: 1;"><div style="display: flex; gap: 0.3rem; height: 300px; align-items: end;"><div style="background: #419E46; width: 20px; height: 100%; border-radius: 4px; position: relative;"><div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; color: #419E46; font-weight: bold;">9.24M</div></div><div style="background: #FED519; width: 20px; height: 50%; border-radius: 4px;"></div></div><div style="margin-top: 0.5rem; font-size: 0.7rem; font-weight: 500; color: #718096;">Ene</div></div>
+                    </div></div>
+                    <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 1rem;"><div style="display: flex; align-items: center; gap: 0.5rem;"><div style="width: 16px; height: 16px; background: #419E46; border-radius: 4px;"></div><span style="font-size: 0.875rem; color: #718096;">Impuestos</span></div><div style="display: flex; align-items: center; gap: 0.5rem;"><div style="width: 16px; height: 16px; background: #FED519; border-radius: 4px;"></div><span style="font-size: 0.875rem; color: #718096;">Ventas</span></div></div>
                 </div>
-
-                <div class="grid grid-2 animate-on-load">
-                    <div class="card">
-                        <div class="chart-title">📊 Análisis de Estacionalidad</div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <div class="legend-dot" style="background: var(--color-accent-1);"></div>
-                                <span>Q2 2025 (Abr-Jun)</span>
-                            </div>
-                            <div>
-                                <div style="font-weight: 700;">Bs.S 6.63M</div>
-                                <div style="font-size: 0.75rem; color: var(--color-neutral-500);">16.1% del total</div>
-                            </div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <div class="legend-dot" style="background: var(--color-accent-2);"></div>
-                                <span>Q3 2025 (Jul-Sep)</span>
-                            </div>
-                            <div>
-                                <div style="font-weight: 700;">Bs.S 10.68M</div>
-                                <div style="font-size: 0.75rem; color: var(--color-neutral-500);">26.0% del total</div>
-                            </div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <div class="legend-dot" style="background: var(--color-primary);"></div>
-                                <span>Q4 2025 (Oct-Dic)</span>
-                            </div>
-                            <div>
-                                <div style="font-weight: 700;">Bs.S 20.45M</div>
-                                <div style="font-size: 0.75rem; color: var(--color-neutral-500);">49.8% del total</div>
-                            </div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <div class="legend-dot" style="background: var(--color-accent-1);"></div>
-                                <span>Q1 2026 (Ene)</span>
-                            </div>
-                            <div>
-                                <div style="font-weight: 700;">Bs.S 3.34M</div>
-                                <div style="font-size: 0.75rem; color: var(--color-neutral-500);">8.1% del período</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="chart-title">📈 Análisis Año sobre Año</div>
-                        <div style="margin-bottom: 1rem;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                <span>Crecimiento 2025</span>
-                                <span style="font-weight: 700; color: var(--color-success);">+377.5%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 100%; background: var(--color-success);">Excepcional</div>
-                            </div>
-                        </div>
-                        <div style="margin-bottom: 1rem;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                <span>Inicio 2026</span>
-                                <span style="font-weight: 700; color: var(--color-accent-2);">Bs.S 3.34M</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 42%; background: var(--color-accent-1);">Sólido</div>
-                            </div>
-                        </div>
-                        <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 1.5rem; padding: 1rem; background: rgba(254, 213, 25, 0.1); border-radius: 8px;">
-                            <span style="font-size: 1.5rem;">🎯</span>
-                            <span style="font-weight: 700; color: var(--color-accent-2);">Transición Exitosa</span>
-                        </div>
+                <div class="chart-container animate-on-load">
+                    <div class="chart-title">Mapa de Calor - Crecimiento Mensual en Impuestos</div>
+                    <div class="heat-map-grid">
+                        <div class="heat-map-item" style="background-color: rgba(124, 193, 65, 0.3);"><h4>ABR</h4><p>Crecimiento</p><p class="growth" style="color: #10b981;">Base</p></div>
+                        <div class="heat-map-item" style="background-color: rgba(124, 193, 65, 0.65);"><h4>MAY</h4><p>Crecimiento</p><p class="growth" style="color: #10b981;">+44.9%</p></div>
+                        <div class="heat-map-item" style="background-color: rgba(124, 193, 65, 0.4);"><h4>JUN</h4><p>Crecimiento</p><p class="growth" style="color: #10b981;">+8.3%</p></div>
+                        <div class="heat-map-item" style="background-color: rgba(124, 193, 65, 0.5);"><h4>JUL</h4><p>Crecimiento</p><p class="growth" style="color: #10b981;">+16.4%</p></div>
+                        <div class="heat-map-item" style="background-color: rgba(124, 193, 65, 0.48);"><h4>AGO</h4><p>Crecimiento</p><p class="growth" style="color: #10b981;">+10.7%</p></div>
+                        <div class="heat-map-item" style="background-color: rgba(124, 193, 65, 0.7);"><h4>SEP</h4><p>Crecimiento</p><p class="growth" style="color: #10b981;">+29.3%</p></div>
+                        <div class="heat-map-item" style="background-color: rgba(124, 193, 65, 0.75);"><h4>OCT</h4><p>Crecimiento</p><p class="growth" style="color: #10b981;">+30.7%</p></div>
+                        <div class="heat-map-item" style="background-color: rgba(124, 193, 65, 0.68);"><h4>NOV</h4><p>Crecimiento</p><p class="growth" style="color: #10b981;">+22.5%</p></div>
+                        <div class="heat-map-item" style="background-color: rgba(124, 193, 65, 0.52);"><h4>DIC</h4><p>Crecimiento</p><p class="growth" style="color: #10b981;">+14.0%</p></div>
+                        <div class="heat-map-item" style="background-color: rgba(124, 193, 65, 0.55);"><h4>ENE</h4><p>Crecimiento</p><p class="growth" style="color: #10b981;">+17.2%</p></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Composición Fiscal -->
+            <!-- Pestaña Composición -->
             <div id="tab-composicion" class="tab-content">
-                <div class="card animate-on-load">
-                    <div class="chart-title">🎯 Composición de Impuestos - Enero 2026</div>
+                <div class="chart-container animate-on-load">
+                    <div class="chart-title">Composición de Impuestos - Enero 2026</div>
                     <div class="grid grid-2">
-                        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
-                            <!-- Gráfico de torta principal -->
-                            <div class="pie-chart" id="pie-chart-main"></div>
-                            
-                            <!-- Fallback Canvas -->
-                            <canvas id="pie-chart-canvas" width="280" height="280" style="display: none; margin: 0 auto; filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));"></canvas>
-                            
-                            <!-- Fallback SVG para mejor compatibilidad -->
-                            <svg style="display: none;" class="pie-chart-svg" width="280" height="280" viewBox="0 0 280 280">
-                                <!-- IVA 15.4% -->
-                                <path d="M 140 140 L 140 20 A 120 120 0 0 1 195.3 47.2 Z" fill="#FED519"/>
-                                
-                                <!-- Anticipos ISLR 14.1% -->
-                                <path d="M 140 140 L 195.3 47.2 A 120 120 0 0 1 247.7 90.5 Z" fill="#F79617"/>
-                                
-                                <!-- Retención IVA 69.3% -->
-                                <path d="M 140 140 L 247.7 90.5 A 120 120 0 0 1 32.3 189.5 Z" fill="#7CC141"/>
-                                
-                                <!-- IGTF 1.3% -->
-                                <path d="M 140 140 L 32.3 189.5 A 120 120 0 0 1 140 20 Z" fill="#419E46"/>
-                                
-                                <!-- Centro blanco -->
-                                <circle cx="140" cy="140" r="60" fill="white"/>
-                            </svg>
-                            
-                            <div style="margin-top: 1rem; text-align: center; font-size: 0.875rem; color: var(--color-neutral-600);">
-                                Distribución Enero 2026 (Estructura Q1)
-                            </div>
-                        </div>
+                        <div style="display: flex; justify-content: center; align-items: center;"><div class="pie-chart"></div></div>
                         <div>
-                            <div class="legend-item">
-                                <div class="legend-label">
-                                    <div class="legend-dot" style="background: #7CC141;"></div>
-                                    <span style="font-weight: 700;">RETENCIÓN IVA</span>
-                                </div>
-                                <div style="text-align: right;">
-                                    <div style="font-weight: 700;">Bs.S 2.312.369</div>
-                                    <div style="font-size: 0.875rem; color: var(--color-neutral-600);">69.3%</div>
-                                </div>
-                            </div>
-                            <div class="legend-item">
-                                <div class="legend-label">
-                                    <div class="legend-dot" style="background: #FED519;"></div>
-                                    <span style="font-weight: 700;">IVA POR PAGAR</span>
-                                </div>
-                                <div style="text-align: right;">
-                                    <div style="font-weight: 700;">Bs.S 512.492</div>
-                                    <div style="font-size: 0.875rem; color: var(--color-neutral-600);">15.4%</div>
-                                </div>
-                            </div>
-                            <div class="legend-item">
-                                <div class="legend-label">
-                                    <div class="legend-dot" style="background: #F79617;"></div>
-                                    <span style="font-weight: 700;">ANTICIPOS ISLR</span>
-                                </div>
-                                <div style="text-align: right;">
-                                    <div style="font-weight: 700;">Bs.S 471.638</div>
-                                    <div style="font-size: 0.875rem; color: var(--color-neutral-600);">14.1%</div>
-                                </div>
-                            </div>
-                            <div class="legend-item">
-                                <div class="legend-label">
-                                    <div class="legend-dot" style="background: #419E46;"></div>
-                                    <span style="font-weight: 700;">IGTF</span>
-                                </div>
-                                <div style="text-align: right;">
-                                    <div style="font-weight: 700;">Bs.S 42.179</div>
-                                    <div style="font-size: 0.875rem; color: var(--color-neutral-600);">1.3%</div>
-                                </div>
-                            </div>
+                            <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #FED519;"></div><span style="font-weight: bold;">RETENCIÓN IVA</span></div><div style="text-align: right;"><p style="font-weight: bold;">Bs.S 4.460.720</p><p style="font-size: 0.875rem; color: #718096;">48.3%</p></div></div>
+                            <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #F79617;"></div><span style="font-weight: bold;">PATENTE</span></div><div style="text-align: right;"><p style="font-weight: bold;">Bs.S 1.575.882</p><p style="font-size: 0.875rem; color: #718096;">17.1%</p></div></div>
+                            <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #419E46;"></div><span style="font-weight: bold;">IVA</span></div><div style="text-align: right;"><p style="font-weight: bold;">Bs.S 1.351.518</p><p style="font-size: 0.875rem; color: #718096;">14.6%</p></div></div>
+                            <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #7CC141;"></div><span style="font-weight: bold;">ANTICIPOS ISLR</span></div><div style="text-align: right;"><p style="font-weight: bold;">Bs.S 1.070.058</p><p style="font-size: 0.875rem; color: #718096;">11.6%</p></div></div>
+                            <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #0A9561;"></div><span style="font-weight: bold;">FONDO PENSIONES</span></div><div style="text-align: right;"><p style="font-weight: bold;">Bs.S 380.824</p><p style="font-size: 0.875rem; color: #718096;">4.1%</p></div></div>
+                            <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #a0aec0;"></div><span style="font-weight: bold;">RET ISLR</span></div><div style="text-align: right;"><p style="font-weight: bold;">Bs.S 224.170</p><p style="font-size: 0.875rem; color: #718096;">2.4%</p></div></div>
+                            <div class="legend-item"><div class="legend-label"><div class="legend-dot" style="background-color: #718096;"></div><span style="font-weight: bold;">OTROS</span></div><div style="text-align: right;"><p style="font-weight: bold;">Bs.S 174.749</p><p style="font-size: 0.875rem; color: #718096;">1.9%</p></div></div>
                         </div>
-                    </div>
-                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(254, 213, 25, 0.1); border-radius: 8px; text-align: center;">
-                        <p style="font-size: 0.875rem; color: var(--color-neutral-600);">
-                            <strong>Estructura Q1 2026:</strong> Enero muestra una concentración en Retención IVA (69.3%) típica del primer quarter, 
-                            con impuestos trimestrales como Patente y Fondo de Pensiones aplicando en meses posteriores.
-                        </p>
                     </div>
                 </div>
-
-                <div class="grid grid-2 animate-on-load">
-                    <div class="card">
-                        <div class="chart-title">📊 Comparación Diciembre vs Enero</div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <span style="font-weight: 600;">Diciembre 2025</span>
-                            </div>
-                            <div style="text-align: right;">
-                                <div style="font-weight: 700;">Bs.S 7.885.882</div>
-                                <div class="metric-change positive">Pico anual</div>
-                            </div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <span style="font-weight: 600;">Enero 2026</span>
-                            </div>
-                            <div style="text-align: right;">
-                                <div style="font-weight: 700;">Bs.S 3.338.677</div>
-                                <div class="metric-change negative">-57.7%</div>
-                            </div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <span style="font-weight: 600;">Ratio Fiscal</span>
-                            </div>
-                            <div style="text-align: right;">
-                                <div style="font-weight: 700;">7.08%</div>
-                                <div class="metric-change positive">Optimizado</div>
-                            </div>
-                        </div>
-                        <div style="margin-top: 1rem; padding: 0.75rem; background: var(--color-neutral-50); border-radius: 6px; text-align: center;">
-                            <div style="font-size: 0.875rem; color: var(--color-neutral-600);">
-                                Reducción estacional normal post-festividades
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="chart-title">⚡ Evolución de Concentración</div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <span style="font-weight: 600;">Retención IVA 2025</span>
-                            </div>
-                            <div style="text-align: right;">
-                                <div style="font-weight: 700;">~25% promedio</div>
-                            </div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <span style="font-weight: 600;">Retención IVA Ene26</span>
-                            </div>
-                            <div style="text-align: right;">
-                                <div style="font-weight: 700; color: var(--color-warning);">69.3%</div>
-                            </div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <span style="font-weight: 600;">Diversificación Q1</span>
-                            </div>
-                            <div style="text-align: right;">
-                                <div style="font-weight: 700; color: var(--color-warning);">Reducida</div>
-                            </div>
-                        </div>
-                        <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(245, 158, 11, 0.1); border-radius: 6px; text-align: center;">
-                            <div style="font-size: 0.875rem; color: var(--color-warning); font-weight: 600;">
-                                ⚠️ Monitorear diversificación en Feb-Mar
-                            </div>
-                        </div>
+                <div class="chart-container animate-on-load">
+                    <div class="chart-title">Embudo Fiscal - Flujo de Impuestos (Enero 2026)</div>
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;"><span style="font-weight: bold;">Ventas Brutas</span><span style="font-weight: bold;">Bs.S 107.005.754</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 100%; background-color: #FED519;">100%</div></div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;"><span style="font-weight: bold;">Base Imponible</span><span style="font-weight: bold;">Bs.S 97.767.832</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 91.4%; background-color: #F79617;">91.4%</div></div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;"><span style="font-weight: bold;">Impuestos Totales</span><span style="font-weight: bold;">Bs.S 9.237.922</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 8.63%; background-color: #7CC141;">8.63%</div></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Análisis Inteligente -->
+            <!-- Pestaña Análisis Detallado -->
             <div id="tab-analisis" class="tab-content">
-                <div class="card animate-on-load">
-                    <div class="chart-title">💡 Resumen Ejecutivo Completo</div>
-                    <div class="table-wrapper">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Mes</th>
-                                    <th style="text-align: right;">Ventas (Bs.S)</th>
-                                    <th style="text-align: right;">Impuestos (Bs.S)</th>
-                                    <th style="text-align: right;">% s/Ventas</th>
-                                    <th style="text-align: right;">Var. Mensual</th>
-                                    <th style="text-align: right;">Acum. %</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td style="font-weight: 700;">Abril 2025</td>
-                                    <td style="text-align: right;">19.690.070</td>
-                                    <td style="text-align: right; font-weight: 700;">1.650.934</td>
-                                    <td style="text-align: right;">8.38%</td>
-                                    <td style="text-align: right; font-weight: 700;">Base</td>
-                                    <td style="text-align: right; color: var(--color-primary);">4.0%</td>
-                                </tr>
-                                <tr>
-                                    <td style="font-weight: 700;">Mayo 2025</td>
-                                    <td style="text-align: right;">28.335.507</td>
-                                    <td style="text-align: right; font-weight: 700;">2.392.809</td>
-                                    <td style="text-align: right;">8.44%</td>
-                                    <td style="text-align: right; font-weight: 700; color: var(--color-success);">+44.9%</td>
-                                    <td style="text-align: right; color: var(--color-primary);">9.8%</td>
-                                </tr>
-                                <tr>
-                                    <td style="font-weight: 700;">Junio 2025</td>
-                                    <td style="text-align: right;">30.357.408</td>
-                                    <td style="text-align: right; font-weight: 700;">2.591.953</td>
-                                    <td style="text-align: right;">8.54%</td>
-                                    <td style="text-align: right; font-weight: 700; color: var(--color-success);">+8.3%</td>
-                                    <td style="text-align: right; color: var(--color-primary);">16.1%</td>
-                                </tr>
-                                <tr>
-                                    <td style="font-weight: 700;">Julio 2025</td>
-                                    <td style="text-align: right;">36.421.600</td>
-                                    <td style="text-align: right; font-weight: 700;">3.016.520</td>
-                                    <td style="text-align: right;">8.28%</td>
-                                    <td style="text-align: right; font-weight: 700; color: var(--color-success);">+16.4%</td>
-                                    <td style="text-align: right; color: var(--color-primary);">23.4%</td>
-                                </tr>
-                                <tr>
-                                    <td style="font-weight: 700;">Agosto 2025</td>
-                                    <td style="text-align: right;">37.537.374</td>
-                                    <td style="text-align: right; font-weight: 700;">3.340.335</td>
-                                    <td style="text-align: right;">8.90%</td>
-                                    <td style="text-align: right; font-weight: 700; color: var(--color-success);">+11.0%</td>
-                                    <td style="text-align: right; color: var(--color-primary);">31.5%</td>
-                                </tr>
-                                <tr>
-                                    <td style="font-weight: 700;">Septiembre 2025</td>
-                                    <td style="text-align: right;">48.824.223</td>
-                                    <td style="text-align: right; font-weight: 700;">4.319.774</td>
-                                    <td style="text-align: right;">8.85%</td>
-                                    <td style="text-align: right; font-weight: 700; color: var(--color-success);">+29.3%</td>
-                                    <td style="text-align: right; color: var(--color-primary);">42.0%</td>
-                                </tr>
-                                <tr>
-                                    <td style="font-weight: 700;">Octubre 2025</td>
-                                    <td style="text-align: right;">64.143.584</td>
-                                    <td style="text-align: right; font-weight: 700;">5.647.726</td>
-                                    <td style="text-align: right;">8.80%</td>
-                                    <td style="text-align: right; font-weight: 700; color: var(--color-success);">+30.8%</td>
-                                    <td style="text-align: right; color: var(--color-primary);">55.8%</td>
-                                </tr>
-                                <tr>
-                                    <td style="font-weight: 700;">Noviembre 2025</td>
-                                    <td style="text-align: right;">77.880.350</td>
-                                    <td style="text-align: right; font-weight: 700;">6.915.179</td>
-                                    <td style="text-align: right;">8.88%</td>
-                                    <td style="text-align: right; font-weight: 700; color: var(--color-success);">+22.5%</td>
-                                    <td style="text-align: right; color: var(--color-primary);">72.6%</td>
-                                </tr>
-                                <tr>
-                                    <td style="font-weight: 700;">Diciembre 2025</td>
-                                    <td style="text-align: right;">86.883.613</td>
-                                    <td style="text-align: right; font-weight: 700;">7.885.882</td>
-                                    <td style="text-align: right;">9.08%</td>
-                                    <td style="text-align: right; font-weight: 700; color: var(--color-success);">+14.0%</td>
-                                    <td style="text-align: right; color: var(--color-primary);">91.9%</td>
-                                </tr>
-                                <tr style="background: linear-gradient(135deg, rgba(254, 213, 25, 0.2), rgba(254, 213, 25, 0.1)); border-left: 4px solid var(--color-accent-1);">
-                                    <td style="font-weight: 700; color: var(--color-accent-2);">Enero 2026</td>
-                                    <td style="text-align: right;">47.163.771</td>
-                                    <td style="text-align: right; font-weight: 700;">3.338.677</td>
-                                    <td style="text-align: right;">7.08%</td>
-                                    <td style="text-align: right; font-weight: 700; color: var(--color-warning);">-57.7%</td>
-                                    <td style="text-align: right; color: var(--color-accent-2);">100.0%</td>
-                                </tr>
-                                <tr style="background: linear-gradient(135deg, rgba(65, 158, 70, 0.1), rgba(65, 158, 70, 0.05)); font-weight: 700;">
-                                    <td>TOTAL PERÍODO</td>
-                                    <td style="text-align: right;">477.237.500</td>
-                                    <td style="text-align: right;">41.099.790</td>
-                                    <td style="text-align: right;">8.61%</td>
-                                    <td style="text-align: right; color: var(--color-success);">+102.2%</td>
-                                    <td style="text-align: right; color: var(--color-success);">✓</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="chart-container animate-on-load">
+                    <div class="chart-title">Resumen Ejecutivo por Mes</div>
+                    <div class="table-wrapper"><table class="table">
+                        <thead><tr><th>Mes</th><th style="text-align: right;">Ventas</th><th style="text-align: right;">Impuestos</th><th style="text-align: right;">% s/Ventas</th><th style="text-align: right;">Var. Mensual</th></tr></thead>
+                        <tbody>
+                            <tr><td style="font-weight: bold;">Abril 2025</td><td style="text-align: right;">Bs.S 19.690.070</td><td style="text-align: right; font-weight: bold;">Bs.S 1.650.934</td><td style="text-align: right;">8.38%</td><td style="text-align: right; font-weight: bold;">-</td></tr>
+                            <tr><td style="font-weight: bold;">Mayo 2025</td><td style="text-align: right;">Bs.S 28.335.507</td><td style="text-align: right; font-weight: bold;">Bs.S 2.392.809</td><td style="text-align: right;">8.44%</td><td style="text-align: right; font-weight: bold; color: #10b981;">+44.9%</td></tr>
+                            <tr><td style="font-weight: bold;">Junio 2025</td><td style="text-align: right;">Bs.S 30.357.408</td><td style="text-align: right; font-weight: bold;">Bs.S 2.591.953</td><td style="text-align: right;">8.54%</td><td style="text-align: right; font-weight: bold; color: #10b981;">+8.3%</td></tr>
+                            <tr><td style="font-weight: bold;">Julio 2025</td><td style="text-align: right;">Bs.S 36.421.600</td><td style="text-align: right; font-weight: bold;">Bs.S 3.016.520</td><td style="text-align: right;">8.28%</td><td style="text-align: right; font-weight: bold; color: #10b981;">+16.4%</td></tr>
+                            <tr><td style="font-weight: bold;">Agosto 2025</td><td style="text-align: right;">Bs.S 37.537.374</td><td style="text-align: right; font-weight: bold;">Bs.S 3.340.335</td><td style="text-align: right;">8.90%</td><td style="text-align: right; font-weight: bold; color: #10b981;">+10.7%</td></tr>
+                            <tr><td style="font-weight: bold;">Septiembre 2025</td><td style="text-align: right;">Bs.S 48.824.223</td><td style="text-align: right; font-weight: bold;">Bs.S 4.319.774</td><td style="text-align: right;">8.85%</td><td style="text-align: right; font-weight: bold; color: #10b981;">+29.3%</td></tr>
+                            <tr><td style="font-weight: bold;">Octubre 2025</td><td style="text-align: right;">Bs.S 64.143.584</td><td style="text-align: right; font-weight: bold;">Bs.S 5.647.726</td><td style="text-align: right;">8.80%</td><td style="text-align: right; font-weight: bold; color: #10b981;">+30.7%</td></tr>
+                            <tr><td style="font-weight: bold;">Noviembre 2025</td><td style="text-align: right;">Bs.S 77.880.350</td><td style="text-align: right; font-weight: bold;">Bs.S 6.915.179</td><td style="text-align: right;">8.88%</td><td style="text-align: right; font-weight: bold; color: #10b981;">+22.5%</td></tr>
+                            <tr><td style="font-weight: bold;">Diciembre 2025</td><td style="text-align: right;">Bs.S 86.883.613</td><td style="text-align: right; font-weight: bold;">Bs.S 7.885.882</td><td style="text-align: right;">9.08%</td><td style="text-align: right; font-weight: bold; color: #10b981;">+14.0%</td></tr>
+                            <tr><td style="font-weight: bold;">Enero 2026</td><td style="text-align: right;">Bs.S 107.005.754</td><td style="text-align: right; font-weight: bold;">Bs.S 9.237.922</td><td style="text-align: right;">8.63%</td><td style="text-align: right; font-weight: bold; color: #10b981;">+17.2%</td></tr>
+                            <tr style="background-color: #f0fdf4; font-weight: bold;"><td>TOTAL</td><td style="text-align: right;">Bs.S 537.079.483</td><td style="text-align: right;">Bs.S 46.999.034</td><td style="text-align: right;">8.75%</td><td style="text-align: right; color: #10b981;">+459.6%</td></tr>
+                        </tbody>
+                    </table></div>
                 </div>
-
-                <div class="grid grid-3 animate-on-load">
-                    <div class="card success-card">
-                        <div class="chart-title">✅ Logros 2025</div>
-                        <ul style="list-style: none; padding: 0;">
-                            <li style="margin-bottom: 0.5rem; color: var(--color-success); font-weight: 600;">
-                                • Crecimiento sostenido 9 meses
-                            </li>
-                            <li style="margin-bottom: 0.5rem; color: var(--color-success); font-weight: 600;">
-                                • Pico histórico en diciembre (Bs.S 7.89M)
-                            </li>
-                            <li style="margin-bottom: 0.5rem; color: var(--color-success); font-weight: 600;">
-                                • Ratio fiscal estable (~8.6%)
-                            </li>
-                            <li style="margin-bottom: 0.5rem; color: var(--color-success); font-weight: 600;">
-                                • Compliance 99.2% excelente
-                            </li>
-                            <li style="margin-bottom: 0.5rem; color: var(--color-success); font-weight: 600;">
-                                • Transición exitosa a 2026
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="card alert-card">
-                        <div class="chart-title">⚠️ Observaciones 2026</div>
-                        <ul style="list-style: none; padding: 0;">
-                            <li style="margin-bottom: 0.5rem; color: var(--color-warning); font-weight: 600;">
-                                • Reducción estacional normal enero
-                            </li>
-                            <li style="margin-bottom: 0.5rem; color: var(--color-warning); font-weight: 600;">
-                                • Concentración en Ret. IVA (69.3%)
-                            </li>
-                            <li style="margin-bottom: 0.5rem; color: var(--color-warning); font-weight: 600;">
-                                • Estructura Q1 simplificada
-                            </li>
-                            <li style="margin-bottom: 0.5rem; color: var(--color-warning); font-weight: 600;">
-                                • Monitorear Feb-Mar recuperación
-                            </li>
-                            <li style="margin-bottom: 0.5rem; color: var(--color-warning); font-weight: 600;">
-                                • Planificar diversificación Q2
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="card" style="border-left: 4px solid var(--color-accent-1);">
-                        <div class="chart-title">🎯 Estrategia 2026</div>
-                        <ul style="list-style: none; padding: 0;">
-                            <li style="margin-bottom: 0.5rem; color: var(--color-primary); font-weight: 600;">
-                                • Consolidar crecimiento sostenible
-                            </li>
-                            <li style="margin-bottom: 0.5rem; color: var(--color-primary); font-weight: 600;">
-                                • Optimizar ratio fiscal objetivo 8.5%
-                            </li>
-                            <li style="margin-bottom: 0.5rem; color: var(--color-primary); font-weight: 600;">
-                                • Implementar predictiva IA avanzada
-                            </li>
-                            <li style="margin-bottom: 0.5rem; color: var(--color-primary); font-weight: 600;">
-                                • Diversificar estructura trimestral
-                            </li>
-                            <li style="margin-bottom: 0.5rem; color: var(--color-primary); font-weight: 600;">
-                                • Meta Q1 2026: Bs.S 12-15M
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Alertas & Cumplimiento -->
-            <div id="tab-alertas" class="tab-content">
-                <div class="grid grid-2 animate-on-load">
-                    <div class="card success-card">
-                        <div class="chart-title">✅ Sistema de Compliance 2026</div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <div class="risk-dot risk-low"></div>
-                                <span>Estado General</span>
-                            </div>
-                            <span style="font-weight: 700; color: var(--color-success);">EXCELENTE</span>
+                <div class="chart-container animate-on-load">
+                    <div class="chart-title">Recomendaciones Estratégicas</div>
+                    <div class="recommendations">
+                        <div class="recommendation-card" style="background-color: rgba(124, 193, 65, 0.1);">
+                            <h4>Optimización Fiscal</h4>
+                            <ul><li>• Revisar estructura de retenciones de IVA (48.3% en último mes)</li><li>• Implementar estrategias para reducción de carga fiscal en IVA</li><li>• Evaluar oportunidades de optimización en patentes (17.1%)</li><li>• Planificación fiscal para ISLR y anticipos</li><li>• Analizar beneficios fiscales disponibles</li></ul>
                         </div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <div class="risk-dot risk-low"></div>
-                                <span>Cierre 2025</span>
-                            </div>
-                            <span style="font-weight: 700; color: var(--color-success);">100%</span>
+                        <div class="recommendation-card" style="background-color: rgba(247, 150, 23, 0.1);">
+                            <h4>Control de Gestión</h4>
+                            <ul><li>• Monitorear ratio impuestos/ventas mensual (8.75% promedio)</li><li>• Implementar alertas automáticas por desviaciones >0.5%</li><li>• Establecer presupuesto fiscal trimestral</li><li>• Dashboard en tiempo real para seguimiento</li><li>• Auditoría trimestral de cumplimiento</li></ul>
                         </div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <div class="risk-dot risk-low"></div>
-                                <span>Inicio 2026</span>
-                            </div>
-                            <span style="font-weight: 700; color: var(--color-success);">99.5%</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <div class="risk-dot risk-medium"></div>
-                                <span>Diversificación Q1</span>
-                            </div>
-                            <span style="font-weight: 700; color: var(--color-warning);">ATENCIÓN</span>
-                        </div>
-                    </div>
-
-                    <div class="card alert-card">
-                        <div class="chart-title">🚨 Alertas Q1 2026</div>
-                        <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 8px; border-left: 4px solid var(--color-warning);">
-                            <div style="font-weight: 700; color: var(--color-warning); margin-bottom: 0.5rem;">
-                                ⚠️ Concentración Retención IVA (69.3%)
-                            </div>
-                            <p style="font-size: 0.875rem; color: var(--color-neutral-600);">
-                                Estructura Q1 normal pero requiere diversificación en Feb-Mar para estabilidad.
-                            </p>
-                        </div>
-                        <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px; border-left: 4px solid var(--color-success);">
-                            <div style="font-weight: 700; color: var(--color-success); margin-bottom: 0.5rem;">
-                                ✅ Transición 2026 Exitosa
-                            </div>
-                            <p style="font-size: 0.875rem; color: var(--color-neutral-600);">
-                                Enero 2026 muestra inicio sólido con ratio optimizado del 7.08%.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card animate-on-load">
-                    <div class="chart-title">📋 Calendario Fiscal Q1 2026</div>
-                    <div class="grid grid-4">
-                        <div style="padding: 1rem; background: var(--color-neutral-50); border-radius: 8px; text-align: center; border-left: 4px solid var(--color-success);">
-                            <div style="font-weight: 700; color: var(--color-success); margin-bottom: 0.5rem;">ENE ✓</div>
-                            <div style="font-size: 0.875rem; color: var(--color-neutral-600);">Declaración completada</div>
-                        </div>
-                        <div style="padding: 1rem; background: var(--color-neutral-50); border-radius: 8px; text-align: center; border-left: 4px solid var(--color-warning);">
-                            <div style="font-weight: 700; color: var(--color-warning); margin-bottom: 0.5rem;">FEB 15</div>
-                            <div style="font-size: 0.875rem; color: var(--color-neutral-600);">Declaración IVA Enero</div>
-                        </div>
-                        <div style="padding: 1rem; background: var(--color-neutral-50); border-radius: 8px; text-align: center; border-left: 4px solid var(--color-primary);">
-                            <div style="font-weight: 700; color: var(--color-primary); margin-bottom: 0.5rem;">MAR 15</div>
-                            <div style="font-size: 0.875rem; color: var(--color-neutral-600);">Declaración IVA Febrero</div>
-                        </div>
-                        <div style="padding: 1rem; background: var(--color-neutral-50); border-radius: 8px; text-align: center; border-left: 4px solid var(--color-accent-2);">
-                            <div style="font-weight: 700; color: var(--color-accent-2); margin-bottom: 0.5rem;">MAR 31</div>
-                            <div style="font-size: 0.875rem; color: var(--color-neutral-600);">Cierre Q1 2026</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Proyecciones 2026 -->
-            <div id="tab-proyecciones" class="tab-content">
-                <div class="grid grid-2 animate-on-load">
-                    <div class="card">
-                        <div class="chart-title">🔮 Proyección Q1 2026 Completo</div>
-                        <div class="forecast-chart">
-                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-                                <div style="font-size: 2rem; font-weight: 700; color: var(--color-primary); margin-bottom: 0.5rem;">
-                                    Bs.S 12.5M
-                                </div>
-                                <div style="font-size: 0.875rem; color: var(--color-neutral-600);">
-                                    Q1 2026 Proyectado
-                                </div>
-                                <div style="font-size: 0.75rem; color: var(--color-success); margin-top: 0.5rem;">
-                                    Confianza: 91%
-                                </div>
-                            </div>
-                        </div>
-                        <div style="margin-top: 1rem;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                <span>Enero 2026 (Real)</span>
-                                <span style="font-weight: 700; color: var(--color-success);">Bs.S 3.34M</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                <span>Febrero 2026 (Proy.)</span>
-                                <span style="font-weight: 700; color: var(--color-primary);">Bs.S 4.8M</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between;">
-                                <span>Marzo 2026 (Proy.)</span>
-                                <span style="font-weight: 700; color: var(--color-primary);">Bs.S 4.4M</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="chart-title">📊 Análisis Predictivo Anual 2026</div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <div class="legend-dot" style="background: var(--color-primary);"></div>
-                                <span>Proyección Total 2026</span>
-                            </div>
-                            <span style="font-weight: 700;">Bs.S 55.0M</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <div class="legend-dot" style="background: var(--color-secondary);"></div>
-                                <span>Crecimiento vs 2025</span>
-                            </div>
-                            <span style="font-weight: 700; color: var(--color-success);">+45-50%</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <div class="legend-dot" style="background: var(--color-accent-1);"></div>
-                                <span>Ratio Fiscal Target</span>
-                            </div>
-                            <span style="font-weight: 700;">8.2-8.5%</span>
-                        </div>
-                        <div style="margin-top: 1.5rem; padding: 1rem; background: var(--color-neutral-50); border-radius: 8px;">
-                            <div style="text-align: center;">
-                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🎯</div>
-                                <div style="font-weight: 700; color: var(--color-primary);">
-                                    Meta Conservadora 2026
-                                </div>
-                                <div style="font-size: 0.875rem; color: var(--color-neutral-600);">
-                                    Basado en IA y patrones estacionales
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card animate-on-load">
-                    <div class="chart-title">🤖 Recomendaciones IA para 2026</div>
-                    <div class="grid grid-3">
-                        <div class="card" style="border-left: 4px solid var(--color-success);">
-                            <h4 style="font-weight: 700; color: var(--color-success); margin-bottom: 1rem;">💡 Q1 2026 (Inmediato)</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li style="margin-bottom: 0.5rem; font-size: 0.875rem;">• Monitorear recuperación Feb-Mar</li>
-                                <li style="margin-bottom: 0.5rem; font-size: 0.875rem;">• Diversificar estructura fiscal</li>
-                                <li style="margin-bottom: 0.5rem; font-size: 0.875rem;">• Optimizar retenciones automáticas</li>
-                                <li style="margin-bottom: 0.5rem; font-size: 0.875rem;">• Dashboard Q1 en tiempo real</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="card" style="border-left: 4px solid var(--color-warning);">
-                            <h4 style="font-weight: 700; color: var(--color-warning); margin-bottom: 1rem;">📈 Q2-Q3 2026</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li style="margin-bottom: 0.5rem; font-size: 0.875rem;">• Implementar IA predictiva avanzada</li>
-                                <li style="margin-bottom: 0.5rem; font-size: 0.875rem;">• Análisis de beneficios fiscales</li>
-                                <li style="margin-bottom: 0.5rem; font-size: 0.875rem;">• Optimización estructura Q2-Q3</li>
-                                <li style="margin-bottom: 0.5rem; font-size: 0.875rem;">• Benchmark sector farmacéutico</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="card" style="border-left: 4px solid var(--color-primary);">
-                            <h4 style="font-weight: 700; color: var(--color-primary); margin-bottom: 1rem;">🚀 Q4 2026 & 2027</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li style="margin-bottom: 0.5rem; font-size: 0.875rem;">• Planificación fiscal estratégica 2027</li>
-                                <li style="margin-bottom: 0.5rem; font-size: 0.875rem;">• IA para optimización tributaria</li>
-                                <li style="margin-bottom: 0.5rem; font-size: 0.875rem;">• Integración ESG fiscal</li>
-                                <li style="margin-bottom: 0.5rem; font-size: 0.875rem;">• Sistema predictivo multi-año</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card animate-on-load" style="background: linear-gradient(135deg, rgba(65, 158, 70, 0.1) 0%, rgba(254, 213, 25, 0.1) 100%);">
-                    <div class="chart-title">🌟 Resumen Ejecutivo 2026</div>
-                    <div class="grid grid-2">
-                        <div>
-                            <h4 style="font-weight: 700; color: var(--color-primary); margin-bottom: 1rem;">Proyecciones Clave</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li style="margin-bottom: 0.75rem;">
-                                    <strong>Q1 2026:</strong> Bs.S 12.5M (Enero: Bs.S 3.34M completado)
-                                </li>
-                                <li style="margin-bottom: 0.75rem;">
-                                    <strong>Total 2026:</strong> Bs.S 55.0M (+45% vs 2025)
-                                </li>
-                                <li style="margin-bottom: 0.75rem;">
-                                    <strong>Ratio fiscal target:</strong> 8.2-8.5% optimizado
-                                </li>
-                                <li style="margin-bottom: 0.75rem;">
-                                    <strong>Confianza modelo IA:</strong> 91% alta precisión
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 style="font-weight: 700; color: var(--color-accent-2); margin-bottom: 1rem;">Recomendaciones Estratégicas</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li style="margin-bottom: 0.75rem;">
-                                    🎯 <strong>Consolidación:</strong> Mantener crecimiento sostenible
-                                </li>
-                                <li style="margin-bottom: 0.75rem;">
-                                    🔄 <strong>Diversificación:</strong> Reducir concentración Ret. IVA
-                                </li>
-                                <li style="margin-bottom: 0.75rem;">
-                                    🤖 <strong>Tecnología:</strong> IA predictiva avanzada
-                                </li>
-                                <li style="margin-bottom: 0.75rem;">
-                                    📊 <strong>Monitoreo:</strong> Dashboard en tiempo real
-                                </li>
-                            </ul>
+                        <div class="recommendation-card" style="background-color: rgba(10, 149, 97, 0.1);">
+                            <h4>Proyecciones 2026</h4>
+                            <ul><li>• Tendencia de crecimiento acelerado (+459.6% período)</li><li>• Proyección Q1 2026: Bs.S 13M-15M en impuestos</li><li>• Ratio estable alrededor de 8.6%-9.0%</li><li>• Preparar provisiones para cierre fiscal</li><li>• Evaluar impacto de nuevas regulaciones 2026</li></ul>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="footer">
-                <div class="footer-main">
-                    <span>📊</span>
-                    <span>Dashboard Fiscal Inteligente - Trinigold Farmacia</span>
-                </div>
-                <div class="footer-date">
-                    Datos período Abril 2025 - Enero 2026 | Powered by AI Analytics | Actualizado: <span id="fecha-actual"></span>
-                </div>
+                <div class="footer-main"><span>📄</span><span>Informe generado por Trinigold Farmacia</span></div>
+                <div class="footer-date">Datos período Abril 2025 - Enero 2026 | Actualizado: <span id="fecha-actual"></span></div>
             </div>
         </div>
     </div>
 
     <script>
-        // Configuración inicial
         document.getElementById('fecha-actual').textContent = new Date().toLocaleDateString('es-VE');
         
-        // Función para cambiar pestañas
         function showTab(tabName, clickedButton) {
-            // Ocultar todas las pestañas
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Mostrar la pestaña seleccionada
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.getElementById('tab-' + tabName).classList.add('active');
             
-            // Actualizar estado de botones
             document.querySelectorAll('.tab-button').forEach(button => {
                 button.classList.remove('active');
                 button.classList.add('inactive');
@@ -1496,170 +326,27 @@
                 clickedButton.classList.add('active');
                 clickedButton.classList.remove('inactive');
             }
-            
-            // Animar elementos en la nueva pestaña
+            // Animate elements in the new tab
             resetAndAnimateElements();
         }
 
-        // Función para animar elementos
         function resetAndAnimateElements() {
             const elements = document.querySelectorAll('.tab-content.active .animate-on-load');
             elements.forEach(el => el.classList.remove('visible'));
-            
             setTimeout(() => {
-                elements.forEach((element, index) => {
+                 elements.forEach((element, index) => {
                     setTimeout(() => {
                         element.classList.add('visible');
-                    }, index * 150);
+                    }, index * 100);
                 });
             }, 50);
         }
 
-        // Inicialización al cargar la página
         document.addEventListener('DOMContentLoaded', function() {
-            // Verificar soporte para conic-gradient
-            checkConicGradientSupport();
-            
             setTimeout(() => {
                 resetAndAnimateElements();
             }, 100);
-
-            // Efecto de hover mejorado para las barras del gráfico
-            document.querySelectorAll('.chart-bar').forEach(bar => {
-                bar.addEventListener('mouseenter', function() {
-                    this.style.boxShadow = '0 8px 25px rgba(65, 158, 70, 0.3)';
-                });
-                
-                bar.addEventListener('mouseleave', function() {
-                    this.style.boxShadow = '0 1px 2px 0 rgb(0 0 0 / 0.05)';
-                });
-            });
-
-            // Animaciones adicionales para las tarjetas
-            document.querySelectorAll('.card').forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.boxShadow = '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.boxShadow = '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)';
-                });
-            });
         });
-
-        // Función para verificar soporte de conic-gradient
-        function checkConicGradientSupport() {
-            const testElement = document.createElement('div');
-            testElement.style.background = 'conic-gradient(red, blue)';
-            
-            if (!testElement.style.background) {
-                // No soporta conic-gradient, intentar Canvas
-                createCanvasPieChart();
-            } else {
-                // Verificar si el gráfico se está renderizando correctamente
-                setTimeout(() => {
-                    const pieChart = document.querySelector('.pie-chart');
-                    if (pieChart && getComputedStyle(pieChart).background.includes('conic-gradient')) {
-                        console.log('Gráfico de torta CSS cargado correctamente');
-                    } else {
-                        // Fallback a Canvas
-                        createCanvasPieChart();
-                    }
-                }, 1000);
-            }
-        }
-
-        // Función para crear gráfico de torta con Canvas (Enero 2026)
-        function createCanvasPieChart() {
-            const canvas = document.getElementById('pie-chart-canvas');
-            const ctx = canvas.getContext('2d');
-            
-            if (!ctx) {
-                // Si no hay canvas, mostrar SVG fallback
-                document.querySelectorAll('.pie-chart').forEach(chart => {
-                    chart.style.display = 'none';
-                });
-                document.querySelectorAll('.pie-chart-svg').forEach(svg => {
-                    svg.style.display = 'block';
-                });
-                return;
-            }
-            
-            // Ocultar otros gráficos
-            document.querySelectorAll('.pie-chart').forEach(chart => {
-                chart.style.display = 'none';
-            });
-            document.querySelectorAll('.pie-chart-svg').forEach(svg => {
-                svg.style.display = 'none';
-            });
-            
-            // Mostrar canvas
-            canvas.style.display = 'block';
-            
-            // Datos del gráfico - Enero 2026
-            const data = [
-                { label: 'Retención IVA', value: 69.3, color: '#7CC141' },
-                { label: 'IVA por Pagar', value: 15.4, color: '#FED519' },
-                { label: 'Anticipos ISLR', value: 14.1, color: '#F79617' },
-                { label: 'IGTF', value: 1.3, color: '#419E46' }
-            ];
-            
-            const centerX = 140;
-            const centerY = 140;
-            const radius = 110;
-            const innerRadius = 60;
-            
-            let currentAngle = -Math.PI / 2; // Comenzar desde la parte superior
-            
-            // Dibujar sombra
-            ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
-            ctx.shadowBlur = 10;
-            ctx.shadowOffsetX = 0;
-            ctx.shadowOffsetY = 4;
-            
-            // Dibujar cada segmento
-            data.forEach(segment => {
-                const sliceAngle = (segment.value / 100) * 2 * Math.PI;
-                
-                ctx.beginPath();
-                ctx.moveTo(centerX, centerY);
-                ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
-                ctx.closePath();
-                
-                ctx.fillStyle = segment.color;
-                ctx.fill();
-                
-                currentAngle += sliceAngle;
-            });
-            
-            // Dibujar círculo interno (agujero)
-            ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
-            ctx.shadowBlur = 5;
-            ctx.shadowOffsetX = 0;
-            ctx.shadowOffsetY = 2;
-            
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, innerRadius, 0, 2 * Math.PI);
-            ctx.fillStyle = 'white';
-            ctx.fill();
-            
-            console.log('Gráfico de torta Canvas (Enero 2026) creado exitosamente');
-        }
-
-        // Función para simular actualización en tiempo real
-        function updateRealTimeData() {
-            const now = new Date();
-            document.getElementById('fecha-actual').textContent = now.toLocaleDateString('es-VE', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-        }
-
-        // Actualizar cada minuto
-        setInterval(updateRealTimeData, 60000);
     </script>
 </body>
 </html>
