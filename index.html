@@ -19,134 +19,38 @@
             --text-light: #8FA898;
             --border: #E0EAE2;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        /* TOP ACCENT BAR */
-        .accent-bar {
-            height: 5px;
-            background: linear-gradient(90deg, #FED519 0%, #F79617 25%, #7CC141 50%, #419E46 75%, #0A9561 100%);
-        }
-
-        /* HEADER */
-        .header {
-            background: linear-gradient(135deg, #F79617 0%, #e8850a 100%);
-            padding: 2.5rem 0 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -60px; right: -60px;
-            width: 300px; height: 300px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
-        }
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: -40px; left: 20%;
-            width: 200px; height: 200px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(254,213,25,0.2) 0%, transparent 70%);
-        }
+        body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text-dark); line-height: 1.6; }
+        .accent-bar { height: 5px; background: linear-gradient(90deg, #FED519 0%, #F79617 25%, #7CC141 50%, #419E46 75%, #0A9561 100%); }
+        .header { background: linear-gradient(135deg, #F79617 0%, #e8850a 100%); padding: 2.5rem 0 2rem; position: relative; overflow: hidden; }
+        .header::before { content: ''; position: absolute; top: -60px; right: -60px; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%); }
+        .header::after { content: ''; position: absolute; bottom: -40px; left: 20%; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(254,213,25,0.2) 0%, transparent 70%); }
         .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
         .header-inner { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem; position: relative; z-index: 1; }
-        .header-title { }
-        .header-eyebrow {
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.85);
-            margin-bottom: 0.5rem;
-        }
-        .header h1 {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(1.8rem, 4vw, 3rem);
-            color: #ffffff;
-            line-height: 1.1;
-            margin-bottom: 0.75rem;
-        }
-        .header-sub {
-            color: rgba(255,255,255,0.75);
-            font-size: 0.9rem;
-            font-weight: 300;
-        }
+        .header-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-bottom: 0.5rem; }
+        .header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 4vw, 3rem); color: #ffffff; line-height: 1.1; margin-bottom: 0.75rem; }
+        .header-sub { color: rgba(255,255,255,0.75); font-size: 0.9rem; font-weight: 300; }
         .header-badges { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }
-        .badge {
-            padding: 0.4rem 1rem;
-            border-radius: 100px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
+        .badge { padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.8rem; font-weight: 600; }
         .badge-total { background: rgba(255,255,255,0.25); color: white; border: 1px solid rgba(255,255,255,0.4); }
         .badge-period { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.2); }
-
-        /* TABS */
         .tabs-wrapper { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
         .tabs { display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; }
         .tabs::-webkit-scrollbar { display: none; }
-        .tab-btn {
-            padding: 1rem 1.5rem;
-            border: none;
-            background: none;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text-light);
-            cursor: pointer;
-            white-space: nowrap;
-            border-bottom: 3px solid transparent;
-            transition: all 0.2s;
-        }
+        .tab-btn { padding: 1rem 1.5rem; border: none; background: none; font-family: 'DM Sans', sans-serif; font-size: 0.875rem; font-weight: 500; color: var(--text-light); cursor: pointer; white-space: nowrap; border-bottom: 3px solid transparent; transition: all 0.2s; }
         .tab-btn:hover { color: var(--green); }
         .tab-btn.active { color: var(--green); border-bottom-color: var(--green); font-weight: 600; }
-
-        /* MAIN */
         .main { padding: 2rem 0 4rem; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-
-        /* GRID */
         .grid { display: grid; gap: 1.25rem; margin-bottom: 1.5rem; }
         .grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
         .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
         .grid-2 { grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); }
-
-        /* CARDS */
-        .card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 8px rgba(28,43,30,0.06);
-            border: 1px solid var(--border);
-        }
-        .card-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.1rem;
-            color: var(--text-dark);
-            margin-bottom: 1.25rem;
-        }
-
-        /* KPI CARDS */
+        .card { background: var(--card-bg); border-radius: 16px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(28,43,30,0.06); border: 1px solid var(--border); }
+        .card-title { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--text-dark); margin-bottom: 1.25rem; }
         .kpi { position: relative; overflow: hidden; }
-        .kpi::after {
-            content: '';
-            position: absolute;
-            top: -20px; right: -20px;
-            width: 80px; height: 80px;
-            border-radius: 50%;
-            opacity: 0.08;
-        }
+        .kpi::after { content: ''; position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; border-radius: 50%; opacity: 0.08; }
         .kpi.c1::after { background: var(--green); }
         .kpi.c2::after { background: var(--yellow); }
         .kpi.c3::after { background: var(--orange); }
@@ -158,156 +62,58 @@
         .kpi-tag.up { background: rgba(65,158,70,0.1); color: var(--green); }
         .kpi-tag.neutral { background: rgba(247,150,23,0.1); color: var(--orange); }
         .kpi-accent { width: 40px; height: 3px; border-radius: 2px; margin-bottom: 1rem; }
-
-        /* BAR CHART */
         .bar-chart-wrap { padding: 1rem 0; }
         .bar-chart-svg-wrap { width: 100%; overflow: visible; }
         .bar-chart-svg-wrap svg { width: 100%; display: block; overflow: visible; }
-        /* Legacy compat for dual chart */
-        .bar-chart { display: flex; align-items: flex-end; gap: 0.5rem; height: 260px; }
-        .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0; }
-        .bar-outer { width: 100%; flex: 1; display: flex; align-items: flex-end; }
-        .bar {
-            width: 100%;
-            border-radius: 6px 6px 0 0;
-            position: relative;
-            transition: filter 0.2s;
-            cursor: default;
-            min-height: 4px;
-        }
-        .bar:hover { filter: brightness(1.1); }
-        .bar-tip {
-            position: absolute;
-            top: -26px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.6rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            white-space: nowrap;
-            background: white;
-            padding: 0.1rem 0.3rem;
-            border-radius: 4px;
-            border: 1px solid var(--border);
-            pointer-events: none;
-        }
-        .bar-lbl { font-size: 0.68rem; font-weight: 600; color: var(--text-light); margin-top: 0.4rem; text-align: center; }
-
-        /* TABLE */
         .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
         table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-        thead th {
-            background: var(--text-dark);
-            color: white;
-            padding: 0.75rem 1rem;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.75rem;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
+        thead th { background: var(--text-dark); color: white; padding: 0.75rem 1rem; text-align: left; font-weight: 600; font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; }
         thead th:first-child { border-radius: 8px 0 0 8px; }
         thead th:last-child { border-radius: 0 8px 8px 0; }
         tbody td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
         tbody tr:hover { background: rgba(65,158,70,0.04); }
         tbody tr.total-row { background: rgba(65,158,70,0.07); font-weight: 700; }
+        tbody tr.quarter-sep td { border-top: 2px solid var(--border); }
         .text-right { text-align: right; }
         .text-center { text-align: center; }
-        .pill {
-            display: inline-block;
-            padding: 0.15rem 0.5rem;
-            border-radius: 100px;
-            font-size: 0.7rem;
-            font-weight: 700;
-        }
-        .pill-green { background: rgba(65,158,70,0.12); color: var(--green); }
-        .pill-yellow { background: rgba(254,213,25,0.2); color: #9a7a00; }
-        .pill-orange { background: rgba(247,150,23,0.12); color: #b05a00; }
-
-        /* PIE / DONUT */
+        .pill { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 100px; font-size: 0.7rem; font-weight: 700; }
+        .pill-q1 { background: rgba(65,158,70,0.12); color: var(--green); }
+        .pill-q2 { background: rgba(124,193,65,0.15); color: #5a8a10; }
+        .pill-q3 { background: rgba(247,150,23,0.12); color: #b05a00; }
+        .pill-q4 { background: rgba(254,213,25,0.2); color: #9a7a00; }
         .donut-wrap { display: flex; justify-content: center; padding: 1rem 0; }
         .legend-list { list-style: none; }
-        .legend-list li {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0.6rem 0.75rem;
-            border-radius: 8px;
-            margin-bottom: 0.4rem;
-            background: var(--bg);
-        }
+        .legend-list li { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0.75rem; border-radius: 8px; margin-bottom: 0.4rem; background: var(--bg); }
         .legend-label { display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; font-weight: 500; }
         .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
         .legend-val { font-weight: 700; font-size: 0.82rem; }
         .legend-pct { font-size: 0.72rem; color: var(--text-light); margin-left: 0.4rem; }
-
-        /* PROGRESS FUNNEL */
         .funnel-row { margin-bottom: 1.25rem; }
         .funnel-label { display: flex; justify-content: space-between; margin-bottom: 0.4rem; font-size: 0.85rem; font-weight: 500; }
         .funnel-bar-bg { width: 100%; height: 10px; background: var(--border); border-radius: 10px; overflow: hidden; }
         .funnel-bar-fill { height: 100%; border-radius: 10px; transition: width 1s ease; }
-
-        /* HEATMAP */
-        .heatmap { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.75rem; }
-        .heat-cell {
-            padding: 1rem;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid transparent;
-        }
+        .heatmap { display: grid; grid-template-columns: repeat(auto-fit, minmax(95px, 1fr)); gap: 0.75rem; }
+        .heat-cell { padding: 0.85rem; border-radius: 12px; text-align: center; border: 1px solid transparent; }
         .heat-month { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-mid); margin-bottom: 0.3rem; }
-        .heat-val { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--text-dark); }
+        .heat-val { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--text-dark); }
         .heat-pct { font-size: 0.72rem; font-weight: 600; margin-top: 0.2rem; }
-
-        /* COMPARATIVO */
-        .compare-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 0.5rem;
-            padding: 0.6rem 0.75rem;
-            border-radius: 8px;
-            margin-bottom: 0.4rem;
-            align-items: center;
-            font-size: 0.82rem;
-        }
+        .compare-row { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; gap: 0.5rem; padding: 0.6rem 0.75rem; border-radius: 8px; margin-bottom: 0.4rem; align-items: center; font-size: 0.82rem; }
         .compare-row.head { background: var(--text-dark); color: white; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.05em; }
         .compare-row.even { background: var(--bg); }
         .compare-row.odd { background: white; border: 1px solid var(--border); }
         .compare-row.subtotal { background: rgba(65,158,70,0.1); font-weight: 700; }
         .diff-up { color: var(--green); font-weight: 700; }
+        .diff-down { color: #e53e3e; font-weight: 700; }
         .diff-neutral { color: var(--text-light); }
-
-        /* SECTION DIVIDER */
-        .section-label {
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-        /* FOOTER */
-        .footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-light);
-            font-size: 0.8rem;
-            border-top: 1px solid var(--border);
-            margin-top: 2rem;
-        }
+        .quarter-badge { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: middle; }
+        .footer { text-align: center; padding: 2rem; color: var(--text-light); font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 2rem; }
         .footer strong { color: var(--text-mid); }
-
-        /* ANIMATE */
         .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
-
         @media (max-width: 768px) {
             .header h1 { font-size: 1.6rem; }
             .grid-2 { grid-template-columns: 1fr; }
-            .compare-row { font-size: 0.72rem; }
+            .compare-row { font-size: 0.7rem; grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr; }
             .tab-btn { padding: 0.85rem 1rem; font-size: 0.8rem; }
         }
     </style>
@@ -321,17 +127,16 @@
                 <div class="header-title">
                     <div class="header-eyebrow">Trinigold Farmacia · Informe Fiscal</div>
                     <h1>Gastos de Impuestos<br><em>2025 – 2026</em></h1>
-                    <p class="header-sub">Abril 2025 – Febrero 2026 &nbsp;·&nbsp; 11 meses</p>
+                    <p class="header-sub">Abril 2025 – Marzo 2026 &nbsp;·&nbsp; 12 meses</p>
                 </div>
                 <div class="header-badges">
-                    <div class="badge badge-total">Total: Bs.S 58.189.986</div>
-                    <div class="badge badge-period">Ventas: Bs.S 659.388.316</div>
+                    <div class="badge badge-total">Total: Bs.S 74.038.098</div>
+                    <div class="badge badge-period">Ventas: Bs.S 819.440.483</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- TABS -->
     <div class="tabs-wrapper">
         <div class="container">
             <div class="tabs">
@@ -339,7 +144,7 @@
                 <button class="tab-btn" onclick="showTab('evolucion', this)">Evolución Temporal</button>
                 <button class="tab-btn" onclick="showTab('composicion', this)">Composición</button>
                 <button class="tab-btn" onclick="showTab('detalle', this)">Análisis Detallado</button>
-                <button class="tab-btn" onclick="showTab('comparativo', this)">1Q vs 2Q</button>
+                <button class="tab-btn" onclick="showTab('trimestral', this)">1Q · 2Q · 3Q · 4Q</button>
             </div>
         </div>
     </div>
@@ -349,46 +154,46 @@
 
             <!-- ===== TAB: RESUMEN ===== -->
             <div id="tab-resumen" class="tab-content active">
-
                 <div class="grid grid-4 fade-in">
                     <div class="card kpi c1">
-                        <div class="kpi-accent" style="background: var(--green);"></div>
+                        <div class="kpi-accent" style="background:var(--green);"></div>
                         <div class="kpi-label">Total Impuestos</div>
-                        <div class="kpi-value">58,2M</div>
-                        <div class="kpi-sub">Bs.S 58.189.986 · 11 meses</div>
-                        <span class="kpi-tag up">↗ 8.8% s/ventas</span>
+                        <div class="kpi-value">74,0M</div>
+                        <div class="kpi-sub">Bs.S 74.038.098 · 12 meses</div>
+                        <span class="kpi-tag up">↗ 9.0% s/ventas</span>
                     </div>
                     <div class="card kpi c2">
-                        <div class="kpi-accent" style="background: var(--yellow);"></div>
+                        <div class="kpi-accent" style="background:var(--yellow);"></div>
                         <div class="kpi-label">Ventas Acumuladas</div>
-                        <div class="kpi-value">659M</div>
-                        <div class="kpi-sub">Bs.S 659.388.316</div>
-                        <span class="kpi-tag up">↗ Abr–Feb</span>
+                        <div class="kpi-value">819M</div>
+                        <div class="kpi-sub">Bs.S 819.440.483</div>
+                        <span class="kpi-tag up">↗ Abr–Mar</span>
                     </div>
                     <div class="card kpi c3">
-                        <div class="kpi-accent" style="background: var(--orange);"></div>
+                        <div class="kpi-accent" style="background:var(--orange);"></div>
                         <div class="kpi-label">Promedio Mensual</div>
-                        <div class="kpi-value">5,29M</div>
+                        <div class="kpi-value">6,17M</div>
                         <div class="kpi-sub">Bs.S impuestos/mes</div>
-                        <span class="kpi-tag neutral">11 períodos</span>
+                        <span class="kpi-tag neutral">12 períodos</span>
                     </div>
                     <div class="card kpi c4">
-                        <div class="kpi-accent" style="background: var(--dark-green);"></div>
+                        <div class="kpi-accent" style="background:var(--dark-green);"></div>
                         <div class="kpi-label">Mayor Componente</div>
-                        <div class="kpi-value">5.2%</div>
+                        <div class="kpi-value">5.0%</div>
                         <div class="kpi-sub">Retención IVA s/ventas</div>
-                        <span class="kpi-tag up">Bs.S 34.103.056</span>
+                        <span class="kpi-tag up">Bs.S 40.878.854</span>
                     </div>
                 </div>
 
-                <!-- Bar Chart Total -->
                 <div class="card fade-in">
                     <div class="card-title">Evolución Mensual — Total Impuestos (Bs.S)</div>
                     <div class="bar-chart-wrap">
                         <div class="bar-chart-svg-wrap" id="bar-resumen"></div>
-                        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.75rem; font-size:0.75rem; color:var(--text-light);">
-                            <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:10px;height:10px;background:var(--green);border-radius:3px;display:inline-block;"></span>1Q (Abr–Sep)</span>
-                            <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:10px;height:10px;background:var(--orange);border-radius:3px;display:inline-block;"></span>2Q (Oct–Feb)</span>
+                        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.75rem;font-size:0.75rem;color:var(--text-light);">
+                            <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:10px;height:10px;background:#419E46;border-radius:3px;display:inline-block;"></span>1Q (Abr–Jun)</span>
+                            <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:10px;height:10px;background:#7CC141;border-radius:3px;display:inline-block;"></span>2Q (Jul–Sep)</span>
+                            <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:10px;height:10px;background:#F79617;border-radius:3px;display:inline-block;"></span>3Q (Oct–Dic)</span>
+                            <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:10px;height:10px;background:#FED519;border-radius:3px;display:inline-block;"></span>4Q (Ene–Mar)</span>
                         </div>
                     </div>
                 </div>
@@ -397,12 +202,12 @@
                     <div class="card">
                         <div class="card-title">Top Componentes — Período Completo</div>
                         <ul class="legend-list">
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#FED519"></div>Retención IVA</div><div><span class="legend-val">Bs.S 34.103.056</span><span class="legend-pct">5.2%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#F79617"></div>Patente</div><div><span class="legend-val">Bs.S 9.581.871</span><span class="legend-pct">1.5%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#7CC141"></div>Anticipos ISLR</div><div><span class="legend-val">Bs.S 6.533.295</span><span class="legend-pct">1.0%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#419E46"></div>IVA</div><div><span class="legend-val">Bs.S 2.076.578</span><span class="legend-pct">0.3%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#0A9561"></div>Fondo Pensiones</div><div><span class="legend-val">Bs.S 2.381.097</span><span class="legend-pct">0.4%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#1C2B1E"></div>Ret. ISLR</div><div><span class="legend-val">Bs.S 1.614.273</span><span class="legend-pct">0.2%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#FED519"></div>Retención IVA</div><div><span class="legend-val">Bs.S 40.878.854</span><span class="legend-pct">5.0%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#F79617"></div>Patente</div><div><span class="legend-val">Bs.S 11.946.671</span><span class="legend-pct">1.5%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#7CC141"></div>Anticipos ISLR</div><div><span class="legend-val">Bs.S 8.133.816</span><span class="legend-pct">1.0%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#419E46"></div>IVA</div><div><span class="legend-val">Bs.S 5.821.742</span><span class="legend-pct">0.7%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#0A9561"></div>Fondo Pensiones</div><div><span class="legend-val">Bs.S 2.899.701</span><span class="legend-pct">0.4%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#1C2B1E"></div>Ret. ISLR</div><div><span class="legend-val">Bs.S 2.048.757</span><span class="legend-pct">0.3%</span></div></li>
                         </ul>
                     </div>
                     <div class="card">
@@ -418,7 +223,7 @@
                     <div class="card-title">Evolución Mensual — Impuestos vs Ventas</div>
                     <div class="bar-chart-wrap">
                         <div class="bar-chart-svg-wrap" id="bar-dual"></div>
-                        <div style="display:flex; gap:1.5rem; margin-top:0.75rem; font-size:0.75rem; color:var(--text-light);">
+                        <div style="display:flex;gap:1.5rem;margin-top:0.75rem;font-size:0.75rem;color:var(--text-light);">
                             <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:12px;height:12px;background:var(--green);border-radius:3px;display:inline-block;"></span>Impuestos</span>
                             <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:12px;height:12px;background:rgba(65,158,70,0.25);border:1.5px solid rgba(65,158,70,0.4);border-radius:3px;display:inline-block;"></span>Ventas (÷10 para escala)</span>
                         </div>
@@ -443,63 +248,59 @@
                         <div class="card-title">Composición Total del Período</div>
                         <div class="donut-wrap">
                             <svg viewBox="0 0 200 200" width="220" height="220">
-                                <!-- Ret. IVA 58.6% → 210.9° of 440 circumference -->
-                                <circle cx="100" cy="100" r="70" fill="none" stroke="#FED519" stroke-width="30" stroke-dasharray="257.8 182.3" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
-                                <!-- Patente 16.5% → 59.4° -->
-                                <circle cx="100" cy="100" r="70" fill="none" stroke="#F79617" stroke-width="30" stroke-dasharray="72.5 367.6" stroke-dashoffset="-257.8" transform="rotate(-90 100 100)"/>
-                                <!-- Ant. ISLR 11.2% → 40.3° -->
-                                <circle cx="100" cy="100" r="70" fill="none" stroke="#7CC141" stroke-width="30" stroke-dasharray="49.3 390.8" stroke-dashoffset="-330.3" transform="rotate(-90 100 100)"/>
-                                <!-- FPS 4.1% → 14.8° -->
-                                <circle cx="100" cy="100" r="70" fill="none" stroke="#0A9561" stroke-width="30" stroke-dasharray="18.0 422.1" stroke-dashoffset="-379.6" transform="rotate(-90 100 100)"/>
-                                <!-- Resto 9.6% -->
-                                <circle cx="100" cy="100" r="70" fill="none" stroke="#419E46" stroke-width="30" stroke-dasharray="42.2 397.9" stroke-dashoffset="-397.6" transform="rotate(-90 100 100)"/>
+                                <!-- Retención IVA 55.2% -->
+                                <circle cx="100" cy="100" r="70" fill="none" stroke="#FED519" stroke-width="30" stroke-dasharray="242.5 197.6" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+                                <!-- Patente 16.1% -->
+                                <circle cx="100" cy="100" r="70" fill="none" stroke="#F79617" stroke-width="30" stroke-dasharray="70.7 369.4" stroke-dashoffset="-242.5" transform="rotate(-90 100 100)"/>
+                                <!-- Anticipos ISLR 11.0% -->
+                                <circle cx="100" cy="100" r="70" fill="none" stroke="#7CC141" stroke-width="30" stroke-dasharray="48.2 391.9" stroke-dashoffset="-313.2" transform="rotate(-90 100 100)"/>
+                                <!-- IVA 7.9% -->
+                                <circle cx="100" cy="100" r="70" fill="none" stroke="#419E46" stroke-width="30" stroke-dasharray="34.6 405.5" stroke-dashoffset="-361.4" transform="rotate(-90 100 100)"/>
+                                <!-- Resto 9.8% -->
+                                <circle cx="100" cy="100" r="70" fill="none" stroke="#0A9561" stroke-width="30" stroke-dasharray="44.2 396.0" stroke-dashoffset="-396.0" transform="rotate(-90 100 100)"/>
                                 <circle cx="100" cy="100" r="55" fill="white"/>
-                                <text x="100" y="96" text-anchor="middle" font-family="DM Serif Display" font-size="16" fill="#1C2B1E">58.2M</text>
+                                <text x="100" y="96" text-anchor="middle" font-family="DM Serif Display" font-size="16" fill="#1C2B1E">74,0M</text>
                                 <text x="100" y="113" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#8FA898">Bs.S Total</text>
                             </svg>
                         </div>
                         <ul class="legend-list">
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#FED519"></div>Retención IVA</div><div><span class="legend-val">34.103.056</span><span class="legend-pct">58.6%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#F79617"></div>Patente</div><div><span class="legend-val">9.581.871</span><span class="legend-pct">16.5%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#7CC141"></div>Anticipos ISLR</div><div><span class="legend-val">6.533.295</span><span class="legend-pct">11.2%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#0A9561"></div>Fondo Pensiones</div><div><span class="legend-val">2.381.097</span><span class="legend-pct">4.1%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#419E46"></div>IVA</div><div><span class="legend-val">2.076.578</span><span class="legend-pct">3.6%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#8FA898"></div>Otros (IGTF, Ret.ISLR, etc.)</div><div><span class="legend-val">3.514.089</span><span class="legend-pct">6.0%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#FED519"></div>Retención IVA</div><div><span class="legend-val">40.878.854</span><span class="legend-pct">55.2%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#F79617"></div>Patente</div><div><span class="legend-val">11.946.671</span><span class="legend-pct">16.1%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#7CC141"></div>Anticipos ISLR</div><div><span class="legend-val">8.133.816</span><span class="legend-pct">11.0%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#419E46"></div>IVA</div><div><span class="legend-val">5.821.742</span><span class="legend-pct">7.9%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#0A9561"></div>Fondo Pensiones</div><div><span class="legend-val">2.899.701</span><span class="legend-pct">3.9%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#8FA898"></div>Otros</div><div><span class="legend-val">4.357.054</span><span class="legend-pct">5.9%</span></div></li>
                         </ul>
                     </div>
                     <div class="card">
                         <div class="card-title">Embudo Fiscal — Período Completo</div>
                         <div class="funnel-row">
-                            <div class="funnel-label"><span>Ventas Brutas</span><strong>Bs.S 659.388.316</strong></div>
+                            <div class="funnel-label"><span>Ventas Brutas</span><strong>Bs.S 819.440.483</strong></div>
                             <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:100%;background:var(--yellow);"></div></div>
                         </div>
                         <div class="funnel-row">
-                            <div class="funnel-label"><span>Retención IVA</span><strong>Bs.S 34.103.056</strong></div>
-                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:58.6%;background:var(--orange);"></div></div>
+                            <div class="funnel-label"><span>Retención IVA</span><strong>Bs.S 40.878.854</strong></div>
+                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:55%;background:var(--orange);"></div></div>
                         </div>
                         <div class="funnel-row">
-                            <div class="funnel-label"><span>Patente</span><strong>Bs.S 9.581.871</strong></div>
-                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:16.5%;background:var(--light-green);"></div></div>
+                            <div class="funnel-label"><span>Patente</span><strong>Bs.S 11.946.671</strong></div>
+                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:16%;background:var(--light-green);"></div></div>
                         </div>
                         <div class="funnel-row">
-                            <div class="funnel-label"><span>Anticipos ISLR</span><strong>Bs.S 6.533.295</strong></div>
-                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:11.2%;background:var(--green);"></div></div>
+                            <div class="funnel-label"><span>Anticipos ISLR</span><strong>Bs.S 8.133.816</strong></div>
+                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:11%;background:var(--green);"></div></div>
                         </div>
                         <div class="funnel-row">
-                            <div class="funnel-label"><span>Fondo Pensiones</span><strong>Bs.S 2.381.097</strong></div>
-                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:4.1%;background:var(--dark-green);"></div></div>
+                            <div class="funnel-label"><span>IVA</span><strong>Bs.S 5.821.742</strong></div>
+                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:7.9%;background:var(--dark-green);"></div></div>
                         </div>
                         <div class="funnel-row">
-                            <div class="funnel-label"><span>IVA</span><strong>Bs.S 2.076.578</strong></div>
-                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:3.6%;background:#1C2B1E;"></div></div>
+                            <div class="funnel-label"><span>Fondo Pensiones</span><strong>Bs.S 2.899.701</strong></div>
+                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:3.9%;background:#1C2B1E;"></div></div>
                         </div>
                         <div class="funnel-row">
-                            <div class="funnel-label"><span>Otros (IGTF, Ret.ISLR, Pub., LOCTI)</span><strong>Bs.S 3.514.089</strong></div>
-                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:6.0%;background:#8FA898;"></div></div>
-                        </div>
-                        <div class="funnel-row">
-                            <div class="funnel-label"><span><strong>Total Impuestos</strong></span><strong>Bs.S 58.189.986 (8.8%)</strong></div>
-                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:8.8%;background:var(--green);"></div></div>
+                            <div class="funnel-label"><span><strong>Total Impuestos</strong></span><strong>Bs.S 74.038.098 (9.0%)</strong></div>
+                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:9%;background:var(--green);"></div></div>
                         </div>
                     </div>
                 </div>
@@ -519,222 +320,190 @@
                                     <th class="text-right">Ant. ISLR</th>
                                     <th class="text-right">Ret. IVA</th>
                                     <th class="text-right">IGTF</th>
-                                    <th class="text-right">F. Pensiones</th>
-                                    <th class="text-right">Ret. ISLR</th>
                                     <th class="text-right">Patente</th>
-                                    <th class="text-right">Publicidad</th>
-                                    <th class="text-right">Ret. Munic.</th>
-                                    <th class="text-right">LOCTI</th>
                                     <th class="text-right">Total Imp.</th>
                                     <th class="text-center">% s/V</th>
                                     <th class="text-center">Var.</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <!-- 1Q -->
                                 <tr>
-                                    <td><strong>Abril</strong> <span class="pill pill-green">1Q</span></td>
+                                    <td><strong>Abril</strong> <span class="pill pill-q1">1Q</span></td>
                                     <td class="text-right">19.690.070</td>
                                     <td class="text-right">39.671</td>
-                                    <td class="text-right">186.219</td>
-                                    <td class="text-right">961.446</td>
-                                    <td class="text-right">73.052</td>
-                                    <td class="text-right">70.106</td>
-                                    <td class="text-right">43.527</td>
+                                    <td class="text-right">100.160</td>
+                                    <td class="text-right">938.139</td>
+                                    <td class="text-right">39.489</td>
                                     <td class="text-right">275.044</td>
-                                    <td class="text-right">1.868</td>
-                                    <td class="text-right">—</td>
-                                    <td class="text-right">—</td>
                                     <td class="text-right"><strong>1.650.934</strong></td>
                                     <td class="text-center">8.4%</td>
                                     <td class="text-center">—</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Mayo</strong> <span class="pill pill-green">1Q</span></td>
+                                    <td><strong>Mayo</strong> <span class="pill pill-q1">1Q</span></td>
                                     <td class="text-right">28.335.507</td>
                                     <td class="text-right">44.421</td>
-                                    <td class="text-right">269.135</td>
-                                    <td class="text-right">1.435.492</td>
-                                    <td class="text-right">93.642</td>
-                                    <td class="text-right">93.885</td>
-                                    <td class="text-right">63.297</td>
+                                    <td class="text-right">117.262</td>
+                                    <td class="text-right">1.378.343</td>
+                                    <td class="text-right">46.259</td>
                                     <td class="text-right">389.983</td>
-                                    <td class="text-right">2.954</td>
-                                    <td class="text-right">—</td>
-                                    <td class="text-right">—</td>
                                     <td class="text-right"><strong>2.392.809</strong></td>
                                     <td class="text-center">8.4%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+44.9%</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Junio</strong> <span class="pill pill-green">1Q</span></td>
+                                    <td><strong>Junio</strong> <span class="pill pill-q1">1Q</span></td>
                                     <td class="text-right">30.357.408</td>
                                     <td class="text-right">69.531</td>
-                                    <td class="text-right">287.690</td>
-                                    <td class="text-right">1.538.604</td>
-                                    <td class="text-right">102.189</td>
-                                    <td class="text-right">107.715</td>
-                                    <td class="text-right">62.507</td>
+                                    <td class="text-right">141.108</td>
+                                    <td class="text-right">1.503.010</td>
+                                    <td class="text-right">49.468</td>
                                     <td class="text-right">420.330</td>
-                                    <td class="text-right">3.388</td>
-                                    <td class="text-right">—</td>
-                                    <td class="text-right">—</td>
                                     <td class="text-right"><strong>2.591.953</strong></td>
                                     <td class="text-center">8.5%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+8.3%</td>
                                 </tr>
-                                <tr>
-                                    <td><strong>Julio</strong> <span class="pill pill-green">1Q</span></td>
+                                <tr class="total-row">
+                                    <td colspan="7"><strong>Subtotal 1Q (Abr–Jun)</strong></td>
+                                    <td class="text-right"><strong>6.635.696</strong></td>
+                                    <td class="text-center">8.4%</td>
+                                    <td></td>
+                                </tr>
+                                <!-- 2Q -->
+                                <tr class="quarter-sep">
+                                    <td><strong>Julio</strong> <span class="pill pill-q2">2Q</span></td>
                                     <td class="text-right">36.421.600</td>
                                     <td class="text-right">64.831</td>
-                                    <td class="text-right">344.393</td>
-                                    <td class="text-right">1.815.213</td>
-                                    <td class="text-right">112.803</td>
-                                    <td class="text-right">129.092</td>
-                                    <td class="text-right">42.444</td>
+                                    <td class="text-right">162.685</td>
+                                    <td class="text-right">1.352.936</td>
+                                    <td class="text-right">55.606</td>
                                     <td class="text-right">503.905</td>
-                                    <td class="text-right">3.838</td>
-                                    <td class="text-right">—</td>
-                                    <td class="text-right">—</td>
                                     <td class="text-right"><strong>3.016.520</strong></td>
                                     <td class="text-center">8.3%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+16.4%</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Agosto</strong> <span class="pill pill-green">1Q</span></td>
+                                    <td><strong>Agosto</strong> <span class="pill pill-q2">2Q</span></td>
                                     <td class="text-right">37.537.374</td>
                                     <td class="text-right">10.183</td>
-                                    <td class="text-right">375.374</td>
-                                    <td class="text-right">2.061.834</td>
-                                    <td class="text-right">93.680</td>
-                                    <td class="text-right">144.023</td>
-                                    <td class="text-right">101.448</td>
+                                    <td class="text-right">187.177</td>
+                                    <td class="text-right">1.725.845</td>
+                                    <td class="text-right">53.592</td>
                                     <td class="text-right">549.131</td>
-                                    <td class="text-right">4.663</td>
-                                    <td class="text-right">—</td>
-                                    <td class="text-right">—</td>
                                     <td class="text-right"><strong>3.340.335</strong></td>
                                     <td class="text-center">8.9%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+10.7%</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Septiembre</strong> <span class="pill pill-green">1Q</span></td>
+                                    <td><strong>Septiembre</strong> <span class="pill pill-q2">2Q</span></td>
                                     <td class="text-right">48.824.223</td>
                                     <td class="text-right">—</td>
-                                    <td class="text-right">488.242</td>
-                                    <td class="text-right">2.654.486</td>
-                                    <td class="text-right">100.787</td>
-                                    <td class="text-right">184.151</td>
-                                    <td class="text-right">147.842</td>
+                                    <td class="text-right">242.942</td>
+                                    <td class="text-right">2.372.082</td>
+                                    <td class="text-right">48.439</td>
                                     <td class="text-right">643.432</td>
-                                    <td class="text-right">5.592</td>
-                                    <td class="text-right">2.131</td>
-                                    <td class="text-right">93.110</td>
                                     <td class="text-right"><strong>4.319.774</strong></td>
                                     <td class="text-center">8.8%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+29.3%</td>
                                 </tr>
                                 <tr class="total-row">
-                                    <td colspan="12"><strong>Subtotal 1Q (Abr–Sep)</strong></td>
-                                    <td class="text-right"><strong>17.312.326</strong></td>
-                                    <td class="text-center">8.6%</td>
+                                    <td colspan="7"><strong>Subtotal 2Q (Jul–Sep)</strong></td>
+                                    <td class="text-right"><strong>10.676.629</strong></td>
+                                    <td class="text-center">8.7%</td>
                                     <td></td>
                                 </tr>
-                                <tr>
-                                    <td><strong>Octubre</strong> <span class="pill pill-orange">2Q</span></td>
+                                <!-- 3Q -->
+                                <tr class="quarter-sep">
+                                    <td><strong>Octubre</strong> <span class="pill pill-q3">3Q</span></td>
                                     <td class="text-right">64.143.584</td>
                                     <td class="text-right">—</td>
-                                    <td class="text-right">641.436</td>
-                                    <td class="text-right">3.425.760</td>
-                                    <td class="text-right">99.292</td>
-                                    <td class="text-right">247.979</td>
-                                    <td class="text-right">178.149</td>
+                                    <td class="text-right">293.800</td>
+                                    <td class="text-right">3.327.677</td>
+                                    <td class="text-right">41.987</td>
                                     <td class="text-right">951.342</td>
-                                    <td class="text-right">6.949</td>
-                                    <td class="text-right">59.319</td>
-                                    <td class="text-right">37.500</td>
                                     <td class="text-right"><strong>5.647.726</strong></td>
                                     <td class="text-center">8.8%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+30.7%</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Noviembre</strong> <span class="pill pill-orange">2Q</span></td>
+                                    <td><strong>Noviembre</strong> <span class="pill pill-q3">3Q</span></td>
                                     <td class="text-right">77.880.350</td>
                                     <td class="text-right">321.205</td>
-                                    <td class="text-right">778.824</td>
-                                    <td class="text-right">3.974.573</td>
-                                    <td class="text-right">113.183</td>
-                                    <td class="text-right">261.786</td>
-                                    <td class="text-right">204.206</td>
+                                    <td class="text-right">374.676</td>
+                                    <td class="text-right">3.487.381</td>
+                                    <td class="text-right">58.664</td>
                                     <td class="text-right">1.136.177</td>
-                                    <td class="text-right">8.459</td>
-                                    <td class="text-right">71.066</td>
-                                    <td class="text-right">45.700</td>
                                     <td class="text-right"><strong>6.915.179</strong></td>
                                     <td class="text-center">8.9%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+22.4%</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Diciembre</strong> <span class="pill pill-orange">2Q</span></td>
+                                    <td><strong>Diciembre</strong> <span class="pill pill-q3">3Q</span></td>
                                     <td class="text-right">86.883.613</td>
                                     <td class="text-right">520.717</td>
-                                    <td class="text-right">868.836</td>
-                                    <td class="text-right">4.381.124</td>
-                                    <td class="text-right">109.610</td>
-                                    <td class="text-right">316.801</td>
-                                    <td class="text-right">279.718</td>
+                                    <td class="text-right">405.180</td>
+                                    <td class="text-right">4.030.611</td>
+                                    <td class="text-right">50.518</td>
                                     <td class="text-right">1.272.975</td>
-                                    <td class="text-right">9.431</td>
-                                    <td class="text-right">80.669</td>
-                                    <td class="text-right">46.000</td>
                                     <td class="text-right"><strong>7.885.882</strong></td>
                                     <td class="text-center">9.1%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+14.0%</td>
                                 </tr>
-                                <tr>
-                                    <td><strong>Enero</strong> <span class="pill pill-orange">2Q</span></td>
+                                <tr class="total-row">
+                                    <td colspan="7"><strong>Subtotal 3Q (Oct–Dic)</strong></td>
+                                    <td class="text-right"><strong>20.448.787</strong></td>
+                                    <td class="text-center">8.9%</td>
+                                    <td></td>
+                                </tr>
+                                <!-- 4Q -->
+                                <tr class="quarter-sep">
+                                    <td><strong>Enero</strong> <span class="pill pill-q4">4Q</span></td>
                                     <td class="text-right">107.005.754</td>
                                     <td class="text-right">512.492</td>
-                                    <td class="text-right">1.070.057</td>
-                                    <td class="text-right">5.299.746</td>
-                                    <td class="text-right">126.831</td>
-                                    <td class="text-right">380.824</td>
-                                    <td class="text-right">178.964</td>
+                                    <td class="text-right">471.638</td>
+                                    <td class="text-right">4.460.720</td>
+                                    <td class="text-right">42.179</td>
                                     <td class="text-right">1.575.882</td>
-                                    <td class="text-right">11.800</td>
-                                    <td class="text-right">37.489</td>
-                                    <td class="text-right">—</td>
                                     <td class="text-right"><strong>9.194.085</strong></td>
                                     <td class="text-center">8.6%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+16.6%</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Febrero</strong> <span class="pill pill-orange">2Q</span></td>
-                                    <td class="text-right">122.308.833</td>
+                                    <td><strong>Febrero</strong> <span class="pill pill-q4">4Q</span></td>
+                                    <td class="text-right">64.039.029</td>
                                     <td class="text-right">493.527</td>
-                                    <td class="text-right">1.223.088</td>
-                                    <td class="text-right">6.554.778</td>
-                                    <td class="text-right">171.589</td>
-                                    <td class="text-right">444.737</td>
-                                    <td class="text-right">312.171</td>
-                                    <td class="text-right">1.863.668</td>
-                                    <td class="text-right">13.240</td>
-                                    <td class="text-right">29.989</td>
-                                    <td class="text-right">128.000</td>
-                                    <td class="text-right"><strong>11.234.788</strong></td>
-                                    <td class="text-center">9.2%</td>
-                                    <td class="text-center" style="color:var(--green);font-weight:700;">+22.2%</td>
+                                    <td class="text-right">640.390</td>
+                                    <td class="text-right">3.399.012</td>
+                                    <td class="text-right">90.643</td>
+                                    <td class="text-right">—</td>
+                                    <td class="text-right"><strong>4.623.572</strong></td>
+                                    <td class="text-center">7.2%</td>
+                                    <td class="text-center" style="color:#e53e3e;font-weight:700;">-49.7%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Marzo</strong> <span class="pill pill-q4">4Q</span></td>
+                                    <td class="text-right">160.052.167</td>
+                                    <td class="text-right">97.490</td>
+                                    <td class="text-right">704.324</td>
+                                    <td class="text-right">6.229.021</td>
+                                    <td class="text-right">105.469</td>
+                                    <td class="text-right">2.364.800</td>
+                                    <td class="text-right"><strong>15.848.113</strong></td>
+                                    <td class="text-center">9.9%</td>
+                                    <td class="text-center" style="color:var(--green);font-weight:700;">+242.8%</td>
                                 </tr>
                                 <tr class="total-row">
-                                    <td colspan="12"><strong>Subtotal 2Q (Oct–Feb)</strong></td>
-                                    <td class="text-right"><strong>40.877.660</strong></td>
-                                    <td class="text-center">8.9%</td>
+                                    <td colspan="7"><strong>Subtotal 4Q (Ene–Mar)</strong></td>
+                                    <td class="text-right"><strong>29.665.770</strong></td>
+                                    <td class="text-center">9.1%</td>
                                     <td></td>
                                 </tr>
                                 <tr class="total-row" style="background:rgba(65,158,70,0.15);">
-                                    <td colspan="11"><strong>TOTAL PERÍODO</strong></td>
-                                    <td class="text-right">659.388.316</td>
-                                    <td class="text-right"><strong>58.189.986</strong></td>
-                                    <td class="text-center"><strong>8.8%</strong></td>
+                                    <td colspan="6"><strong>TOTAL PERÍODO</strong></td>
+                                    <td class="text-right">819.440.483</td>
+                                    <td class="text-right"><strong>74.038.098</strong></td>
+                                    <td class="text-center"><strong>9.0%</strong></td>
                                     <td></td>
                                 </tr>
                             </tbody>
@@ -747,145 +516,198 @@
                     <div class="grid grid-3" style="margin-top:0;">
                         <div style="padding:1.25rem;background:rgba(65,158,70,0.07);border-radius:12px;border:1px solid rgba(65,158,70,0.15);">
                             <div style="font-weight:700;color:var(--green);margin-bottom:0.75rem;font-size:0.9rem;">Optimización Fiscal</div>
-                            <p style="font-size:0.82rem;color:var(--text-mid);line-height:1.7;">Retención IVA representa el 58.6% del gasto fiscal total. Revisar estructura de agentes de retención y evaluar créditos fiscales disponibles puede generar ahorros significativos. Planificar anticipos ISLR con proyecciones actualizadas.</p>
+                            <p style="font-size:0.82rem;color:var(--text-mid);line-height:1.7;">Retención IVA representa el 55.2% del gasto fiscal total. Revisar estructura de agentes de retención y evaluar créditos fiscales disponibles puede generar ahorros significativos. Planificar anticipos ISLR con proyecciones actualizadas.</p>
                         </div>
                         <div style="padding:1.25rem;background:rgba(247,150,23,0.07);border-radius:12px;border:1px solid rgba(247,150,23,0.15);">
                             <div style="font-weight:700;color:var(--orange);margin-bottom:0.75rem;font-size:0.9rem;">Control de Gestión</div>
-                            <p style="font-size:0.82rem;color:var(--text-mid);line-height:1.7;">El ratio s/ventas se mantiene estable en el rango 8.3%–9.2%. Monitorear mensualmente con alertas si supera el 9.5%. Febrero 2026 cierra en 9.2% con crecimiento de +22.2% — tendencia alcista sostenida. Implementar presupuesto fiscal trimestral.</p>
+                            <p style="font-size:0.82rem;color:var(--text-mid);line-height:1.7;">El ratio s/ventas es estable (8.3%–9.9%). Monitorear mensualmente con alertas si supera el 10%. Marzo 2026 alcanzó 9.9% — nivel récord del período. Implementar presupuesto fiscal trimestral con revisión mensual.</p>
                         </div>
                         <div style="padding:1.25rem;background:rgba(10,149,97,0.07);border-radius:12px;border:1px solid rgba(10,149,97,0.15);">
                             <div style="font-weight:700;color:var(--dark-green);margin-bottom:0.75rem;font-size:0.9rem;">Proyecciones</div>
-                            <p style="font-size:0.82rem;color:var(--text-mid);line-height:1.7;">Crecimiento sostenido en ventas mes a mes. Si la tendencia de Febrero (11.234M en impuestos) se mantiene, el gasto fiscal anualizado proyectado supera los Bs.S 130M. Preparar provisiones para cierre fiscal 2026.</p>
+                            <p style="font-size:0.82rem;color:var(--text-mid);line-height:1.7;">Marzo 2026 registró Bs.S 15.8M en impuestos sobre ventas de 160M — el mes de mayor actividad del período. Si esta tendencia continúa, el gasto fiscal anualizado proyectado supera Bs.S 150M. Preparar provisiones para cierre fiscal 2026.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ===== TAB: COMPARATIVO 1Q vs 2Q ===== -->
-            <div id="tab-comparativo" class="tab-content">
+            <!-- ===== TAB: TRIMESTRAL ===== -->
+            <div id="tab-trimestral" class="tab-content">
 
-                <div class="grid grid-3 fade-in">
+                <div class="grid grid-4 fade-in">
                     <div class="card kpi c1">
                         <div class="kpi-accent" style="background:var(--green);"></div>
-                        <div class="kpi-label">1Q Total (Abr–Sep)</div>
-                        <div class="kpi-value">17,3M</div>
-                        <div class="kpi-sub">Bs.S 17.312.326</div>
-                        <span class="kpi-tag up">6 meses</span>
+                        <div class="kpi-label">1Q (Abr–Jun)</div>
+                        <div class="kpi-value">6,6M</div>
+                        <div class="kpi-sub">Bs.S 6.635.696</div>
+                        <span class="kpi-tag up">8.4% s/ventas</span>
+                    </div>
+                    <div class="card kpi c2">
+                        <div class="kpi-accent" style="background:var(--light-green);"></div>
+                        <div class="kpi-label">2Q (Jul–Sep)</div>
+                        <div class="kpi-value">10,7M</div>
+                        <div class="kpi-sub">Bs.S 10.676.629</div>
+                        <span class="kpi-tag up">+60.9% vs 1Q</span>
                     </div>
                     <div class="card kpi c3">
                         <div class="kpi-accent" style="background:var(--orange);"></div>
-                        <div class="kpi-label">2Q Total (Oct–Feb)</div>
-                        <div class="kpi-value">40,9M</div>
-                        <div class="kpi-sub">Bs.S 40.877.660</div>
-                        <span class="kpi-tag up">5 meses</span>
+                        <div class="kpi-label">3Q (Oct–Dic)</div>
+                        <div class="kpi-value">20,4M</div>
+                        <div class="kpi-sub">Bs.S 20.448.787</div>
+                        <span class="kpi-tag up">+91.5% vs 2Q</span>
                     </div>
-                    <div class="card kpi c2">
+                    <div class="card kpi c4">
                         <div class="kpi-accent" style="background:var(--yellow);"></div>
-                        <div class="kpi-label">Crecimiento 2Q vs 1Q</div>
-                        <div class="kpi-value">+136.1%</div>
-                        <div class="kpi-sub">En total impuestos</div>
-                        <span class="kpi-tag up">↗ Escala ventas</span>
+                        <div class="kpi-label">4Q (Ene–Mar)</div>
+                        <div class="kpi-value">29,7M</div>
+                        <div class="kpi-sub">Bs.S 29.665.770</div>
+                        <span class="kpi-tag up">+45.1% vs 3Q</span>
                     </div>
                 </div>
 
                 <div class="grid grid-2 fade-in">
                     <div class="card">
-                        <div class="card-title">Ventas e Impuestos — 1Q vs 2Q</div>
+                        <div class="card-title">Ventas e Impuestos por Trimestre</div>
                         <div class="bar-chart-wrap">
-                            <div class="bar-chart-svg-wrap" id="bar-comparativo"></div>
+                            <div class="bar-chart-svg-wrap" id="bar-trimestral"></div>
                             <div style="display:flex;gap:1.25rem;flex-wrap:wrap;margin-top:0.75rem;font-size:0.75rem;color:var(--text-light);">
-                                <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:12px;height:12px;background:var(--green);border-radius:3px;display:inline-block;"></span>1Q Ventas</span>
-                                <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:12px;height:12px;background:var(--orange);border-radius:3px;display:inline-block;"></span>2Q Ventas</span>
-                                <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:12px;height:12px;background:var(--green);border-radius:3px;opacity:0.45;display:inline-block;"></span>1Q Impuestos</span>
-                                <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:12px;height:12px;background:var(--orange);border-radius:3px;opacity:0.45;display:inline-block;"></span>2Q Impuestos</span>
+                                <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:12px;height:12px;background:#419E46;border-radius:3px;display:inline-block;"></span>1Q</span>
+                                <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:12px;height:12px;background:#7CC141;border-radius:3px;display:inline-block;"></span>2Q</span>
+                                <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:12px;height:12px;background:#F79617;border-radius:3px;display:inline-block;"></span>3Q</span>
+                                <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:12px;height:12px;background:#FED519;border-radius:3px;display:inline-block;"></span>4Q</span>
                             </div>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-title">Ratio Impuesto/Venta por Período</div>
-                        <div style="padding:1.5rem 0;">
+                        <div class="card-title">Ratio Impuesto/Venta por Trimestre</div>
+                        <div style="padding:1rem 0;">
                             <div style="margin-bottom:1.5rem;">
                                 <div style="display:flex;justify-content:space-between;margin-bottom:0.4rem;font-size:0.85rem;font-weight:600;">
-                                    <span>1Q — Abr a Sep 2025</span><span>8.61% promedio</span>
+                                    <span>1Q — Abr a Jun 2025</span><span>8.42% promedio</span>
                                 </div>
-                                <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:86.1%;background:var(--green);height:14px;"></div></div>
-                                <div style="font-size:0.75rem;color:var(--text-light);margin-top:0.3rem;">Ventas: Bs.S 201.166.182 · Impuestos: Bs.S 17.312.326</div>
+                                <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:85%;background:#419E46;height:14px;"></div></div>
+                                <div style="font-size:0.75rem;color:var(--text-light);margin-top:0.3rem;">Ventas: Bs.S 78.382.985 · Impuestos: Bs.S 6.635.696</div>
+                            </div>
+                            <div style="margin-bottom:1.5rem;">
+                                <div style="display:flex;justify-content:space-between;margin-bottom:0.4rem;font-size:0.85rem;font-weight:600;">
+                                    <span>2Q — Jul a Sep 2025</span><span>8.66% promedio</span>
+                                </div>
+                                <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:87%;background:#7CC141;height:14px;"></div></div>
+                                <div style="font-size:0.75rem;color:var(--text-light);margin-top:0.3rem;">Ventas: Bs.S 122.783.197 · Impuestos: Bs.S 10.676.629</div>
+                            </div>
+                            <div style="margin-bottom:1.5rem;">
+                                <div style="display:flex;justify-content:space-between;margin-bottom:0.4rem;font-size:0.85rem;font-weight:600;">
+                                    <span>3Q — Oct a Dic 2025</span><span>8.93% promedio</span>
+                                </div>
+                                <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:90%;background:#F79617;height:14px;"></div></div>
+                                <div style="font-size:0.75rem;color:var(--text-light);margin-top:0.3rem;">Ventas: Bs.S 228.907.548 · Impuestos: Bs.S 20.448.787</div>
                             </div>
                             <div>
                                 <div style="display:flex;justify-content:space-between;margin-bottom:0.4rem;font-size:0.85rem;font-weight:600;">
-                                    <span>2Q — Oct 2025 a Feb 2026</span><span>8.92% promedio</span>
+                                    <span>4Q — Ene a Mar 2026</span><span>9.13% promedio</span>
                                 </div>
-                                <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:100%;background:var(--orange);height:14px;"></div></div>
-                                <div style="font-size:0.75rem;color:var(--text-light);margin-top:0.3rem;">Ventas: Bs.S 458.222.134 · Impuestos: Bs.S 40.877.660</div>
+                                <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:100%;background:#e8a800;height:14px;"></div></div>
+                                <div style="font-size:0.75rem;color:var(--text-light);margin-top:0.3rem;">Ventas: Bs.S 331.096.950 · Impuestos: Bs.S 29.665.770</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="card fade-in">
-                    <div class="card-title">Comparativo por Tipo de Impuesto — 1Q vs 2Q</div>
+                    <div class="card-title">Comparativo por Tipo de Impuesto — 4 Trimestres</div>
                     <div class="compare-row head">
-                        <span>Concepto</span><span style="text-align:right;">1Q (Abr–Sep)</span><span style="text-align:right;">2Q (Oct–Feb)</span>
+                        <span>Concepto</span>
+                        <span style="text-align:right;">1Q Abr–Jun</span>
+                        <span style="text-align:right;">2Q Jul–Sep</span>
+                        <span style="text-align:right;">3Q Oct–Dic</span>
+                        <span style="text-align:right;">4Q Ene–Mar</span>
                     </div>
                     <div class="compare-row even">
                         <span>IVA</span>
-                        <span style="text-align:right;">228.637</span>
-                        <span style="text-align:right;font-weight:700;">1.847.941 <span class="diff-up">↗</span></span>
+                        <span style="text-align:right;">153.623</span>
+                        <span style="text-align:right;">75.014</span>
+                        <span style="text-align:right;">841.922</span>
+                        <span style="text-align:right;font-weight:700;">1.103.509 <span class="diff-up">↗</span></span>
                     </div>
                     <div class="compare-row odd">
                         <span>Anticipos ISLR</span>
-                        <span style="text-align:right;">1.951.054</span>
-                        <span style="text-align:right;font-weight:700;">4.582.241 <span class="diff-up">↗</span></span>
+                        <span style="text-align:right;">358.530</span>
+                        <span style="text-align:right;">592.804</span>
+                        <span style="text-align:right;">1.073.657</span>
+                        <span style="text-align:right;font-weight:700;">1.816.352 <span class="diff-up">↗</span></span>
                     </div>
                     <div class="compare-row even">
                         <span>Retención IVA</span>
-                        <span style="text-align:right;">10.467.075</span>
-                        <span style="text-align:right;font-weight:700;">23.635.981 <span class="diff-up">↗</span></span>
+                        <span style="text-align:right;">3.819.431</span>
+                        <span style="text-align:right;">5.450.863</span>
+                        <span style="text-align:right;">9.319.000</span>
+                        <span style="text-align:right;font-weight:700;">12.241.153 <span class="diff-up">↗</span></span>
                     </div>
                     <div class="compare-row odd">
                         <span>IGTF</span>
-                        <span style="text-align:right;">576.153</span>
-                        <span style="text-align:right;font-weight:700;">620.505 <span class="diff-up">↗</span></span>
+                        <span style="text-align:right;">135.216</span>
+                        <span style="text-align:right;">157.637</span>
+                        <span style="text-align:right;">151.168</span>
+                        <span style="text-align:right;">238.291</span>
                     </div>
                     <div class="compare-row even">
                         <span>Fondo Pensiones</span>
-                        <span style="text-align:right;">729.072</span>
-                        <span style="text-align:right;font-weight:700;">1.652.025 <span class="diff-up">↗</span></span>
+                        <span style="text-align:right;">271.195</span>
+                        <span style="text-align:right;">455.266</span>
+                        <span style="text-align:right;">1.026.566</span>
+                        <span style="text-align:right;font-weight:700;">1.146.674 <span class="diff-up">↗</span></span>
                     </div>
                     <div class="compare-row odd">
                         <span>Retención ISLR</span>
-                        <span style="text-align:right;">461.773</span>
-                        <span style="text-align:right;font-weight:700;">1.152.500 <span class="diff-up">↗</span></span>
+                        <span style="text-align:right;">188.248</span>
+                        <span style="text-align:right;">391.794</span>
+                        <span style="text-align:right;">662.073</span>
+                        <span style="text-align:right;font-weight:700;">806.642 <span class="diff-up">↗</span></span>
                     </div>
                     <div class="compare-row even">
                         <span>Patente</span>
-                        <span style="text-align:right;">2.781.825</span>
-                        <span style="text-align:right;font-weight:700;">6.800.046 <span class="diff-up">↗</span></span>
+                        <span style="text-align:right;">1.085.357</span>
+                        <span style="text-align:right;">1.696.469</span>
+                        <span style="text-align:right;">3.360.494</span>
+                        <span style="text-align:right;font-weight:700;">3.804.351 <span class="diff-up">↗</span></span>
                     </div>
                     <div class="compare-row odd">
                         <span>Publicidad / Ret. Munic. / LOCTI</span>
-                        <span style="text-align:right;">100.833</span>
-                        <span style="text-align:right;font-weight:700;">602.324 <span class="diff-up">↗</span></span>
+                        <span style="text-align:right;">6.242</span>
+                        <span style="text-align:right;">100.782</span>
+                        <span style="text-align:right;">300.907</span>
+                        <span style="text-align:right;font-weight:700;">213.798</span>
                     </div>
                     <div class="compare-row subtotal">
                         <span><strong>TOTAL</strong></span>
-                        <span style="text-align:right;"><strong>17.312.326</strong></span>
-                        <span style="text-align:right;"><strong>40.877.660 <span class="diff-up">↗+136.1%</span></strong></span>
+                        <span style="text-align:right;"><strong>6.635.696</strong></span>
+                        <span style="text-align:right;"><strong>10.676.629 <span class="diff-up">↗+61%</span></strong></span>
+                        <span style="text-align:right;"><strong>20.448.787 <span class="diff-up">↗+91%</span></strong></span>
+                        <span style="text-align:right;"><strong>29.665.770 <span class="diff-up">↗+45%</span></strong></span>
                     </div>
                 </div>
 
                 <div class="card fade-in" style="margin-top:1.25rem;">
-                    <div class="card-title">Promedio Mensual — 1Q vs 2Q</div>
-                    <div class="grid grid-2" style="margin-top:0;">
+                    <div class="card-title">Promedio Mensual por Trimestre</div>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:0;">
                         <div style="padding:1rem;background:rgba(65,158,70,0.06);border-radius:12px;">
-                            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--green);margin-bottom:0.75rem;">1Q — 6 meses</div>
-                            <div style="font-family:'DM Serif Display',serif;font-size:2rem;color:var(--text-dark);">2.885.388</div>
-                            <div style="font-size:0.8rem;color:var(--text-light);">Bs.S promedio mensual</div>
+                            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#419E46;margin-bottom:0.75rem;">1Q — 3 meses</div>
+                            <div style="font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--text-dark);">2.211.899</div>
+                            <div style="font-size:0.8rem;color:var(--text-light);">Bs.S / mes</div>
+                        </div>
+                        <div style="padding:1rem;background:rgba(124,193,65,0.06);border-radius:12px;">
+                            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#5a8a10;margin-bottom:0.75rem;">2Q — 3 meses</div>
+                            <div style="font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--text-dark);">3.558.876</div>
+                            <div style="font-size:0.8rem;color:var(--text-light);">Bs.S / mes <strong style="color:var(--green);">(+60.9%)</strong></div>
                         </div>
                         <div style="padding:1rem;background:rgba(247,150,23,0.06);border-radius:12px;">
-                            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--orange);margin-bottom:0.75rem;">2Q — 5 meses</div>
-                            <div style="font-family:'DM Serif Display',serif;font-size:2rem;color:var(--text-dark);">8.175.532</div>
-                            <div style="font-size:0.8rem;color:var(--text-light);">Bs.S promedio mensual <strong style="color:var(--green);">(+183.4%)</strong></div>
+                            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--orange);margin-bottom:0.75rem;">3Q — 3 meses</div>
+                            <div style="font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--text-dark);">6.816.262</div>
+                            <div style="font-size:0.8rem;color:var(--text-light);">Bs.S / mes <strong style="color:var(--green);">(+91.5%)</strong></div>
+                        </div>
+                        <div style="padding:1rem;background:rgba(254,213,25,0.1);border-radius:12px;">
+                            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#9a7a00;margin-bottom:0.75rem;">4Q — 3 meses</div>
+                            <div style="font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--text-dark);">9.888.590</div>
+                            <div style="font-size:0.8rem;color:var(--text-light);">Bs.S / mes <strong style="color:var(--green);">(+45.1%)</strong></div>
                         </div>
                     </div>
                 </div>
@@ -895,17 +717,19 @@
 
         <div class="footer">
             <strong>Trinigold Farmacia</strong> · Informe Ejecutivo de Gastos de Impuestos<br>
-            Período: Abril 2025 – Febrero 2026 (11 meses) · Actualizado: <span id="fecha"></span>
+            Período: Abril 2025 – Marzo 2026 (12 meses) · Actualizado: <span id="fecha"></span>
         </div>
     </div><!-- /container -->
 
     <script>
         // ---- DATA ----
-        const meses = ['Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic','Ene','Feb'];
-        const impuestos = [1650934, 2392809, 2591953, 3016520, 3340335, 4319774, 5647726, 6915179, 7885882, 9194085, 11234788];
-        const ventas    = [19690070, 28335507, 30357408, 36421600, 37537374, 48824223, 64143584, 77880350, 86883613, 107005754, 122308833];
-        const ratios    = [8.39, 8.44, 8.54, 8.28, 8.90, 8.85, 8.81, 8.88, 9.08, 8.59, 9.19];
-        const colores   = ['#419E46','#419E46','#419E46','#419E46','#419E46','#419E46','#F79617','#F79617','#F79617','#F79617','#F79617'];
+        const meses = ['Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic','Ene','Feb','Mar'];
+        const impuestos = [1650934, 2392809, 2591953, 3016520, 3340335, 4319774, 5647726, 6915179, 7885882, 9194085, 4623572, 15848113];
+        const ventas    = [19690070, 28335507, 30357408, 36421600, 37537374, 48824223, 64143584, 77880350, 86883613, 107005754, 64039029, 160052167];
+        const ratios    = [8.39, 8.44, 8.54, 8.28, 8.90, 8.85, 8.81, 8.88, 9.08, 8.59, 7.22, 9.90];
+        // Q colors: Q1=green, Q2=light-green, Q3=orange, Q4=yellow
+        const colores   = ['#419E46','#419E46','#419E46','#7CC141','#7CC141','#7CC141','#F79617','#F79617','#F79617','#FED519','#FED519','#FED519'];
+        const qColors   = {'1Q':'#419E46','2Q':'#7CC141','3Q':'#F79617','4Q':'#e8a800'};
 
         function fmt(n) {
             if(n >= 1e6) return (n/1e6).toFixed(2)+'M';
@@ -916,51 +740,30 @@
         function buildBarChartSVG(containerId, data, colors, labels) {
             const el = document.getElementById(containerId);
             if(!el) return;
-            const svgH = 340;
-            const padTop = 40;
-            const padBottom = 32;
-            const padX = 10;
+            const svgH = 340, padTop = 40, padBottom = 32, padX = 10;
             const chartH = svgH - padTop - padBottom;
             const n = data.length;
             const maxV = Math.max(...data);
-            // Use viewBox with fixed width for proportions, scale via CSS
             const totalW = 900;
             const barW = Math.floor((totalW - padX*2) / n) - 8;
             const gap = Math.floor((totalW - padX*2) / n);
 
-            let bars = '';
+            let bars = '', gridLines = '';
             data.forEach((v, i) => {
                 const barH = Math.max(6, Math.round((v / maxV) * chartH));
                 const x = padX + i * gap + (gap - barW) / 2;
                 const y = padTop + chartH - barH;
-                const lbl = labels[i];
-                const valStr = fmt(v);
                 bars += `
-                    <rect x="${x}" y="${y}" width="${barW}" height="${barH}"
-                          rx="5" fill="${colors[i]}" opacity="0.92"/>
-                    <text x="${x + barW/2}" y="${y - 8}" text-anchor="middle"
-                          font-family="DM Sans" font-size="11" font-weight="700"
-                          fill="#4A6050">${valStr}</text>
-                    <text x="${x + barW/2}" y="${svgH - 8}" text-anchor="middle"
-                          font-family="DM Sans" font-size="11" font-weight="600"
-                          fill="#8FA898">${lbl}</text>`;
+                    <rect x="${x}" y="${y}" width="${barW}" height="${barH}" rx="5" fill="${colors[i]}" opacity="0.92"/>
+                    <text x="${x + barW/2}" y="${y - 8}" text-anchor="middle" font-family="DM Sans" font-size="11" font-weight="700" fill="#4A6050">${fmt(v)}</text>
+                    <text x="${x + barW/2}" y="${svgH - 8}" text-anchor="middle" font-family="DM Sans" font-size="11" font-weight="600" fill="#8FA898">${labels[i]}</text>`;
             });
-
-            // Horizontal grid lines (4 lines)
-            let gridLines = '';
             for(let g = 1; g <= 4; g++) {
                 const gy = padTop + chartH - (chartH / 4) * g;
-                const gVal = fmt(Math.round(maxV / 4 * g));
-                gridLines += `<line x1="${padX}" y1="${gy}" x2="${totalW - padX}" y2="${gy}"
-                    stroke="#E0EAE2" stroke-width="1" stroke-dasharray="4,4"/>
-                <text x="${padX}" y="${gy - 4}" font-family="DM Sans" font-size="9"
-                    fill="#8FA898">${gVal}</text>`;
+                gridLines += `<line x1="${padX}" y1="${gy}" x2="${totalW - padX}" y2="${gy}" stroke="#E0EAE2" stroke-width="1" stroke-dasharray="4,4"/>
+                <text x="${padX}" y="${gy - 4}" font-family="DM Sans" font-size="9" fill="#8FA898">${fmt(Math.round(maxV / 4 * g))}</text>`;
             }
-
-            el.innerHTML = `<svg viewBox="0 0 ${totalW} ${svgH}" preserveAspectRatio="xMidYMid meet">
-                ${gridLines}
-                ${bars}
-            </svg>`;
+            el.innerHTML = `<svg viewBox="0 0 ${totalW} ${svgH}" preserveAspectRatio="xMidYMid meet">${gridLines}${bars}</svg>`;
         }
 
         function buildRatioBars() {
@@ -975,9 +778,7 @@
                         <span style="font-weight:500;color:var(--text-mid);">${meses[i]}</span>
                         <span style="font-weight:700;color:${color};">${r.toFixed(2)}%</span>
                     </div>
-                    <div class="funnel-bar-bg">
-                        <div class="funnel-bar-fill" style="width:${pct}%;background:${color};"></div>
-                    </div>
+                    <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:${pct}%;background:${color};"></div></div>
                 </div>`;
             });
             el.innerHTML = html;
@@ -986,8 +787,8 @@
         function buildHeatmap() {
             const el = document.getElementById('heatmap');
             if(!el) return;
-            const growths = [null, 44.9, 8.3, 16.4, 10.7, 29.3, 30.7, 22.4, 14.0, 16.6, 22.2];
-            const intensities = [0.3, 0.7, 0.4, 0.5, 0.55, 0.65, 0.7, 0.75, 0.8, 0.85, 0.92];
+            const growths = [null, 44.9, 8.3, 16.4, 10.7, 29.3, 30.7, 22.4, 14.0, 16.6, -49.7, 242.8];
+            const intensities = [0.3, 0.7, 0.4, 0.5, 0.55, 0.65, 0.7, 0.75, 0.8, 0.85, 0.2, 1.0];
             let html = '';
             meses.forEach((m, i) => {
                 const g = growths[i];
@@ -1006,81 +807,45 @@
         function buildDualBars() {
             const el = document.getElementById('bar-dual');
             if(!el) return;
-
-            const svgH = 340;
-            const padTop = 40;
-            const padBottom = 32;
-            const padX = 10;
+            const svgH = 340, padTop = 40, padBottom = 32, padX = 10;
             const chartH = svgH - padTop - padBottom;
             const n = meses.length;
             const totalW = 900;
             const groupW = Math.floor((totalW - padX * 2) / n);
             const barW = Math.floor(groupW * 0.38);
             const gap = 4;
-
-            // Normalise both series to the same scale: ventas/10 so they're comparable
             const ventasScaled = ventas.map(v => v / 10);
             const allVals = [...impuestos, ...ventasScaled];
             const maxV = Math.max(...allVals);
 
-            let bars = '';
-            let gridLines = '';
-
-            // Grid lines
+            let bars = '', gridLines = '';
             for (let g = 1; g <= 4; g++) {
                 const gy = padTop + chartH - (chartH / 4) * g;
-                const gVal = fmt(Math.round(maxV / 4 * g));
-                gridLines += `<line x1="${padX}" y1="${gy}" x2="${totalW - padX}" y2="${gy}"
-                    stroke="#E0EAE2" stroke-width="1" stroke-dasharray="4,4"/>
-                <text x="${padX}" y="${gy - 4}" font-family="DM Sans" font-size="9" fill="#8FA898">${gVal}</text>`;
+                gridLines += `<line x1="${padX}" y1="${gy}" x2="${totalW - padX}" y2="${gy}" stroke="#E0EAE2" stroke-width="1" stroke-dasharray="4,4"/>
+                <text x="${padX}" y="${gy - 4}" font-family="DM Sans" font-size="9" fill="#8FA898">${fmt(Math.round(maxV / 4 * g))}</text>`;
             }
-
             meses.forEach((m, i) => {
-                const imp = impuestos[i];
-                const ven = ventasScaled[i];
+                const imp = impuestos[i], ven = ventasScaled[i];
                 const hI = Math.max(4, Math.round((imp / maxV) * chartH));
                 const hV = Math.max(4, Math.round((ven / maxV) * chartH));
-
                 const groupX = padX + i * groupW + (groupW - barW * 2 - gap) / 2;
-                const xI = groupX;
-                const xV = groupX + barW + gap;
-                const yI = padTop + chartH - hI;
-                const yV = padTop + chartH - hV;
-
+                const xI = groupX, xV = groupX + barW + gap;
                 bars += `
-                    <!-- Impuestos bar -->
-                    <rect x="${xI}" y="${yI}" width="${barW}" height="${hI}"
-                          rx="4" fill="${colores[i]}" opacity="0.92"/>
-                    <text x="${xI + barW/2}" y="${yI - 6}" text-anchor="middle"
-                          font-family="DM Sans" font-size="9.5" font-weight="700"
-                          fill="#4A6050">${fmt(imp)}</text>
-
-                    <!-- Ventas bar (scaled ÷10) -->
-                    <rect x="${xV}" y="${yV}" width="${barW}" height="${hV}"
-                          rx="4" fill="rgba(65,158,70,0.18)" stroke="rgba(65,158,70,0.4)" stroke-width="1"/>
-                    <text x="${xV + barW/2}" y="${yV - 6}" text-anchor="middle"
-                          font-family="DM Sans" font-size="9.5" font-weight="600"
-                          fill="#8FA898">${fmt(ventas[i])}</text>
-
-                    <!-- Month label centered under pair -->
-                    <text x="${groupX + barW + gap/2}" y="${svgH - 8}" text-anchor="middle"
-                          font-family="DM Sans" font-size="11" font-weight="600"
-                          fill="#8FA898">${m}</text>`;
+                    <rect x="${xI}" y="${padTop + chartH - hI}" width="${barW}" height="${hI}" rx="4" fill="${colores[i]}" opacity="0.92"/>
+                    <text x="${xI + barW/2}" y="${padTop + chartH - hI - 6}" text-anchor="middle" font-family="DM Sans" font-size="9.5" font-weight="700" fill="#4A6050">${fmt(imp)}</text>
+                    <rect x="${xV}" y="${padTop + chartH - hV}" width="${barW}" height="${hV}" rx="4" fill="rgba(65,158,70,0.18)" stroke="rgba(65,158,70,0.4)" stroke-width="1"/>
+                    <text x="${xV + barW/2}" y="${padTop + chartH - hV - 6}" text-anchor="middle" font-family="DM Sans" font-size="9.5" font-weight="600" fill="#8FA898">${fmt(ventas[i])}</text>
+                    <text x="${groupX + barW + gap/2}" y="${svgH - 8}" text-anchor="middle" font-family="DM Sans" font-size="11" font-weight="600" fill="#8FA898">${m}</text>`;
             });
-
-            el.innerHTML = `<svg viewBox="0 0 ${totalW} ${svgH}" preserveAspectRatio="xMidYMid meet">
-                ${gridLines}
-                ${bars}
-            </svg>`;
+            el.innerHTML = `<svg viewBox="0 0 ${totalW} ${svgH}" preserveAspectRatio="xMidYMid meet">${gridLines}${bars}</svg>`;
         }
 
         function buildStackedTrend() {
             const el = document.getElementById('stacked-bars');
             if(!el) return;
-            // Ret IVA total per month (all 3 columns summed)
-            const retenIVA = [961446,1435492,1538604,1815213,2061834,2654486,3425760,3974573,4381124,5299746,6554778];
-            const patente  = [275044,389983,420330,503905,549131,643432,951342,1136177,1272975,1575882,1863668];
-            const islr     = [186219,269135,287690,344393,375374,488242,641436,778824,868836,1070057,1223088];
+            const retenIVA = [938139,1378343,1503010,1352936,1725845,2372082,3327677,3487381,4030611,4460720,3399012,6229021];
+            const patente  = [275044,389983,420330,503905,549131,643432,951342,1136177,1272975,1575882,0,2364800];
+            const islr     = [100160,117262,141108,162685,187177,242942,293800,374676,405180,471638,640390,704324];
             const maxV = Math.max(...impuestos);
             let html = `<div style="display:flex;gap:0.5rem;align-items:flex-end;height:200px;padding:1rem 0;">`;
             meses.forEach((m, i) => {
@@ -1109,66 +874,52 @@
             el.innerHTML = html;
         }
 
-        function buildComparativoChart() {
-            const el = document.getElementById('bar-comparativo');
+        function buildTrimestralChart() {
+            const el = document.getElementById('bar-trimestral');
             if(!el) return;
 
-            const svgH = 320;
-            const padTop = 40;
-            const padBottom = 36;
-            const padX = 14;
+            const svgH = 320, padTop = 40, padBottom = 36, padX = 14;
             const chartH = svgH - padTop - padBottom;
-            const totalW = 500;
+            const totalW = 600;
 
-            // Real values
-            const ventas1Q = 201166182;
-            const ventas2Q = 458222134;
-            const imp1Q    = 17312326;
-            const imp2Q    = 40877660;
+            const qLabels = ['1Q\nAbr–Jun', '2Q\nJul–Sep', '3Q\nOct–Dic', '4Q\nEne–Mar'];
+            const qVentas = [78382985, 122783197, 228907548, 331096950];
+            const qImps   = [6635696, 10676629, 20448787, 29665770];
+            const qCols   = ['#419E46','#7CC141','#F79617','#e8a800'];
 
-            const values = [ventas1Q, ventas2Q, imp1Q, imp2Q];
-            const labels = ['1Q Ventas', '2Q Ventas', '1Q Imp.', '2Q Imp.'];
-            const colors = ['#419E46', '#F79617', '#419E46', '#F79617'];
-            const opacities = [1, 1, 0.45, 0.45];
-
+            const values = [...qVentas, ...qImps];
             const maxV = Math.max(...values);
-            const n = values.length;
+
+            const n = 4;
             const availW = totalW - padX * 2;
-            const barW = Math.floor(availW / n) - 14;
-            const step = Math.floor(availW / n);
+            const groupW = Math.floor(availW / n);
+            const barW = Math.floor(groupW * 0.38);
+            const innerGap = 4;
 
-            let bars = '';
-            let gridLines = '';
-
-            // Grid lines (4)
+            let bars = '', gridLines = '';
             for (let g = 1; g <= 4; g++) {
                 const gy = padTop + chartH - (chartH / 4) * g;
-                const gVal = fmt(Math.round(maxV / 4 * g));
-                gridLines += `<line x1="${padX}" y1="${gy}" x2="${totalW - padX}" y2="${gy}"
-                    stroke="#E0EAE2" stroke-width="1" stroke-dasharray="4,4"/>
-                <text x="${padX}" y="${gy - 4}" font-family="DM Sans" font-size="9" fill="#8FA898">${gVal}</text>`;
+                gridLines += `<line x1="${padX}" y1="${gy}" x2="${totalW - padX}" y2="${gy}" stroke="#E0EAE2" stroke-width="1" stroke-dasharray="4,4"/>
+                <text x="${padX}" y="${gy - 4}" font-family="DM Sans" font-size="9" fill="#8FA898">${fmt(Math.round(maxV / 4 * g))}</text>`;
             }
 
-            values.forEach((v, i) => {
-                const barH = Math.max(6, Math.round((v / maxV) * chartH));
-                const x = padX + i * step + (step - barW) / 2;
-                const y = padTop + chartH - barH;
+            for (let i = 0; i < n; i++) {
+                const hV = Math.max(4, Math.round((qVentas[i] / maxV) * chartH));
+                const hI = Math.max(4, Math.round((qImps[i] / maxV) * chartH));
+                const groupX = padX + i * groupW + (groupW - barW * 2 - innerGap) / 2;
+                const xV = groupX, xI = groupX + barW + innerGap;
                 bars += `
-                    <rect x="${x}" y="${y}" width="${barW}" height="${barH}"
-                          rx="5" fill="${colors[i]}" opacity="${opacities[i]}"/>
-                    <text x="${x + barW/2}" y="${y - 7}" text-anchor="middle"
-                          font-family="DM Sans" font-size="10" font-weight="700"
-                          fill="#4A6050">${fmt(v)}</text>
-                    <text x="${x + barW/2}" y="${svgH - 8}" text-anchor="middle"
-                          font-family="DM Sans" font-size="10.5" font-weight="600"
-                          fill="#8FA898">${labels[i]}</text>`;
-            });
+                    <rect x="${xV}" y="${padTop + chartH - hV}" width="${barW}" height="${hV}" rx="4" fill="${qCols[i]}" opacity="0.3"/>
+                    <text x="${xV + barW/2}" y="${padTop + chartH - hV - 6}" text-anchor="middle" font-family="DM Sans" font-size="9" font-weight="600" fill="#8FA898">${fmt(qVentas[i])}</text>
+                    <rect x="${xI}" y="${padTop + chartH - hI}" width="${barW}" height="${hI}" rx="4" fill="${qCols[i]}" opacity="0.92"/>
+                    <text x="${xI + barW/2}" y="${padTop + chartH - hI - 6}" text-anchor="middle" font-family="DM Sans" font-size="10" font-weight="700" fill="#4A6050">${fmt(qImps[i])}</text>
+                    <text x="${groupX + barW + innerGap/2}" y="${svgH - 8}" text-anchor="middle" font-family="DM Sans" font-size="11" font-weight="700" fill="#4A6050">${qLabels[i].split('\n')[0]}</text>
+                    <text x="${groupX + barW + innerGap/2}" y="${svgH + 6}" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#8FA898">${qLabels[i].split('\n')[1]}</text>`;
+            }
 
-            el.innerHTML = `<svg viewBox="0 0 ${totalW} ${svgH}" preserveAspectRatio="xMidYMid meet">
-                ${gridLines}
-                ${bars}
-            </svg>`;
+            el.innerHTML = `<svg viewBox="0 0 ${totalW} ${svgH + 14}" preserveAspectRatio="xMidYMid meet">${gridLines}${bars}</svg>`;
         }
+
         function showTab(name, btn) {
             document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -1177,7 +928,6 @@
             animate();
         }
 
-        // ---- ANIMATE ----
         function animate() {
             const els = document.querySelectorAll('.tab-content.active .fade-in');
             els.forEach(el => el.classList.remove('visible'));
@@ -1186,7 +936,6 @@
             }, 50);
         }
 
-        // ---- INIT ----
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('fecha').textContent = new Date().toLocaleDateString('es-VE');
             buildBarChartSVG('bar-resumen', impuestos, colores, meses);
@@ -1194,7 +943,7 @@
             buildDualBars();
             buildHeatmap();
             buildStackedTrend();
-            buildComparativoChart();
+            buildTrimestralChart();
             animate();
         });
     </script>
