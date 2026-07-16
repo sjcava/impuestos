@@ -176,7 +176,7 @@
         .text-center { text-align: center; }
         .pill { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 100px; font-size: 0.7rem; font-weight: 700; }
         .pill-green { background: rgba(65,158,70,0.12); color: var(--green); }
-        .pill-yellow { background: rgba(254,213,25,0.2); color: #9a7a00; }
+        .pill-yellow { background: rgba(254,213,25,0.25); color: #9a7a00; }
         .pill-orange { background: rgba(247,150,23,0.12); color: #b05a00; }
         .pill-teal { background: rgba(10,149,97,0.12); color: var(--dark-green); }
 
@@ -207,7 +207,7 @@
 
         .compare-row {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 1.3fr 1fr 1fr 0.7fr;
             gap: 0.5rem;
             padding: 0.6rem 0.75rem;
             border-radius: 8px;
@@ -221,12 +221,6 @@
         .compare-row.subtotal { background: rgba(65,158,70,0.1); font-weight: 700; }
         .diff-up { color: var(--green); font-weight: 700; }
 
-        .section-label {
-            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-            color: var(--text-light); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;
-        }
-        .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
         .footer {
             text-align: center; padding: 2rem; color: var(--text-light); font-size: 0.8rem;
             border-top: 1px solid var(--border); margin-top: 2rem;
@@ -236,10 +230,22 @@
         .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
+        .note-parcial {
+            display: inline-block;
+            padding: 0.3rem 0.9rem;
+            border-radius: 100px;
+            background: rgba(254,213,25,0.25);
+            border: 1px solid rgba(254,213,25,0.6);
+            color: #7a6100;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
         @media (max-width: 768px) {
             .header h1 { font-size: 1.6rem; }
             .grid-2 { grid-template-columns: 1fr; }
-            .compare-row { font-size: 0.72rem; }
+            .compare-row { font-size: 0.7rem; }
             .tab-btn { padding: 0.85rem 1rem; font-size: 0.8rem; }
         }
     </style>
@@ -253,11 +259,11 @@
                 <div class="header-title">
                     <div class="header-eyebrow">Trinigold Farmacia · Informe Fiscal</div>
                     <h1>Gastos de Impuestos<br><em>2025 – 2026</em></h1>
-                    <p class="header-sub">Abril 2025 – Abril 2026 &nbsp;·&nbsp; 13 meses</p>
+                    <p class="header-sub">Abril 2025 – Julio 2026 &nbsp;·&nbsp; 16 meses &nbsp;·&nbsp; Julio 2026 parcial (1ra quincena)</p>
                 </div>
                 <div class="header-badges">
-                    <div class="badge badge-total">Total: Bs.S 87.026.172</div>
-                    <div class="badge badge-period">Ventas: Bs.S 977.450.092</div>
+                    <div class="badge badge-total">Total: Bs.S 150.546.321</div>
+                    <div class="badge badge-period">Ventas: Bs.S 1.655.760.291</div>
                 </div>
             </div>
         </div>
@@ -270,7 +276,7 @@
                 <button class="tab-btn" onclick="showTab('evolucion', this)">Evolución Temporal</button>
                 <button class="tab-btn" onclick="showTab('composicion', this)">Composición</button>
                 <button class="tab-btn" onclick="showTab('detalle', this)">Análisis Detallado</button>
-                <button class="tab-btn" onclick="showTab('comparativo', this)">1Q vs 2Q</button>
+                <button class="tab-btn" onclick="showTab('yoy', this)">Comparativo YoY</button>
             </div>
         </div>
     </div>
@@ -285,30 +291,30 @@
                     <div class="card kpi c1">
                         <div class="kpi-accent" style="background: var(--green);"></div>
                         <div class="kpi-label">Total Impuestos</div>
-                        <div class="kpi-value">87,0M</div>
-                        <div class="kpi-sub">Bs.S 87.026.172 · 13 meses</div>
-                        <span class="kpi-tag up">↗ 8.9% s/ventas</span>
+                        <div class="kpi-value">150,5M</div>
+                        <div class="kpi-sub">Bs.S 150.546.321 · 16 meses</div>
+                        <span class="kpi-tag up">↗ 9.1% s/ventas</span>
                     </div>
                     <div class="card kpi c2">
                         <div class="kpi-accent" style="background: var(--yellow);"></div>
                         <div class="kpi-label">Ventas Acumuladas</div>
-                        <div class="kpi-value">977M</div>
-                        <div class="kpi-sub">Bs.S 977.450.092</div>
-                        <span class="kpi-tag up">↗ Abr 25 – Abr 26</span>
+                        <div class="kpi-value">1.656M</div>
+                        <div class="kpi-sub">Bs.S 1.655.760.291</div>
+                        <span class="kpi-tag up">↗ Abr 25 – Jul 26</span>
                     </div>
                     <div class="card kpi c3">
                         <div class="kpi-accent" style="background: var(--orange);"></div>
                         <div class="kpi-label">Promedio Mensual</div>
-                        <div class="kpi-value">6,69M</div>
-                        <div class="kpi-sub">Bs.S impuestos/mes</div>
-                        <span class="kpi-tag neutral">13 períodos</span>
+                        <div class="kpi-value">9,41M</div>
+                        <div class="kpi-sub">Bs.S impuestos/mes · incluye Jul parcial</div>
+                        <span class="kpi-tag neutral">16 períodos</span>
                     </div>
                     <div class="card kpi c4">
                         <div class="kpi-accent" style="background: var(--dark-green);"></div>
                         <div class="kpi-label">Mayor Componente</div>
                         <div class="kpi-value">4.9%</div>
-                        <div class="kpi-sub">Retención IVA s/ventas</div>
-                        <span class="kpi-tag up">Bs.S 47.496.901</span>
+                        <div class="kpi-sub">Retención IVA s/ventas · 53.4% del total</div>
+                        <span class="kpi-tag up">Bs.S 80.454.372</span>
                     </div>
                 </div>
 
@@ -316,10 +322,10 @@
                     <div class="card-title">Evolución Mensual — Total Impuestos (Bs.S)</div>
                     <div class="bar-chart-wrap">
                         <div class="bar-chart-svg-wrap" id="bar-resumen"></div>
-                        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.75rem; font-size:0.75rem; color:var(--text-light);">
-                            <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:10px;height:10px;background:var(--green);border-radius:3px;display:inline-block;"></span>1Q (Abr–Sep 2025)</span>
-                            <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:10px;height:10px;background:var(--orange);border-radius:3px;display:inline-block;"></span>2Q (Oct 25–Feb 26)</span>
-                            <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:10px;height:10px;background:var(--dark-green);border-radius:3px;display:inline-block;"></span>Nuevos (Mar–Abr 26)</span>
+                        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:0.75rem; font-size:0.75rem; color:var(--text-light);">
+                            <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:10px;height:10px;background:var(--green);border-radius:3px;display:inline-block;"></span>2025 (Abr–Dic)</span>
+                            <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:10px;height:10px;background:var(--orange);border-radius:3px;display:inline-block;"></span>2026 (Ene–Jun)</span>
+                            <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:10px;height:10px;background:#FBC77E;border-radius:3px;display:inline-block;"></span>Jul 2026 * parcial (1ra quincena)</span>
                         </div>
                     </div>
                 </div>
@@ -328,12 +334,12 @@
                     <div class="card">
                         <div class="card-title">Top Componentes — Período Completo</div>
                         <ul class="legend-list">
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#FED519"></div>Retención IVA</div><div><span class="legend-val">Bs.S 47.496.901</span><span class="legend-pct">4.9%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#F79617"></div>Patente</div><div><span class="legend-val">Bs.S 14.300.256</span><span class="legend-pct">1.5%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#7CC141"></div>Anticipos ISLR</div><div><span class="legend-val">Bs.S 9.713.912</span><span class="legend-pct">1.0%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#419E46"></div>IVA</div><div><span class="legend-val">Bs.S 6.897.866</span><span class="legend-pct">0.7%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#0A9561"></div>Fondo Pensiones</div><div><span class="legend-val">Bs.S 3.507.771</span><span class="legend-pct">0.4%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#1C2B1E"></div>Ret. ISLR</div><div><span class="legend-val">Bs.S 2.491.745</span><span class="legend-pct">0.3%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#FED519"></div>Retención IVA</div><div><span class="legend-val">Bs.S 80.454.372</span><span class="legend-pct">4.9%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#F79617"></div>Patente</div><div><span class="legend-val">Bs.S 22.255.642</span><span class="legend-pct">1.3%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#7CC141"></div>IVA</div><div><span class="legend-val">Bs.S 17.734.214</span><span class="legend-pct">1.1%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#419E46"></div>Anticipos ISLR</div><div><span class="legend-val">Bs.S 16.497.014</span><span class="legend-pct">1.0%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#0A9561"></div>Fondo Pensiones</div><div><span class="legend-val">Bs.S 5.629.632</span><span class="legend-pct">0.3%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#1C2B1E"></div>Ret. ISLR</div><div><span class="legend-val">Bs.S 3.836.216</span><span class="legend-pct">0.2%</span></div></li>
                         </ul>
                     </div>
                     <div class="card">
@@ -357,6 +363,7 @@
                 </div>
                 <div class="card fade-in">
                     <div class="card-title">Mapa de Calor — Crecimiento Mensual</div>
+                    <div class="note-parcial">* Julio 2026 refleja solo la 1ra quincena — la caída de -54% no es comparable con meses completos</div>
                     <div class="heatmap" id="heatmap"></div>
                 </div>
                 <div class="card fade-in">
@@ -374,59 +381,59 @@
                         <div class="card-title">Composición Total del Período</div>
                         <div class="donut-wrap">
                             <svg viewBox="0 0 200 200" width="220" height="220">
-                                <!-- Ret IVA 54.6% -->
-                                <circle cx="100" cy="100" r="70" fill="none" stroke="#FED519" stroke-width="30" stroke-dasharray="240.3 199.7" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
-                                <!-- Patente 16.4% -->
-                                <circle cx="100" cy="100" r="70" fill="none" stroke="#F79617" stroke-width="30" stroke-dasharray="72.2 367.9" stroke-dashoffset="-240.3" transform="rotate(-90 100 100)"/>
-                                <!-- Anticipos ISLR 11.2% -->
-                                <circle cx="100" cy="100" r="70" fill="none" stroke="#7CC141" stroke-width="30" stroke-dasharray="49.2 390.8" stroke-dashoffset="-312.5" transform="rotate(-90 100 100)"/>
-                                <!-- IVA 7.9% -->
-                                <circle cx="100" cy="100" r="70" fill="none" stroke="#419E46" stroke-width="30" stroke-dasharray="34.8 405.2" stroke-dashoffset="-361.7" transform="rotate(-90 100 100)"/>
-                                <!-- Resto 9.9% -->
-                                <circle cx="100" cy="100" r="70" fill="none" stroke="#0A9561" stroke-width="30" stroke-dasharray="43.5 396.5" stroke-dashoffset="-396.5" transform="rotate(-90 100 100)"/>
+                                <!-- Ret IVA 53.4% -->
+                                <circle cx="100" cy="100" r="70" fill="none" stroke="#FED519" stroke-width="30" stroke-dasharray="235.0 204.8" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+                                <!-- Patente 14.8% -->
+                                <circle cx="100" cy="100" r="70" fill="none" stroke="#F79617" stroke-width="30" stroke-dasharray="65.0 374.8" stroke-dashoffset="-235.0" transform="rotate(-90 100 100)"/>
+                                <!-- IVA 11.8% -->
+                                <circle cx="100" cy="100" r="70" fill="none" stroke="#7CC141" stroke-width="30" stroke-dasharray="51.8 388.0" stroke-dashoffset="-300.0" transform="rotate(-90 100 100)"/>
+                                <!-- Anticipos ISLR 11.0% -->
+                                <circle cx="100" cy="100" r="70" fill="none" stroke="#419E46" stroke-width="30" stroke-dasharray="48.2 391.6" stroke-dashoffset="-351.8" transform="rotate(-90 100 100)"/>
+                                <!-- Resto 9.0% -->
+                                <circle cx="100" cy="100" r="70" fill="none" stroke="#0A9561" stroke-width="30" stroke-dasharray="39.8 400.0" stroke-dashoffset="-400.0" transform="rotate(-90 100 100)"/>
                                 <circle cx="100" cy="100" r="55" fill="white"/>
-                                <text x="100" y="96" text-anchor="middle" font-family="DM Serif Display" font-size="16" fill="#1C2B1E">87,0M</text>
+                                <text x="100" y="96" text-anchor="middle" font-family="DM Serif Display" font-size="15" fill="#1C2B1E">150,5M</text>
                                 <text x="100" y="113" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#8FA898">Bs.S Total</text>
                             </svg>
                         </div>
                         <ul class="legend-list">
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#FED519"></div>Retención IVA</div><div><span class="legend-val">47.496.901</span><span class="legend-pct">54.6%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#F79617"></div>Patente</div><div><span class="legend-val">14.300.256</span><span class="legend-pct">16.4%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#7CC141"></div>Anticipos ISLR</div><div><span class="legend-val">9.713.912</span><span class="legend-pct">11.2%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#419E46"></div>IVA</div><div><span class="legend-val">6.897.866</span><span class="legend-pct">7.9%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#0A9561"></div>Fondo Pensiones</div><div><span class="legend-val">3.507.771</span><span class="legend-pct">4.0%</span></div></li>
-                            <li><div class="legend-label"><div class="legend-dot" style="background:#8FA898"></div>Otros (IGTF + ISLR + Mun.)</div><div><span class="legend-val">5.109.366</span><span class="legend-pct">5.9%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#FED519"></div>Retención IVA</div><div><span class="legend-val">80.454.372</span><span class="legend-pct">53.4%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#F79617"></div>Patente</div><div><span class="legend-val">22.255.642</span><span class="legend-pct">14.8%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#7CC141"></div>IVA</div><div><span class="legend-val">17.734.214</span><span class="legend-pct">11.8%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#419E46"></div>Anticipos ISLR</div><div><span class="legend-val">16.497.014</span><span class="legend-pct">11.0%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#0A9561"></div>Fondo Pensiones</div><div><span class="legend-val">5.629.632</span><span class="legend-pct">3.7%</span></div></li>
+                            <li><div class="legend-label"><div class="legend-dot" style="background:#8FA898"></div>Otros (Ret. ISLR + IGTF + Mun. + Pub. + LOCTI)</div><div><span class="legend-val">7.975.444</span><span class="legend-pct">5.3%</span></div></li>
                         </ul>
                     </div>
                     <div class="card">
                         <div class="card-title">Embudo Fiscal — Período Completo</div>
                         <div class="funnel-row">
-                            <div class="funnel-label"><span>Ventas Brutas</span><strong>Bs.S 977.450.092</strong></div>
+                            <div class="funnel-label"><span>Ventas Brutas</span><strong>Bs.S 1.655.760.291</strong></div>
                             <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:100%;background:var(--yellow);"></div></div>
                         </div>
                         <div class="funnel-row">
-                            <div class="funnel-label"><span>Retención IVA</span><strong>Bs.S 47.496.901</strong></div>
-                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:54.6%;background:var(--orange);"></div></div>
+                            <div class="funnel-label"><span>Retención IVA</span><strong>Bs.S 80.454.372</strong></div>
+                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:53.4%;background:var(--orange);"></div></div>
                         </div>
                         <div class="funnel-row">
-                            <div class="funnel-label"><span>Patente</span><strong>Bs.S 14.300.256</strong></div>
-                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:16.4%;background:var(--light-green);"></div></div>
+                            <div class="funnel-label"><span>Patente</span><strong>Bs.S 22.255.642</strong></div>
+                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:14.8%;background:var(--light-green);"></div></div>
                         </div>
                         <div class="funnel-row">
-                            <div class="funnel-label"><span>Anticipos ISLR</span><strong>Bs.S 9.713.912</strong></div>
-                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:11.2%;background:var(--green);"></div></div>
+                            <div class="funnel-label"><span>IVA</span><strong>Bs.S 17.734.214</strong></div>
+                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:11.8%;background:var(--green);"></div></div>
                         </div>
                         <div class="funnel-row">
-                            <div class="funnel-label"><span>IVA</span><strong>Bs.S 6.897.866</strong></div>
-                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:7.9%;background:var(--dark-green);"></div></div>
+                            <div class="funnel-label"><span>Anticipos ISLR</span><strong>Bs.S 16.497.014</strong></div>
+                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:11.0%;background:var(--dark-green);"></div></div>
                         </div>
                         <div class="funnel-row">
-                            <div class="funnel-label"><span>Fondo Pensiones</span><strong>Bs.S 3.507.771</strong></div>
-                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:4.0%;background:#1C2B1E;"></div></div>
+                            <div class="funnel-label"><span>Fondo Pensiones</span><strong>Bs.S 5.629.632</strong></div>
+                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:3.7%;background:#1C2B1E;"></div></div>
                         </div>
                         <div class="funnel-row">
-                            <div class="funnel-label"><span><strong>Total Impuestos</strong></span><strong>Bs.S 87.026.172 (8.9%)</strong></div>
-                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:8.9%;background:var(--green);"></div></div>
+                            <div class="funnel-label"><span><strong>Total Impuestos</strong></span><strong>Bs.S 150.546.321 (9.1%)</strong></div>
+                            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:9.1%;background:var(--green);"></div></div>
                         </div>
                     </div>
                 </div>
@@ -436,6 +443,7 @@
             <div id="tab-detalle" class="tab-content">
                 <div class="card fade-in">
                     <div class="card-title">Resumen Mensual Detallado</div>
+                    <div class="note-parcial">Los componentes por mes suman ambas quincenas · * Julio 2026 solo incluye la 1ra quincena</div>
                     <div class="table-wrap">
                         <table>
                             <thead>
@@ -454,184 +462,216 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><strong>Abril 25</strong> <span class="pill pill-green">1Q</span></td>
+                                    <td><strong>Abril 25</strong> <span class="pill pill-green">2025</span></td>
                                     <td class="text-right">19.690.070</td>
-                                    <td class="text-right">39.671</td>
-                                    <td class="text-right">100.160</td>
+                                    <td class="text-right">62.978</td>
+                                    <td class="text-right">186.219</td>
                                     <td class="text-right">938.139</td>
-                                    <td class="text-right">39.489</td>
+                                    <td class="text-right">73.052</td>
                                     <td class="text-right">275.044</td>
                                     <td class="text-right"><strong>1.650.934</strong></td>
                                     <td class="text-center">8.4%</td>
                                     <td class="text-center">—</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Mayo</strong> <span class="pill pill-green">1Q</span></td>
+                                    <td><strong>Mayo</strong> <span class="pill pill-green">2025</span></td>
                                     <td class="text-right">28.335.507</td>
-                                    <td class="text-right">44.421</td>
-                                    <td class="text-right">117.262</td>
+                                    <td class="text-right">101.570</td>
+                                    <td class="text-right">269.135</td>
                                     <td class="text-right">1.378.343</td>
-                                    <td class="text-right">46.259</td>
+                                    <td class="text-right">93.642</td>
                                     <td class="text-right">389.983</td>
                                     <td class="text-right"><strong>2.392.809</strong></td>
                                     <td class="text-center">8.4%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+44.9%</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Junio</strong> <span class="pill pill-green">1Q</span></td>
+                                    <td><strong>Junio</strong> <span class="pill pill-green">2025</span></td>
                                     <td class="text-right">30.357.408</td>
-                                    <td class="text-right">69.531</td>
-                                    <td class="text-right">141.108</td>
+                                    <td class="text-right">105.126</td>
+                                    <td class="text-right">287.690</td>
                                     <td class="text-right">1.503.010</td>
-                                    <td class="text-right">49.468</td>
+                                    <td class="text-right">102.189</td>
                                     <td class="text-right">420.330</td>
                                     <td class="text-right"><strong>2.591.953</strong></td>
                                     <td class="text-center">8.5%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+8.3%</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Julio</strong> <span class="pill pill-green">1Q</span></td>
+                                    <td><strong>Julio</strong> <span class="pill pill-green">2025</span></td>
                                     <td class="text-right">36.421.600</td>
-                                    <td class="text-right">64.831</td>
-                                    <td class="text-right">162.685</td>
+                                    <td class="text-right">527.108</td>
+                                    <td class="text-right">344.393</td>
                                     <td class="text-right">1.352.936</td>
-                                    <td class="text-right">55.606</td>
+                                    <td class="text-right">112.803</td>
                                     <td class="text-right">503.905</td>
                                     <td class="text-right"><strong>3.016.520</strong></td>
                                     <td class="text-center">8.3%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+16.4%</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Agosto</strong> <span class="pill pill-green">1Q</span></td>
+                                    <td><strong>Agosto</strong> <span class="pill pill-green">2025</span></td>
                                     <td class="text-right">37.537.374</td>
-                                    <td class="text-right">10.183</td>
-                                    <td class="text-right">187.177</td>
+                                    <td class="text-right">346.172</td>
+                                    <td class="text-right">375.374</td>
                                     <td class="text-right">1.725.845</td>
-                                    <td class="text-right">53.592</td>
+                                    <td class="text-right">93.680</td>
                                     <td class="text-right">549.131</td>
                                     <td class="text-right"><strong>3.340.335</strong></td>
                                     <td class="text-center">8.9%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+10.7%</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Septiembre</strong> <span class="pill pill-green">1Q</span></td>
+                                    <td><strong>Septiembre</strong> <span class="pill pill-green">2025</span></td>
                                     <td class="text-right">48.824.223</td>
-                                    <td class="text-right">—</td>
-                                    <td class="text-right">242.942</td>
+                                    <td class="text-right">282.404</td>
+                                    <td class="text-right">488.242</td>
                                     <td class="text-right">2.372.082</td>
-                                    <td class="text-right">48.439</td>
+                                    <td class="text-right">100.787</td>
                                     <td class="text-right">643.432</td>
                                     <td class="text-right"><strong>4.319.774</strong></td>
                                     <td class="text-center">8.8%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+29.3%</td>
                                 </tr>
-                                <tr class="total-row">
-                                    <td colspan="7"><strong>Subtotal 1Q (Abr–Sep 2025)</strong></td>
-                                    <td class="text-right"><strong>17.312.325</strong></td>
-                                    <td class="text-center">8.7%</td>
-                                    <td></td>
-                                </tr>
                                 <tr>
-                                    <td><strong>Octubre</strong> <span class="pill pill-orange">2Q</span></td>
+                                    <td><strong>Octubre</strong> <span class="pill pill-green">2025</span></td>
                                     <td class="text-right">64.143.584</td>
-                                    <td class="text-right">—</td>
-                                    <td class="text-right">293.800</td>
+                                    <td class="text-right">98.083</td>
+                                    <td class="text-right">641.436</td>
                                     <td class="text-right">3.327.677</td>
-                                    <td class="text-right">41.987</td>
+                                    <td class="text-right">99.292</td>
                                     <td class="text-right">951.342</td>
                                     <td class="text-right"><strong>5.647.726</strong></td>
                                     <td class="text-center">8.8%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+30.7%</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Noviembre</strong> <span class="pill pill-orange">2Q</span></td>
+                                    <td><strong>Noviembre</strong> <span class="pill pill-green">2025</span></td>
                                     <td class="text-right">77.880.350</td>
-                                    <td class="text-right">321.205</td>
-                                    <td class="text-right">374.676</td>
+                                    <td class="text-right">808.396</td>
+                                    <td class="text-right">778.824</td>
                                     <td class="text-right">3.487.381</td>
-                                    <td class="text-right">58.664</td>
+                                    <td class="text-right">113.183</td>
                                     <td class="text-right">1.136.177</td>
                                     <td class="text-right"><strong>6.915.179</strong></td>
                                     <td class="text-center">8.9%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+22.4%</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Diciembre</strong> <span class="pill pill-orange">2Q</span></td>
+                                    <td><strong>Diciembre</strong> <span class="pill pill-green">2025</span></td>
                                     <td class="text-right">86.883.613</td>
-                                    <td class="text-right">520.717</td>
-                                    <td class="text-right">405.180</td>
+                                    <td class="text-right">871.230</td>
+                                    <td class="text-right">868.836</td>
                                     <td class="text-right">4.030.611</td>
-                                    <td class="text-right">50.518</td>
+                                    <td class="text-right">109.610</td>
                                     <td class="text-right">1.272.975</td>
                                     <td class="text-right"><strong>7.885.882</strong></td>
                                     <td class="text-center">9.1%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+14.0%</td>
                                 </tr>
+                                <tr class="total-row">
+                                    <td colspan="6"><strong>Subtotal 2025 (Abr–Dic · 9 meses)</strong></td>
+                                    <td class="text-right">430.073.729</td>
+                                    <td class="text-right"><strong>37.761.113</strong></td>
+                                    <td class="text-center">8.8%</td>
+                                    <td></td>
+                                </tr>
                                 <tr>
-                                    <td><strong>Enero</strong> <span class="pill pill-orange">2Q</span></td>
+                                    <td><strong>Enero 26</strong> <span class="pill pill-orange">2026</span></td>
                                     <td class="text-right">107.005.754</td>
-                                    <td class="text-right">512.492</td>
-                                    <td class="text-right">471.638</td>
+                                    <td class="text-right">1.351.517</td>
+                                    <td class="text-right">1.070.057</td>
                                     <td class="text-right">4.460.720</td>
-                                    <td class="text-right">42.179</td>
+                                    <td class="text-right">126.831</td>
                                     <td class="text-right">1.575.882</td>
                                     <td class="text-right"><strong>9.194.085</strong></td>
                                     <td class="text-center">8.6%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+16.6%</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Febrero</strong> <span class="pill pill-orange">2Q</span></td>
+                                    <td><strong>Febrero</strong> <span class="pill pill-orange">2026</span></td>
                                     <td class="text-right">122.308.833</td>
-                                    <td class="text-right">493.527</td>
-                                    <td class="text-right">640.390</td>
+                                    <td class="text-right">1.169.667</td>
+                                    <td class="text-right">1.223.088</td>
                                     <td class="text-right">5.878.638</td>
-                                    <td class="text-right">90.643</td>
+                                    <td class="text-right">171.589</td>
                                     <td class="text-right">1.863.669</td>
                                     <td class="text-right"><strong>11.234.788</strong></td>
                                     <td class="text-center">9.2%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+22.2%</td>
                                 </tr>
-                                <tr class="total-row">
-                                    <td colspan="7"><strong>Subtotal 2Q (Oct 25–Feb 26)</strong></td>
-                                    <td class="text-right"><strong>40.877.660</strong></td>
-                                    <td class="text-center">9.0%</td>
-                                    <td></td>
-                                </tr>
                                 <tr>
-                                    <td><strong>Marzo</strong> <span class="pill pill-teal">Ext.</span></td>
+                                    <td><strong>Marzo</strong> <span class="pill pill-orange">2026</span></td>
                                     <td class="text-right">160.052.167</td>
                                     <td class="text-right">97.490</td>
-                                    <td class="text-right">704.324</td>
+                                    <td class="text-right">1.600.522</td>
                                     <td class="text-right">10.423.472</td>
-                                    <td class="text-right">105.469</td>
+                                    <td class="text-right">186.499</td>
                                     <td class="text-right">2.364.800</td>
                                     <td class="text-right"><strong>15.848.113</strong></td>
                                     <td class="text-center">9.9%</td>
                                     <td class="text-center" style="color:var(--green);font-weight:700;">+41.1%</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Abril 26</strong> <span class="pill pill-teal">Ext.</span></td>
+                                    <td><strong>Abril</strong> <span class="pill pill-orange">2026</span></td>
                                     <td class="text-right">158.009.609</td>
-                                    <td class="text-right">294.587</td>
-                                    <td class="text-right">673.185</td>
+                                    <td class="text-right">1.076.124</td>
+                                    <td class="text-right">1.580.096</td>
                                     <td class="text-right">6.618.047</td>
-                                    <td class="text-right">78.902</td>
+                                    <td class="text-right">166.010</td>
                                     <td class="text-right">2.353.586</td>
-                                    <td class="text-right"><strong>12.988.074</strong></td>
-                                    <td class="text-center">8.2%</td>
-                                    <td class="text-center" style="color:#e53e3e;font-weight:700;">-18.1%</td>
+                                    <td class="text-right"><strong>13.148.093</strong></td>
+                                    <td class="text-center">8.3%</td>
+                                    <td class="text-center" style="color:#e53e3e;font-weight:700;">-17.0%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mayo</strong> <span class="pill pill-orange">2026</span></td>
+                                    <td class="text-right">199.639.979</td>
+                                    <td class="text-right">1.634.600</td>
+                                    <td class="text-right">1.995.510</td>
+                                    <td class="text-right">10.296.859</td>
+                                    <td class="text-right">203.592</td>
+                                    <td class="text-right">3.053.523</td>
+                                    <td class="text-right"><strong>19.281.927</strong></td>
+                                    <td class="text-center">9.7%</td>
+                                    <td class="text-center" style="color:var(--green);font-weight:700;">+46.7%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Junio</strong> <span class="pill pill-orange">2026</span></td>
+                                    <td class="text-right">320.847.224</td>
+                                    <td class="text-right">9.201.748</td>
+                                    <td class="text-right">3.209.362</td>
+                                    <td class="text-right">10.591.780</td>
+                                    <td class="text-right">620.569</td>
+                                    <td class="text-right">4.901.863</td>
+                                    <td class="text-right"><strong>30.198.892</strong></td>
+                                    <td class="text-center">9.4%</td>
+                                    <td class="text-center" style="color:var(--green);font-weight:700;">+56.6%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Julio *</strong> <span class="pill pill-yellow">Parcial 1Q</span></td>
+                                    <td class="text-right">157.822.997</td>
+                                    <td class="text-right">—</td>
+                                    <td class="text-right">1.578.230</td>
+                                    <td class="text-right">12.068.832</td>
+                                    <td class="text-right">232.248</td>
+                                    <td class="text-right">—</td>
+                                    <td class="text-right"><strong>13.879.310</strong></td>
+                                    <td class="text-center">8.8%</td>
+                                    <td class="text-center" style="color:var(--text-light);font-weight:700;">n/c *</td>
                                 </tr>
                                 <tr class="total-row">
-                                    <td colspan="7"><strong>Subtotal Ext. (Mar–Abr 26)</strong></td>
-                                    <td class="text-right"><strong>28.836.187</strong></td>
-                                    <td class="text-center">9.1%</td>
+                                    <td colspan="6"><strong>Subtotal 2026 (Ene–Jul* · 7 meses)</strong></td>
+                                    <td class="text-right">1.225.686.562</td>
+                                    <td class="text-right"><strong>112.785.208</strong></td>
+                                    <td class="text-center">9.2%</td>
                                     <td></td>
                                 </tr>
                                 <tr class="total-row" style="background:rgba(65,158,70,0.15);">
                                     <td colspan="6"><strong>TOTAL PERÍODO</strong></td>
-                                    <td class="text-right">977.450.092</td>
-                                    <td class="text-right"><strong>87.026.172</strong></td>
-                                    <td class="text-center"><strong>8.9%</strong></td>
+                                    <td class="text-right">1.655.760.291</td>
+                                    <td class="text-right"><strong>150.546.321</strong></td>
+                                    <td class="text-center"><strong>9.1%</strong></td>
                                     <td></td>
                                 </tr>
                             </tbody>
@@ -644,163 +684,178 @@
                     <div class="grid grid-3" style="margin-top:0;">
                         <div style="padding:1.25rem;background:rgba(65,158,70,0.07);border-radius:12px;border:1px solid rgba(65,158,70,0.15);">
                             <div style="font-weight:700;color:var(--green);margin-bottom:0.75rem;font-size:0.9rem;">Optimización Fiscal</div>
-                            <p style="font-size:0.82rem;color:var(--text-mid);line-height:1.7;">Retención IVA representa el 54.6% del gasto fiscal total. Revisar estructura de agentes de retención y evaluar créditos fiscales disponibles puede generar ahorros significativos. Planificar anticipos ISLR con proyecciones actualizadas al nuevo volumen de ventas.</p>
+                            <p style="font-size:0.82rem;color:var(--text-mid);line-height:1.7;">Retención IVA concentra el 53.4% del gasto fiscal (Bs.S 80,5M · 4.9% s/ventas). Revisar estructura de agentes de retención y créditos fiscales disponibles. Atención al IVA de Junio 2026: saltó a Bs.S 9,2M (2.9% s/ventas del mes) — validar si corresponde a ajustes acumulados o cambio de tratamiento.</p>
                         </div>
                         <div style="padding:1.25rem;background:rgba(247,150,23,0.07);border-radius:12px;border:1px solid rgba(247,150,23,0.15);">
                             <div style="font-weight:700;color:var(--orange);margin-bottom:0.75rem;font-size:0.9rem;">Control de Gestión</div>
-                            <p style="font-size:0.82rem;color:var(--text-mid);line-height:1.7;">El ratio s/ventas es estable en banda 8.2%–9.9%. Monitorear mensualmente con alertas si supera 10%. Marzo 2026 marcó el pico histórico con Bs.S 15.8M — validar si obedece a acumulación de obligaciones o es la nueva normalidad del volumen.</p>
+                            <p style="font-size:0.82rem;color:var(--text-mid);line-height:1.7;">El ratio s/ventas se mantiene en banda 8.3%–9.9%, pero el promedio subió de 8.8% (2025) a 9.2% (2026). Junio 2026 marcó el pico histórico absoluto con Bs.S 30,2M sobre ventas récord de Bs.S 320,8M. Monitorear mensualmente con alertas si el ratio supera 10%.</p>
                         </div>
                         <div style="padding:1.25rem;background:rgba(10,149,97,0.07);border-radius:12px;border:1px solid rgba(10,149,97,0.15);">
                             <div style="font-weight:700;color:var(--dark-green);margin-bottom:0.75rem;font-size:0.9rem;">Proyecciones</div>
-                            <p style="font-size:0.82rem;color:var(--text-mid);line-height:1.7;">Las ventas superaron los Bs.S 977M en 13 meses. Con el promedio mensual de los últimos 3 meses (≈13,4M en impuestos), el gasto fiscal anualizado proyectado supera los Bs.S 160M. Preparar provisiones robustas para cierre fiscal 2026.</p>
+                            <p style="font-size:0.82rem;color:var(--text-mid);line-height:1.7;">Con el promedio de los últimos 3 meses completos (Abr–Jun 26 ≈ Bs.S 20,9M/mes en impuestos), el gasto fiscal anualizado proyectado ronda los Bs.S 250M. Julio 2026 ya acumula Bs.S 13,9M en su primera quincena — preparar provisiones robustas para el segundo semestre 2026.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ===== TAB: COMPARATIVO 1Q vs 2Q ===== -->
-            <div id="tab-comparativo" class="tab-content">
+            <!-- ===== TAB: COMPARATIVO YoY ===== -->
+            <div id="tab-yoy" class="tab-content">
+
+                <div class="note-parcial fade-in">Comparación interanual Abril–Julio 2025 vs Abril–Julio 2026 · * Julio 2026 incluye solo la 1ra quincena</div>
 
                 <div class="grid grid-4 fade-in">
                     <div class="card kpi c1">
                         <div class="kpi-accent" style="background:var(--green);"></div>
-                        <div class="kpi-label">1Q Total (Abr–Sep 25)</div>
-                        <div class="kpi-value">17,3M</div>
-                        <div class="kpi-sub">Bs.S 17.312.325</div>
-                        <span class="kpi-tag up">6 meses</span>
+                        <div class="kpi-label">Impuestos Abr–Jul 2025</div>
+                        <div class="kpi-value">9,65M</div>
+                        <div class="kpi-sub">Bs.S 9.652.217 · 4 meses</div>
+                        <span class="kpi-tag up">Ventas: 114,8M</span>
                     </div>
                     <div class="card kpi c3">
                         <div class="kpi-accent" style="background:var(--orange);"></div>
-                        <div class="kpi-label">2Q Total (Oct 25–Feb 26)</div>
-                        <div class="kpi-value">40,9M</div>
-                        <div class="kpi-sub">Bs.S 40.877.660</div>
-                        <span class="kpi-tag up">5 meses</span>
-                    </div>
-                    <div class="card kpi c4">
-                        <div class="kpi-accent" style="background:var(--dark-green);"></div>
-                        <div class="kpi-label">Ext. (Mar–Abr 26)</div>
-                        <div class="kpi-value">28,8M</div>
-                        <div class="kpi-sub">Bs.S 28.836.187</div>
-                        <span class="kpi-tag up">2 meses</span>
+                        <div class="kpi-label">Impuestos Abr–Jul 2026 *</div>
+                        <div class="kpi-value">76,5M</div>
+                        <div class="kpi-sub">Bs.S 76.508.223 · Jul parcial</div>
+                        <span class="kpi-tag up">Ventas: 836,3M</span>
                     </div>
                     <div class="card kpi c2">
                         <div class="kpi-accent" style="background:var(--yellow);"></div>
-                        <div class="kpi-label">Crecimiento 2Q vs 1Q</div>
-                        <div class="kpi-value">+136%</div>
-                        <div class="kpi-sub">En total impuestos</div>
-                        <span class="kpi-tag up">↗ Escala ventas</span>
+                        <div class="kpi-label">Crecimiento YoY</div>
+                        <div class="kpi-value">+693%</div>
+                        <div class="kpi-sub">En total impuestos (≈ x7,9)</div>
+                        <span class="kpi-tag up">↗ Ventas: +628%</span>
+                    </div>
+                    <div class="card kpi c4">
+                        <div class="kpi-accent" style="background:var(--dark-green);"></div>
+                        <div class="kpi-label">Ratio Impuesto/Venta</div>
+                        <div class="kpi-value">8.4% → 9.2%</div>
+                        <div class="kpi-sub">2025 vs 2026 (Abr–Jul)</div>
+                        <span class="kpi-tag neutral">+0.7 pts de presión fiscal</span>
                     </div>
                 </div>
 
                 <div class="grid grid-2 fade-in">
                     <div class="card">
-                        <div class="card-title">Ventas e Impuestos — 1Q vs 2Q vs Ext.</div>
+                        <div class="card-title">Impuestos Mensuales — 2025 vs 2026 (Abr–Jul)</div>
                         <div class="bar-chart-wrap">
-                            <div class="bar-chart-svg-wrap" id="bar-comparativo"></div>
+                            <div class="bar-chart-svg-wrap" id="bar-yoy"></div>
                             <div style="display:flex;gap:1.25rem;flex-wrap:wrap;margin-top:0.75rem;font-size:0.75rem;color:var(--text-light);">
-                                <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:12px;height:12px;background:var(--green);border-radius:3px;display:inline-block;"></span>1Q Ventas/Imp.</span>
-                                <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:12px;height:12px;background:var(--orange);border-radius:3px;display:inline-block;"></span>2Q Ventas/Imp.</span>
-                                <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:12px;height:12px;background:var(--dark-green);border-radius:3px;display:inline-block;"></span>Ext. Ventas/Imp.</span>
+                                <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:12px;height:12px;background:var(--green);border-radius:3px;display:inline-block;"></span>2025</span>
+                                <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:12px;height:12px;background:var(--orange);border-radius:3px;display:inline-block;"></span>2026</span>
+                                <span style="display:flex;align-items:center;gap:0.3rem;"><span style="width:12px;height:12px;background:#FBC77E;border-radius:3px;display:inline-block;"></span>Jul 26 * parcial</span>
                             </div>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-title">Ratio Impuesto/Venta por Período</div>
-                        <div style="padding:1.5rem 0;">
-                            <div style="margin-bottom:1.5rem;">
+                        <div class="card-title">Crecimiento YoY por Mes</div>
+                        <div style="padding:1rem 0;">
+                            <div style="margin-bottom:1.4rem;">
                                 <div style="display:flex;justify-content:space-between;margin-bottom:0.4rem;font-size:0.85rem;font-weight:600;">
-                                    <span>1Q — Abr–Sep 2025</span><span>8.65% promedio</span>
+                                    <span>Abril · 1,65M → 13,15M</span><span style="color:var(--green);">+696%</span>
                                 </div>
-                                <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:86.5%;background:var(--green);height:14px;"></div></div>
-                                <div style="font-size:0.75rem;color:var(--text-light);margin-top:0.3rem;">Ventas: Bs.S 200.165.182 · Impuestos: Bs.S 17.312.325</div>
+                                <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:65%;background:var(--green);height:14px;"></div></div>
                             </div>
-                            <div style="margin-bottom:1.5rem;">
+                            <div style="margin-bottom:1.4rem;">
                                 <div style="display:flex;justify-content:space-between;margin-bottom:0.4rem;font-size:0.85rem;font-weight:600;">
-                                    <span>2Q — Oct 25 a Feb 26</span><span>9.04% promedio</span>
+                                    <span>Mayo · 2,39M → 19,28M</span><span style="color:var(--green);">+706%</span>
                                 </div>
-                                <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:90.4%;background:var(--orange);height:14px;"></div></div>
-                                <div style="font-size:0.75rem;color:var(--text-light);margin-top:0.3rem;">Ventas: Bs.S 458.222.134 · Impuestos: Bs.S 40.877.660</div>
+                                <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:66%;background:var(--light-green);height:14px;"></div></div>
+                            </div>
+                            <div style="margin-bottom:1.4rem;">
+                                <div style="display:flex;justify-content:space-between;margin-bottom:0.4rem;font-size:0.85rem;font-weight:600;">
+                                    <span>Junio · 2,59M → 30,20M</span><span style="color:var(--green);">+1.065%</span>
+                                </div>
+                                <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:100%;background:var(--dark-green);height:14px;"></div></div>
                             </div>
                             <div>
                                 <div style="display:flex;justify-content:space-between;margin-bottom:0.4rem;font-size:0.85rem;font-weight:600;">
-                                    <span>Ext. — Mar–Abr 2026</span><span>9.05% promedio</span>
+                                    <span>Julio * · 3,02M → 13,88M</span><span style="color:var(--orange);">+360% *</span>
                                 </div>
-                                <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:90.5%;background:var(--dark-green);height:14px;"></div></div>
-                                <div style="font-size:0.75rem;color:var(--text-light);margin-top:0.3rem;">Ventas: Bs.S 318.061.776 · Impuestos: Bs.S 28.836.187</div>
+                                <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:34%;background:#FBC77E;height:14px;"></div></div>
+                                <div style="font-size:0.72rem;color:var(--text-light);margin-top:0.3rem;">* Con solo media quincena cargada, Julio 26 ya supera 4,6 veces el mes completo de Julio 25</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="card fade-in">
-                    <div class="card-title">Comparativo por Tipo de Impuesto — 1Q vs 2Q vs Ext.</div>
+                    <div class="card-title">Comparativo por Tipo de Impuesto — Abr–Jul 2025 vs Abr–Jul 2026</div>
                     <div class="compare-row head">
-                        <span>Concepto</span><span style="text-align:right;">1Q (Abr–Sep 25)</span><span style="text-align:right;">2Q (Oct 25–Feb 26)</span>
-                    </div>
-                    <div class="compare-row even">
-                        <span>IVA</span>
-                        <span style="text-align:right;">228.637</span>
-                        <span style="text-align:right;font-weight:700;">1.847.941 <span class="diff-up">↗</span></span>
-                    </div>
-                    <div class="compare-row odd">
-                        <span>Anticipos ISLR</span>
-                        <span style="text-align:right;">951.334</span>
-                        <span style="text-align:right;font-weight:700;">2.185.684 <span class="diff-up">↗</span></span>
+                        <span>Concepto</span><span style="text-align:right;">Abr–Jul 2025</span><span style="text-align:right;">Abr–Jul 2026 *</span><span style="text-align:right;">Var. YoY</span>
                     </div>
                     <div class="compare-row even">
                         <span>Retención IVA</span>
-                        <span style="text-align:right;">8.290.315</span>
-                        <span style="text-align:right;font-weight:700;">21.185.027 <span class="diff-up">↗</span></span>
+                        <span style="text-align:right;">5.172.428</span>
+                        <span style="text-align:right;font-weight:700;">39.575.518</span>
+                        <span style="text-align:right;" class="diff-up">+665%</span>
                     </div>
                     <div class="compare-row odd">
-                        <span>IGTF</span>
-                        <span style="text-align:right;">292.853</span>
-                        <span style="text-align:right;font-weight:700;">283.991</span>
-                    </div>
-                    <div class="compare-row even">
-                        <span>Fondo Pensiones</span>
-                        <span style="text-align:right;">585.012</span>
-                        <span style="text-align:right;font-weight:700;">1.351.348 <span class="diff-up">↗</span></span>
-                    </div>
-                    <div class="compare-row odd">
-                        <span>Retención ISLR</span>
-                        <span style="text-align:right;">457.069</span>
-                        <span style="text-align:right;font-weight:700;">845.033 <span class="diff-up">↗</span></span>
+                        <span>IVA</span>
+                        <span style="text-align:right;">796.782</span>
+                        <span style="text-align:right;font-weight:700;">11.912.472</span>
+                        <span style="text-align:right;" class="diff-up">+1.395%</span>
                     </div>
                     <div class="compare-row even">
                         <span>Patente</span>
-                        <span style="text-align:right;">2.781.825</span>
-                        <span style="text-align:right;font-weight:700;">6.800.044 <span class="diff-up">↗</span></span>
+                        <span style="text-align:right;">1.589.263</span>
+                        <span style="text-align:right;font-weight:700;">10.308.971</span>
+                        <span style="text-align:right;" class="diff-up">+549%</span>
+                    </div>
+                    <div class="compare-row odd">
+                        <span>Anticipos ISLR</span>
+                        <span style="text-align:right;">1.087.437</span>
+                        <span style="text-align:right;font-weight:700;">8.363.198</span>
+                        <span style="text-align:right;" class="diff-up">+669%</span>
+                    </div>
+                    <div class="compare-row even">
+                        <span>Fondo Pensiones</span>
+                        <span style="text-align:right;">400.798</span>
+                        <span style="text-align:right;font-weight:700;">2.729.932</span>
+                        <span style="text-align:right;" class="diff-up">+581%</span>
+                    </div>
+                    <div class="compare-row odd">
+                        <span>Retención ISLR</span>
+                        <span style="text-align:right;">211.775</span>
+                        <span style="text-align:right;font-weight:700;">1.787.459</span>
+                        <span style="text-align:right;" class="diff-up">+744%</span>
+                    </div>
+                    <div class="compare-row even">
+                        <span>IGTF</span>
+                        <span style="text-align:right;">381.686</span>
+                        <span style="text-align:right;font-weight:700;">1.222.418</span>
+                        <span style="text-align:right;" class="diff-up">+220%</span>
                     </div>
                     <div class="compare-row odd">
                         <span>Otros (Pub. / Mun. / LOCTI)</span>
-                        <span style="text-align:right;">25.380</span>
-                        <span style="text-align:right;font-weight:700;">378.592 <span class="diff-up">↗</span></span>
+                        <span style="text-align:right;">12.048</span>
+                        <span style="text-align:right;font-weight:700;">608.254</span>
+                        <span style="text-align:right;" class="diff-up">+4.948%</span>
                     </div>
                     <div class="compare-row subtotal">
                         <span><strong>TOTAL</strong></span>
-                        <span style="text-align:right;"><strong>17.312.325</strong></span>
-                        <span style="text-align:right;"><strong>40.877.660 <span class="diff-up">↗+136%</span></strong></span>
+                        <span style="text-align:right;"><strong>9.652.217</strong></span>
+                        <span style="text-align:right;"><strong>76.508.223</strong></span>
+                        <span style="text-align:right;"><strong class="diff-up">+693%</strong></span>
                     </div>
                 </div>
 
                 <div class="card fade-in" style="margin-top:1.25rem;">
-                    <div class="card-title">Promedio Mensual — 1Q vs 2Q vs Ext.</div>
+                    <div class="card-title">Año Calendario — 2025 vs 2026 (a la fecha)</div>
                     <div class="grid grid-3" style="margin-top:0;">
                         <div style="padding:1rem;background:rgba(65,158,70,0.06);border-radius:12px;">
-                            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--green);margin-bottom:0.75rem;">1Q — 6 meses</div>
-                            <div style="font-family:'DM Serif Display',serif;font-size:2rem;color:var(--text-dark);">2.885.387</div>
-                            <div style="font-size:0.8rem;color:var(--text-light);">Bs.S promedio mensual</div>
+                            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--green);margin-bottom:0.75rem;">2025 — Abr a Dic (9 meses)</div>
+                            <div style="font-family:'DM Serif Display',serif;font-size:2rem;color:var(--text-dark);">37,8M</div>
+                            <div style="font-size:0.8rem;color:var(--text-light);">Bs.S impuestos · ratio 8.8% s/ventas (430,1M)</div>
                         </div>
                         <div style="padding:1rem;background:rgba(247,150,23,0.06);border-radius:12px;">
-                            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--orange);margin-bottom:0.75rem;">2Q — 5 meses</div>
-                            <div style="font-family:'DM Serif Display',serif;font-size:2rem;color:var(--text-dark);">8.175.532</div>
-                            <div style="font-size:0.8rem;color:var(--text-light);">Bs.S promedio mensual <strong style="color:var(--green);">(+183%)</strong></div>
+                            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--orange);margin-bottom:0.75rem;">2026 — Ene a Jul * (7 meses)</div>
+                            <div style="font-family:'DM Serif Display',serif;font-size:2rem;color:var(--text-dark);">112,8M</div>
+                            <div style="font-size:0.8rem;color:var(--text-light);">Bs.S impuestos · ratio 9.2% s/ventas (1.225,7M)</div>
                         </div>
                         <div style="padding:1rem;background:rgba(10,149,97,0.06);border-radius:12px;">
-                            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--dark-green);margin-bottom:0.75rem;">Ext. — 2 meses</div>
-                            <div style="font-family:'DM Serif Display',serif;font-size:2rem;color:var(--text-dark);">14.418.094</div>
-                            <div style="font-size:0.8rem;color:var(--text-light);">Bs.S promedio mensual <strong style="color:var(--green);">(+76% vs 2Q)</strong></div>
+                            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--dark-green);margin-bottom:0.75rem;">Promedio mensual 2026</div>
+                            <div style="font-family:'DM Serif Display',serif;font-size:2rem;color:var(--text-dark);">16,1M</div>
+                            <div style="font-size:0.8rem;color:var(--text-light);">vs 4,2M en 2025 <strong style="color:var(--green);">(+284%)</strong></div>
                         </div>
                     </div>
                 </div>
@@ -810,20 +865,20 @@
 
         <div class="footer">
             <strong>Trinigold Farmacia</strong> · Informe Ejecutivo de Gastos de Impuestos<br>
-            Período: Abril 2025 – Abril 2026 (13 meses) · Actualizado: <span id="fecha"></span>
+            Período: Abril 2025 – Julio 2026 (16 meses · Julio parcial 1ra quincena) · Actualizado: <span id="fecha"></span>
         </div>
     </div>
 
     <script>
-        // ---- DATA (13 meses) ----
-        const meses = ['Abr25','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic','Ene','Feb','Mar','Abr26'];
-        const impuestos = [1650934, 2392809, 2591953, 3016520, 3340335, 4319774, 5647726, 6915179, 7885882, 9194085, 11234788, 15848113, 12988074];
-        const ventas    = [19690070, 28335507, 30357408, 36421600, 37537374, 48824223, 64143584, 77880350, 86883613, 107005754, 122308833, 160052167, 158009609];
-        const ratios    = [8.39, 8.44, 8.54, 8.28, 8.90, 8.85, 8.81, 8.88, 9.08, 8.59, 9.18, 9.90, 8.22];
-        // Colors: 1Q=green, 2Q=orange, Ext=dark-green
-        const colores   = ['#419E46','#419E46','#419E46','#419E46','#419E46','#419E46',
-                           '#F79617','#F79617','#F79617','#F79617','#F79617',
-                           '#0A9561','#0A9561'];
+        // ---- DATA (16 meses · Jul26 parcial 1ra quincena · componentes = suma de ambas quincenas) ----
+        const meses = ['Abr25','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic','Ene26','Feb','Mar','Abr','May','Jun','Jul*'];
+        const impuestos = [1650934, 2392809, 2591953, 3016520, 3340335, 4319774, 5647726, 6915179, 7885882, 9194085, 11234788, 15848113, 13148093, 19281927, 30198892, 13879310];
+        const ventas    = [19690070, 28335507, 30357408, 36421600, 37537374, 48824223, 64143584, 77880350, 86883613, 107005754, 122308833, 160052167, 158009609, 199639979, 320847224, 157822997];
+        const ratios    = [8.38, 8.44, 8.54, 8.28, 8.90, 8.85, 8.80, 8.88, 9.08, 8.59, 9.19, 9.90, 8.32, 9.66, 9.41, 8.79];
+        // Colors: 2025=green, 2026=orange, Jul26 parcial=light orange
+        const colores   = ['#419E46','#419E46','#419E46','#419E46','#419E46','#419E46','#419E46','#419E46','#419E46',
+                           '#F79617','#F79617','#F79617','#F79617','#F79617','#F79617',
+                           '#FBC77E'];
 
         function fmt(n) {
             if(n >= 1e6) return (n/1e6).toFixed(2)+'M';
@@ -841,7 +896,7 @@
             const chartH = svgH - padTop - padBottom;
             const n = data.length;
             const maxV = Math.max(...data);
-            const totalW = 960;
+            const totalW = 1100;
             const barW = Math.floor((totalW - padX*2) / n) - 7;
             const gap = Math.floor((totalW - padX*2) / n);
 
@@ -885,7 +940,7 @@
             ratios.forEach((r, i) => {
                 const color = colores[i];
                 const pct = (r/12)*100;
-                html += `<div style="margin-bottom:0.55rem;">
+                html += `<div style="margin-bottom:0.5rem;">
                     <div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:0.2rem;">
                         <span style="font-weight:500;color:var(--text-mid);">${meses[i]}</span>
                         <span style="font-weight:700;color:${color};">${r.toFixed(2)}%</span>
@@ -901,15 +956,19 @@
         function buildHeatmap() {
             const el = document.getElementById('heatmap');
             if(!el) return;
-            const growths = [null, 44.9, 8.3, 16.4, 10.7, 29.3, 30.7, 22.4, 14.0, 16.6, 22.2, 41.1, -18.1];
-            const intensities = [0.2, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.95, 0.8];
+            const growths = [null, 44.9, 8.3, 16.4, 10.7, 29.3, 30.7, 22.4, 14.0, 16.6, 22.2, 41.1, -17.0, 46.7, 56.6, -54.0];
+            const maxV = Math.max(...impuestos);
             let html = '';
             meses.forEach((m, i) => {
                 const g = growths[i];
-                const alpha = intensities[i];
-                const gStr = g === null ? 'Base' : (g > 0 ? '+'+g.toFixed(1)+'%' : g.toFixed(1)+'%');
-                const gColor = g === null ? 'var(--text-light)' : (g > 0 ? 'var(--green)' : '#e53e3e');
-                html += `<div class="heat-cell" style="background:rgba(65,158,70,${alpha});border-color:rgba(65,158,70,${alpha+0.1});">
+                const alpha = Math.max(0.12, Math.min(0.95, (impuestos[i]/maxV)*0.9 + 0.08));
+                const isParcial = (i === meses.length - 1);
+                let gStr;
+                if (g === null) gStr = 'Base';
+                else if (isParcial) gStr = g.toFixed(1)+'% *';
+                else gStr = (g > 0 ? '+' : '')+g.toFixed(1)+'%';
+                const gColor = g === null ? 'var(--text-light)' : (isParcial ? 'var(--text-mid)' : (g > 0 ? 'var(--green)' : '#e53e3e'));
+                html += `<div class="heat-cell" style="background:rgba(65,158,70,${alpha});border-color:rgba(65,158,70,${Math.min(1, alpha+0.1)});">
                     <div class="heat-month">${m}</div>
                     <div class="heat-val">${fmt(impuestos[i])}</div>
                     <div class="heat-pct" style="color:${gColor};">${gStr}</div>
@@ -927,7 +986,7 @@
             const padX = 10;
             const chartH = svgH - padTop - padBottom;
             const n = meses.length;
-            const totalW = 960;
+            const totalW = 1150;
             const groupW = Math.floor((totalW - padX * 2) / n);
             const barW = Math.floor(groupW * 0.38);
             const gap = 3;
@@ -979,25 +1038,25 @@
         function buildStackedTrend() {
             const el = document.getElementById('stacked-bars');
             if(!el) return;
-            const retenIVA = [938139,1378343,1503010,1352936,1725845,2372082,3327677,3487381,4030611,4460720,5878638,10423472,6618047];
-            const patente  = [275044,389983,420330,503905,549131,643432,951342,1136177,1272975,1575882,1863669,2364800,2353586];
-            const islr     = [100160,117262,141108,162685,187177,242942,293800,374676,405180,471638,640390,704324,673185];
+            const retenIVA = [938139,1378343,1503010,1352936,1725845,2372082,3327677,3487381,4030611,4460720,5878638,10423472,6618047,10296859,10591780,12068832];
+            const patente  = [275044,389983,420330,503905,549131,643432,951342,1136177,1272975,1575882,1863669,2364800,2353586,3053523,4901863,0];
+            const islr     = [186219,269135,287690,344393,375374,488242,641436,778824,868836,1070057,1223088,1600522,1580096,1995510,3209362,1578230];
             const maxV = Math.max(...impuestos);
-            let html = `<div style="display:flex;gap:0.4rem;align-items:flex-end;height:200px;padding:1rem 0;">`;
+            let html = `<div style="display:flex;gap:0.4rem;align-items:flex-end;height:210px;padding:1rem 0;">`;
             meses.forEach((m, i) => {
-                const totalH = Math.max(4, Math.round((impuestos[i]/maxV)*100));
+                const totalH = Math.max(4, Math.round((impuestos[i]/maxV)*140));
                 const r1 = Math.round((retenIVA[i]/impuestos[i])*totalH);
                 const r2 = Math.round((patente[i]/impuestos[i])*totalH);
                 const r3 = Math.round((islr[i]/impuestos[i])*totalH);
                 const rest = Math.max(0, totalH - r1 - r2 - r3);
-                html += `<div style="flex:1;display:flex;flex-direction:column;align-items:center;">
+                html += `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;">
                     <div style="width:100%;display:flex;flex-direction:column-reverse;gap:1px;height:${totalH}px;">
                         <div style="background:#FED519;height:${r1}px;border-radius:2px;" title="Ret. IVA"></div>
                         <div style="background:#F79617;height:${r2}px;border-radius:2px;" title="Patente"></div>
-                        <div style="background:#7CC141;height:${r3}px;border-radius:2px;" title="ISLR"></div>
+                        <div style="background:#7CC141;height:${r3}px;border-radius:2px;" title="Ant. ISLR"></div>
                         <div style="background:#419E46;height:${rest}px;border-radius:2px;" title="Otros"></div>
                     </div>
-                    <div style="font-size:0.62rem;font-weight:600;color:var(--text-light);margin-top:0.3rem;">${m}</div>
+                    <div style="font-size:0.6rem;font-weight:600;color:var(--text-light);margin-top:0.3rem;">${m}</div>
                 </div>`;
             });
             html += `</div>
@@ -1010,8 +1069,8 @@
             el.innerHTML = html;
         }
 
-        function buildComparativoChart() {
-            const el = document.getElementById('bar-comparativo');
+        function buildYoYChart() {
+            const el = document.getElementById('bar-yoy');
             if(!el) return;
             const svgH = 320;
             const padTop = 40;
@@ -1020,25 +1079,18 @@
             const chartH = svgH - padTop - padBottom;
             const totalW = 680;
 
-            const ventas1Q = 200165182;
-            const ventas2Q = 458222134;
-            const ventasExt = 318061776;
-            const imp1Q    = 17312325;
-            const imp2Q    = 40877660;
-            const impExt   = 28836187;
+            const mesesYoY = ['Abril','Mayo','Junio','Julio *'];
+            const y2025 = [1650934, 2392809, 2591953, 3016520];
+            const y2026 = [13148093, 19281927, 30198892, 13879310];
+            const c2026 = ['#F79617','#F79617','#F79617','#FBC77E'];
 
-            const values = [ventas1Q, ventas2Q, ventasExt, imp1Q, imp2Q, impExt];
-            const labels = ['1Q Ventas','2Q Ventas','Ext. Ventas','1Q Imp.','2Q Imp.','Ext. Imp.'];
-            const colors = ['#419E46','#F79617','#0A9561','#419E46','#F79617','#0A9561'];
-            const opacities = [1, 1, 1, 0.45, 0.45, 0.45];
-
-            const maxV = Math.max(...values);
-            const n = values.length;
+            const maxV = Math.max(...y2026);
+            const n = mesesYoY.length;
             const availW = totalW - padX * 2;
-            const barW = Math.floor(availW / n) - 10;
-            const step = Math.floor(availW / n);
+            const groupW = Math.floor(availW / n);
+            const barW = Math.floor(groupW * 0.36);
+            const gap = 5;
 
-            let bars = '';
             let gridLines = '';
             for (let g = 1; g <= 4; g++) {
                 const gy = padTop + chartH - (chartH / 4) * g;
@@ -1048,19 +1100,21 @@
                 <text x="${padX}" y="${gy - 4}" font-family="DM Sans" font-size="9" fill="#8FA898">${gVal}</text>`;
             }
 
-            values.forEach((v, i) => {
-                const barH = Math.max(6, Math.round((v / maxV) * chartH));
-                const x = padX + i * step + (step - barW) / 2;
-                const y = padTop + chartH - barH;
+            let bars = '';
+            mesesYoY.forEach((m, i) => {
+                const hA = Math.max(5, Math.round((y2025[i] / maxV) * chartH));
+                const hB = Math.max(5, Math.round((y2026[i] / maxV) * chartH));
+                const groupX = padX + i * groupW + (groupW - barW * 2 - gap) / 2;
+                const xA = groupX;
+                const xB = groupX + barW + gap;
+                const yA = padTop + chartH - hA;
+                const yB = padTop + chartH - hB;
                 bars += `
-                    <rect x="${x}" y="${y}" width="${barW}" height="${barH}"
-                          rx="5" fill="${colors[i]}" opacity="${opacities[i]}"/>
-                    <text x="${x + barW/2}" y="${y - 7}" text-anchor="middle"
-                          font-family="DM Sans" font-size="9.5" font-weight="700"
-                          fill="#4A6050">${fmt(v)}</text>
-                    <text x="${x + barW/2}" y="${svgH - 8}" text-anchor="middle"
-                          font-family="DM Sans" font-size="9.5" font-weight="600"
-                          fill="#8FA898">${labels[i]}</text>`;
+                    <rect x="${xA}" y="${yA}" width="${barW}" height="${hA}" rx="5" fill="#419E46" opacity="0.92"/>
+                    <text x="${xA + barW/2}" y="${yA - 7}" text-anchor="middle" font-family="DM Sans" font-size="9.5" font-weight="700" fill="#4A6050">${fmt(y2025[i])}</text>
+                    <rect x="${xB}" y="${yB}" width="${barW}" height="${hB}" rx="5" fill="${c2026[i]}" opacity="0.92"/>
+                    <text x="${xB + barW/2}" y="${yB - 7}" text-anchor="middle" font-family="DM Sans" font-size="9.5" font-weight="700" fill="#4A6050">${fmt(y2026[i])}</text>
+                    <text x="${groupX + barW + gap/2}" y="${svgH - 8}" text-anchor="middle" font-family="DM Sans" font-size="10" font-weight="600" fill="#8FA898">${m}</text>`;
             });
 
             el.innerHTML = `<svg viewBox="0 0 ${totalW} ${svgH}" preserveAspectRatio="xMidYMid meet">
@@ -1091,7 +1145,7 @@
             buildDualBars();
             buildHeatmap();
             buildStackedTrend();
-            buildComparativoChart();
+            buildYoYChart();
             animate();
         });
     </script>
